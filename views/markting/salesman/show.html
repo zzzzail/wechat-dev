@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>点影渠道自查系统</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+		<link href="/assets/weui/dist/style/weui.min.css" rel="stylesheet">
+		<style>
+			body{
+				overflow-x: hidden;
+    			background-color: #fbf9fe;
+			}
+		</style>
+		<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+		<script type="text/javascript" src="http://www.sunsean.com/idTabs/jquery.idTabs.min.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<div class="home">
+
+				<div class="weui_grids idTabs" >
+					<a class="weui_grid" href="#guest">
+						<div class="weui_grid_icon">
+							<h3 style="color:black;"><%=guestCount%></h3>
+						</div>
+						<p class="weui_grid_label">
+							领取优惠码
+						</p>
+					</a>
+					<a class="weui_grid" href="#registered">
+						<div class="weui_grid_icon">
+							<h3 style="color:black;"><%=registeredCount%></h3>
+						</div>
+						<p class="weui_grid_label">
+							注册
+						</p>
+					</a>
+					<a class="weui_grid" href="#purchased">
+						<div class="weui_grid_icon">
+							<h3 style="color:red;"><%=purchasedCount%></h3>
+						</div>
+						<p class="weui_grid_label">
+							购买
+						</p>
+					</a>
+				</div>
+				<div id="list_title" class="weui_cells_title">最新购买的用户</div>
+				<div class="weui_cells">
+
+					<div id="guest">
+					<%guest.forEach(function(g){%>
+						<div class="weui_cell">
+							<div class="weui_cell_bd weui_cell_primary">
+								<p><%=(g.cell+"").slice(0,3)+"****"+(g.cell+"").slice(7,11)%></p>
+							</div>
+							<div class="weui_cell_ft"><%=fn.nearTime(g.source.ctime)%></div>
+						</div>
+					<%})%>
+					</div>
+					<div id="registered">
+						<%registered.forEach(function(g){%>
+							<div class="weui_cell">
+								<div class="weui_cell_bd weui_cell_primary">
+									<p><%=(g.cell+"").slice(0,3)+"****"+(g.cell+"").slice(7,11)%></p>
+								</div>
+								<div class="weui_cell_ft"><%=fn.nearTime(g.events.ctime)%></div>
+							</div>
+						<%})%>
+					</div>
+					<div id="purchased">
+						<%purchased.forEach(function(g){%>
+							<div class="weui_cell">
+								<div class="weui_cell_bd weui_cell_primary">
+									<p><%=(g.cell+"").slice(0,3)+"****"+(g.cell+"").slice(7,11)%></p>
+								</div>
+								<div class="weui_cell_ft"><%=fn.nearTime(g.events.ctime)%></div>
+							</div>
+						<%})%>
+					</div>
+				</div>
+				<div class="weui_msg">
+				<div class="weui_extra_area">
+        			<a href="logout">退出查询</a>
+    			</div>
+    			</div>
+			</div>
+		</div>
+		<script>
+			$(".idTabs").idTabs(function(id,list,set){
+				if(id=="#guest"){
+					$("#list_title").text("最新访客");
+				}else if(id=="#registered"){
+					$("#list_title").text("最新注册用户");
+				}else if(id == "#purchased"){
+					$("#list_title").text("最新购买用户");
+				}
+			}); 
+		</script>
+	</body>
+</html>
