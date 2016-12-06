@@ -24,6 +24,8 @@
 		"/markting/salesman/login":["get","marktingController.salesmanLoginGet"],
 		"/markting/salesman/loginPost":["post","marktingController.salesmanLoginPost"],
 		"/markting/salesman/logout":["get","marktingController.salesmanLogout"],
-		"/markting/salesman/:id":["get","marktingController.salesman"]
+		"/markting/salesman/:id":["get","marktingController.salesman"],
+		"/markting/salesman/:id/activity":["get","marktingController.activity"],
+		"/markting/salesman/:id/card/receive":["post","marktingController.receiveCard"]
 	}
 }

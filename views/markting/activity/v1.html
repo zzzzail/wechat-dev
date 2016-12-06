@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-cn" class="no-js">
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>点影-记录生活</title>
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<meta name="author" content="Codrops" />
+	<link rel="stylesheet" type="text/css" href="/assets/css/default.css">
+	<link rel="stylesheet" type="text/css" href="/assets/css/multilevelmenu.css">
+	<link rel="stylesheet" type="text/css" href="/assets/css/component.css">
+	<link rel="stylesheet" type="text/css" href="/assets/css/animations.css">
+	<link rel="stylesheet" type="text/css" href="/assets/css/iconfont.css">
+	<script src="/assets/js/jquery.min.js"></script>
+	<script src="/assets/js/modernizr.custom.js"></script>
+
+</head>
+<body>
+	<!--滑动引导开始-->
+	<style>
+	.slide-tip{padding:5px;bottom:0px;text-align: center;z-index: 9999;height:40px;width:40px;margin-left:150px;}
+	
+	</style>
+	
+	<div class="slide-tip pa ants wd100 wryh">
+		<img width=95% src="/assets/images/perttwo.png">
+	</div>
+	<!--滑动引导结束-->
+	<!-- /triggers -->
+
+	<div id="pt-main" class="pt-perspective">
+		
+		<!--<div class="pt-page pt-page-1">
+			<div class="bottom-img b1 wd100 pa z-1">
+				<img class="wd100 imgsm" src="tmp-img/b1.jpg" alt="">
+				
+			</div>
+		</div>
+
+		<div class="pt-page pt-page-2">
+			<div class="bottom-img b2 wd100 pa z-1 bottom">
+				<img class="wd100 imgsm" src="tmp-img/b2.jpg" alt="" />
+			</div>
+			<div class="from-l b2w bgwh">
+				<div class="bwp b2w_1"></div>
+			</div>
+		</div>-->
+
+	
+
+		<div class="pt-page pt-page-5">
+			<div class="bottom-img b5 wd100 pa z-1">
+				<img class="wd100 imgsm" src="/assets/tmp-img/b51.jpg"/>
+			</div>
+			<div class="from-b b5w bgwh">
+				<div class="bwp b5w_2"></div>
+				<div class="bwp b5w_1"></div>
+			</div>
+		</div>
+
+		<!--<div class="pt-page pt-page-4">
+			<div class="bottom-img b4 wd100 pa z-1">
+				<img class="wd100 imgsm" src="tmp-img/b4.jpg"/>
+			</div>
+			<div class="from-b b4w bgwh">
+				<div class="bwp b4w_1"></div>
+			</div>
+		</div>-->
+
+		<div class="pt-page pt-page">
+			<div class="bottom-img b6 wd100 pa z-1">
+				<img class="wd100 imgsm" src="/assets/tmp-img/b6.jpg" alt="" />
+			</div>
+			<div class="from-l b6w bgwh">
+				<div class="bwp b6w_1"> 
+				    <div class="font_tis">还有<%=remainder%>份未领取</div>
+				    <div class="form_input">
+                        <input type="text" class="phone_num" maxlength="11" placeholder="输入手机号码">
+					    <div class="btn_sumb" id="btn_sw"></div>
+					</div>
+				
+				</div>
+			</div>
+		</div>
+
+	</div>
+   
+     <audio id="audioPlay" src="/assets/louvre/Go_To_Dream_Mix3.mp3" loop autoplay style="z-index: 0; width: 1px; height: 1px; left: 0px; bottom: 0px;"></audio>
+	 <a class="player-button" data="1" href="javascript:;">
+		<span class="player-tip" style="display: none;">点击开启/关闭音乐</span>
+	 </a>
+
+
+	<div class="pt-message">
+		<p>亲，你的浏览器不支持 CSS 动画，请使用 Chrome,Firefox,Safari 等浏览器浏览.</p>
+	</div>
+	<style>
+	  
+	</style>
+	<script src="/assets/js/jquery.dlmenu.js"></script>
+	<script src="/assets/js/pagetransitions.js"></script>
+	<script src="/assets/js/touchy.js"></script>
+	<script type="text/javascript">
+		
+		function onBridgeReady() {
+			var mainTitle="点影相册APP上线了",
+			mainDesc="赶快去上传相片，打印自己的相册吧！！",
+			mainURL="index.html"
+			mainImgUrl= "tmp-img/sm_logo.jpg";
+	    //转发朋友圈
+	    WeixinJSBridge.on("menu:share:timeline", function(e) {
+	    	var data = {
+	    		img_url:mainImgUrl,
+	    		img_width: "120",
+	    		img_height: "120",
+	    		link: mainURL,
+	            //desc这个属性要加上，虽然不会显示，但是不加暂时会导致无法转发至朋友圈，
+	            desc: mainDesc,
+	            title: mainTitle
+	        };
+	        WeixinJSBridge.invoke("shareTimeline", data, function(res) {
+	        	WeixinJSBridge.log(res.err_msg)
+	        });
+	    });
+	    //同步到微博
+	    WeixinJSBridge.on("menu:share:weibo", function() {
+	    	WeixinJSBridge.invoke("shareWeibo", {
+	    		"content": mainDesc,
+	    		"url": mainURL
+	    	}, function(res) {
+	    		WeixinJSBridge.log(res.err_msg);
+	    	});
+	    });
+	    //分享给朋友
+	    WeixinJSBridge.on('menu:share:appmessage', function(argv) {
+	    	WeixinJSBridge.invoke("sendAppMessage", {
+	    		img_url: mainImgUrl,
+	    		img_width: "120",
+	    		img_height: "120",
+	    		link: mainURL,
+	    		desc: mainDesc,
+	    		title: mainTitle
+	    	}, function(res) {
+	    		WeixinJSBridge.log(res.err_msg)
+	    	});
+	    });
+
+	};
+	//执行
+	document.addEventListener('WeixinJSBridgeReady', function() {
+		onBridgeReady();
+	});
+	
+	
+	var ts='<div class="tszit"><span>已经是最后一页了</span></div>'
+	//滑动监听
+	Touchy.stopWindowBounce();
+
+	var touchMe = document.getElementById('pt-main');
+	function pagenation(point){
+        //滑到最后一页停止滑动
+//		if(animcursor==1){
+//			if(point.y-startpoint.y>=30){
+//				return
+//			}
+//			
+//		}
+//
+//		if(animcursor==6){
+//			if(point.y-startpoint.y<=-30){
+//                $("#pt-main").append(ts)
+//                setTimeout(function (){
+//                	$(".tszit").animate({"opacity":0},300)
+//                	
+//                },1000)
+//
+//                return
+//			}
+//		}
+	    if(animcursor==5){
+		    $(".slide-tip").addClass("slide-hand")
+		}else{
+		  $(".slide-tip").removeClass("slide-hand")
+		}
+
+
+		if(point.y-startpoint.y>=30){
+			_prePage();
+		}else if(point.y-startpoint.y<=-30){
+			_nextPage();
+		}
+		
+	}
+
+	var startpoint;
+	function moveStart(point){
+		startpoint=point;
+	}
+	Touchy(touchMe, true, function (hand, finger) {
+		finger.on('start', moveStart);
+		//finger.on('move' , pagenation);
+		finger.on('end'  , pagenation);
+	});
+	
+	
+	// css script 图片的自适应 
+	var _winWidth=$(window).width();
+	var _winScale=_winWidth/640;
+	$(".from-r,.from-l,.from-t,.from-b").css("transform","scale("+_winScale+")");
+	$(".from-r,.from-l,.from-t,.from-b").css("-webkit-transform","scale("+_winScale+")");
+	var _winHeight=$(window).height();
+	if(_winHeight>=480){
+		$(".scrollTip").show();
+	}
+     var wH=$(window).height();
+	 var margins=(720/1110)*wH-_winWidth
+   $(".imgsm").css('marginLeft',-margins+10+'px')
+    $(".b6 .imgsm").css('marginLeft',-margins/2+'px')
+    $(".bgwh").css({'width':_winWidth,'height':_winHeight})
+
+	
+
+	var status_bool = true;
+
+	//音乐播放按钮
+	$(".player-button").click(function(){
+
+		if (status_bool == true) {
+			document.getElementById("audioPlay").pause();
+			$(this).addClass('player-button-stop');
+			document.getElementById("audioPlay").loop = 'loop';
+			status_bool = false;
+		} else {
+			document.getElementById("audioPlay").play();
+			$(this).removeClass('player-button-stop');
+			document.getElementById("audioPlay").loop = 'loop';
+			status_bool = true;
+		}
+	});
+
+	var inputPhone=$(".phone_num")
+
+  	$(".btn_sumb").on("click",function(){
+  		var _me = this;
+  	   	if(inputPhone.val().length!=11){
+  	   	    $("#pt-main").append('<div class="tszit"><span>请输入正确的手机号</span></div>')
+
+  	   	    setTimeout(function (){
+            	$(".tszit").animate({"opacity":0},300)
+            },1000)
+
+  	   	}else{
+
+  	   	  	var phone_per=inputPhone.val(),
+  	   	  		id = "<%=salesman._id%>"
+
+  	   	  	$.post("/markting/salesman/"+id+"/card/receive",
+  	   	  		{cell:phone_per},
+  	   	  		function(data){
+  	   	  			if(data.retcode!=0){
+  	   	  				return alert(data.message);
+  	   	  			}
+  	   	  			
+  	   	  			inputPhone.hide();
+		  	   	  	$(".b6w_1").addClass("b6w_111");
+		          	$(".btn_sumb").addClass("download_app");
+		          	$(".btn_sumb").css("backgroundImage","url(images/btns2.png)")
+		          	$(".btn_sumb").css("marginTop",100);
+
+
+		          	$(_me).on("click",function(){
+				  	    location.href="http://shuitagushi.com/download/index.html"
+				  	});
+
+  	   	  		}
+  	   	  	);
+
+  	   }   
+  	})
+
+
+  	function getParameterByName(name, url) {
+	    if (!url) url = window.location.href;
+	    name = name.replace(/[\[\]]/g, "\\$&");
+	    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+	        results = regex.exec(url);
+	    if (!results) return null;
+	    if (!results[2]) return '';
+    	return decodeURIComponent(results[2].replace(/\+/g, " "));
+	}
+
+  	
+</script>
+</body>
+</html>
