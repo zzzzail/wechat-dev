@@ -50,7 +50,8 @@
 					<%guest.forEach(function(g){%>
 						<div class="weui_cell">
 							<div class="weui_cell_bd weui_cell_primary">
-								<p><%=(g.cell+"").slice(0,3)+"****"+(g.cell+"").slice(7,11)%></p>
+								<!-- <p><%=(g.cell+"").slice(0,3)+"****"+(g.cell+"").slice(7,11)%></p> -->
+								<p><%=g.cell%></p>
 							</div>
 							<div class="weui_cell_ft"><%=fn.nearTime(g.source.ctime)%></div>
 						</div>
@@ -60,7 +61,8 @@
 						<%registered.forEach(function(g){%>
 							<div class="weui_cell">
 								<div class="weui_cell_bd weui_cell_primary">
-									<p><%=(g.cell+"").slice(0,3)+"****"+(g.cell+"").slice(7,11)%></p>
+									<!-- <p><%=(g.cell+"").slice(0,3)+"****"+(g.cell+"").slice(7,11)%></p> -->
+									<p><%=g.cell%></p>
 								</div>
 								<div class="weui_cell_ft"><%=fn.nearTime(g.events.ctime)%></div>
 							</div>
@@ -70,7 +72,8 @@
 						<%purchased.forEach(function(g){%>
 							<div class="weui_cell">
 								<div class="weui_cell_bd weui_cell_primary">
-									<p><%=(g.cell+"").slice(0,3)+"****"+(g.cell+"").slice(7,11)%></p>
+									<!--<p><%=(g.cell+"").slice(0,3)+"****"+(g.cell+"").slice(7,11)%></p>-->
+									<p><%=g.cell%></p>
 								</div>
 								<div class="weui_cell_ft"><%=fn.nearTime(g.events.ctime)%></div>
 							</div>
