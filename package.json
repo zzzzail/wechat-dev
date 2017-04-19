@@ -1,0 +1,28 @@
+{
+  "name": "dianying-open",
+  "version": "1.0.0",
+  "description": "微信服务号",
+  "main": "app.js",
+  "scripts": {
+    "start": "node --harmony app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@git.loocall.com:yuyang/dianying-open.git"
+  },
+  "author": "Zail",
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "ejs": "^2.5.6",
+    "koa": "^2.2.0",
+    "koa-body": "^2.0.0",
+    "koa-ejs": "^4.0.0",
+    "koa-logger": "^2.0.1",
+    "koa-router": "^7.1.1",
+    "koa-static": "^3.0.0",
+    "lodash": "^4.17.4",
+    "moment": "^2.18.1",
+    "mongoose": "^4.9.5"
+  }
+}
