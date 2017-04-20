@@ -1,5 +1,6 @@
 apps:
-  - script: ./app.js
+  - script: './app.js'
+    cwd: './'
     name: 'dianying-open'
     watch: true
     ignore_watch:
@@ -11,9 +12,9 @@ apps:
       - 'cache'
       - '.idea'
       - '*.md'
-    node_agrs: '--harmony'
+    interpreter_args: '--harmony'
     log_date_format: 'YYYY-MM-DD HH:mm:ss'
-    out_file: './log/pm2-out.log'
-    error_file: './log/pm2-error.log'
+    out_file: './logs/pm2-out.log'
+    error_file: './logs/pm2-error.log'
     env:
-      NODE_ENV: local
+      NODE_ENV: 'local'
