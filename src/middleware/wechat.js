@@ -41,9 +41,8 @@ module.exports = function (app) {
 
       let data = await getRawBody(ctx.req);
       let content = await util.parseXMLAsync(data);
-      console.log(content.xml);
       let message = util.formatMessage(content.xml);
-      console.log(message);
+      console.log('微信post数据', message);
 
     } else {
       await next();
