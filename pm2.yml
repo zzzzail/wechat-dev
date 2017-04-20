@@ -1,0 +1,19 @@
+apps:
+  - script: ./app.js
+  name: 'dianying-open'
+  watch: true
+  ignore_watch:
+    - 'node_modules'
+    - 'log'
+    - '*.log'
+    - '.DS_Store'
+    - '.git'
+    - 'cache'
+    - '.idea'
+    - '*.md'
+  node_agrs: '--harmony'
+  log_date_format: 'YYYY-MM-DD HH:mm:ss'
+  out_file: './log/pm2-out.log'
+  error_file: './log/pm2-error.log'
+  env:
+    NODE_ENV: production
