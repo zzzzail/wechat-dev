@@ -9,6 +9,7 @@ const sha1 = require('sha1');
 const config = require('../config/config');
 const Wechat = require('../wechat');
 const getRawBody = require('raw-body');
+const util = require('../util');
 
 module.exports = function (app) {
 
@@ -28,7 +29,6 @@ module.exports = function (app) {
     let nonce = query.nonce;
     let str = [token, timestamp, nonce].sort().join('');
     let sha = sha1(str);
-    console.log(sha, signature);
     if (ctx.method == 'GET') {
       if (sha == signature) {
         return ctx.body = echostr;
@@ -37,11 +37,11 @@ module.exports = function (app) {
     } else if (ctx.method == 'POST') {
       if (sha != signature) {
         await next();
-        console.log('!=');
       }
 
       let data = await getRawBody(ctx.req);
-      console.log(data.toString());
+      let content = await util.parseXMLAsync(data);
+      console.log(content);
 
     } else {
       await next();
