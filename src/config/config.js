@@ -10,7 +10,8 @@ const path = require('path');
 const _ = require('lodash');
 const staticDir = path.join(__dirname, '../../public');
 const viewDir = path.join(__dirname, '../../public/views');
-let wechatApiPrefix = 'https://api.weixin.qq.com/cgi-bin/';
+const local = require('./local');
+const wechatApiPrefix = 'https://api.weixin.qq.com/cgi-bin/';
 
 let config = {
   title: '点影微信服务号',
