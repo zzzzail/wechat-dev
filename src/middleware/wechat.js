@@ -9,7 +9,7 @@ const sha1 = require('sha1');
 const config = require('../config/config');
 const Wechat = require('../wechat');
 const getRawBody = require('raw-body');
-const util = require('../util');
+const util = require('../wechat/util');
 
 module.exports = function (app) {
 
