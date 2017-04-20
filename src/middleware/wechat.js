@@ -37,6 +37,7 @@ module.exports = function (app) {
     } else if (ctx.method == 'POST') {
       if (sha != signature) {
         await next();
+        console.log('!=');
       }
 
       let data = await getRawBody(ctx.req);
