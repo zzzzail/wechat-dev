@@ -32,4 +32,6 @@ exports.formatMessage = function (data) {
       }
     }
   }
+
+  return data;
 }
