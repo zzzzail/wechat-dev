@@ -8,6 +8,7 @@
 const sha1 = require('sha1');
 const config = require('../config/config');
 const Wechat = require('../wechat');
+const getRawBody = require('raw-body');
 
 module.exports = function (app) {
 
@@ -25,17 +26,26 @@ module.exports = function (app) {
     let echostr = query.echostr;
     let timestamp = query.timestamp;
     let nonce = query.nonce;
-    if (signature && echostr && timestamp && nonce) {
-      let str = [token, timestamp, nonce].sort().join('');
-      let sha = sha1(str);
+    let str = [token, timestamp, nonce].sort().join('');
+    let sha = sha1(str);
+    console.log(sha, signature);
+    if (ctx.method == 'GET') {
       if (sha == signature) {
         return ctx.body = echostr;
-      } else {
-        return ctx.body = '不要碰爸爸的微信公众号.🙂';
       }
+      await next();
+    } else if (ctx.method == 'POST') {
+      if (sha != signature) {
+        await next();
+      }
+
+      let data = await getRawBody(ctx.req);
+      console.log(data.toString());
+
     } else {
       await next();
     }
+
   })
 
 }
