@@ -5,7 +5,7 @@ apps:
     watch: true
     ignore_watch:
       - 'node_modules'
-      - 'log'
+      - 'logs'
       - '*.log'
       - '.DS_Store'
       - '.git'
