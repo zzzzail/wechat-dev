@@ -41,3 +41,6 @@ jspm_packages
 
 # Mac cache file
 .DS_Store
+
+# 缓存文件
+cache

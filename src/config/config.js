@@ -53,6 +53,7 @@ let config = {
   wechat: {
     appId: "wx41cbb84cb6b1c9ee",
     secret: "c1b8b203c9f67a3907f0c9a6c9067a63",
+    token: 'ZhangErGouWechatDeveloper',
     tokenCacheFile: path.join(__dirname, '../../', 'cache/tokenCache.txt'),
     ticketCacheFile: path.join(__dirname, '../../', 'cache/ticketCache.txt'),
     api: {
