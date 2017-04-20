@@ -6,6 +6,7 @@
  */
 
 const sha1 = require('sha1');
+const config = require('../config/config');
 const Wechat = require('../wechat');
 
 module.exports = function (app) {
