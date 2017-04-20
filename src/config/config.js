@@ -16,7 +16,7 @@ let config = {
   title: '点影微信服务号',
   env: 'production',
   appName: 'wechat-open',
-  port: 4800,
+  port: 4700,
   keys: '',
   middleware: [
     {
@@ -50,8 +50,8 @@ let config = {
   ],
   // 微信开发所有配置信息
   wechat: {
-    appId: "wxccd81e1589ab17ed",
-    secret: "805ab2401d1638fb93588d24551e3341",
+    appId: "wx41cbb84cb6b1c9ee",
+    secret: "c1b8b203c9f67a3907f0c9a6c9067a63",
     tokenCacheFile: path.join(__dirname, '../../', 'cache/tokenCache.txt'),
     ticketCacheFile: path.join(__dirname, '../../', 'cache/ticketCache.txt'),
     api: {
