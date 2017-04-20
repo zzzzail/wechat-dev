@@ -41,7 +41,8 @@ module.exports = function (app) {
 
       let data = await getRawBody(ctx.req);
       let content = await util.parseXMLAsync(data);
-      console.log(content);
+      data = util.formatMessage(content);
+      console.log(data);
 
     } else {
       await next();
