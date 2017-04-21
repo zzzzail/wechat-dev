@@ -10,6 +10,7 @@ const config = require('../config/config');
 const Wechat = require('../wechat');
 const getRawBody = require('raw-body');
 const util = require('../wechat/util');
+const replyHandler = require('../wechat/replyHandler');
 
 module.exports = function (app) {
 
@@ -42,10 +43,10 @@ module.exports = function (app) {
       let data = await getRawBody(ctx.req);
       let content = await util.parseXMLAsync(data);
       let message = util.formatMessage(content.xml);
-      console.log('微信post数据', message);
+      ctx.wechatMessage = message;
+      let replyMessage = replyHandler(message);
 
-      ctx.wechat.reply.call(this, ctx, next, message);
-      await next();
+      ctx.wechat.reply.call(ctx, replyMessage);
 
       // if (message.MsgType == 'event') {
       //   if (message.Event == 'subscribe') {

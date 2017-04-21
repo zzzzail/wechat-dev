@@ -270,9 +270,15 @@ class Wechat {
 
 }
 
-Wechat.prototype.reply = function (ctx, next, message) {
-  console.log(ctx, next, message);
-  console.log('123123')
+const xmlTemplate = require('./util').xmlTemplate;
+
+Wechat.prototype.reply = function (replyMessage) {
+  let message = this.wechatMessage;
+  let xml = xmlTemplate(message, replyMessage);
+  console.log(xml);
+  this.status = 200;
+  this.type = 'application/xml';
+  return this.body = xml;
 }
 
 module.exports = Wechat;
