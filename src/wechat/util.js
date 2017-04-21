@@ -56,7 +56,7 @@ exports.xmlTemplate = function (message, content) {
     type = 'news';
   }
 
-  type = replyMessage.type || type;
+  type = content.type || type;
 
   let info = {
     msgType: type,
