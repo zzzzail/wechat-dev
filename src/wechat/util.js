@@ -51,13 +51,11 @@ exports.xmlTemplate = function (message, content) {
   let type = 'text';
   let toUserName = message.FromUserName;
   let fromUserName = message.ToUserName;
-
   if (Array.isArray(content)) {
     type = 'news';
   }
 
   type = content.type || type;
-
   let info = {
     msgType: type,
     content,
@@ -65,6 +63,6 @@ exports.xmlTemplate = function (message, content) {
     toUserName,
     fromUserName
   }
-  console.log(info);
+
   return xmlCompiled(info);
 }
