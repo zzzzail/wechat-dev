@@ -8,12 +8,14 @@
 
 const router = require('koa-router')();
 const {getLogin, postLogin, isLogin, getIndex} = require('../controller/indexController');
+const {getAutoResponse} = require('../controller/responseController');
 
 module.exports = function (app) {
   router.get('/login', getLogin);
   router.post('/login', postLogin);
   router.get('/', isLogin, getIndex);
   router.get('/index', isLogin, getIndex);
+  router.get('/auto-response', isLogin, getAutoResponse);
 
   app
     .use(router.routes())
