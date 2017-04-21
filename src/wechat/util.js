@@ -65,6 +65,6 @@ exports.xmlTemplate = function (message, content) {
     toUserName,
     fromUserName
   }
-
+  console.log(info);
   return xmlCompiled(info);
 }
