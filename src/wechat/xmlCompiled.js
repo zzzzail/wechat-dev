@@ -13,6 +13,7 @@ module.exports = function (info) {
       contentXml = `
         <MsgType><![CDATA[${info.msgType}]]></MsgType>
         <Content><![CDATA[${info.content}]]></Content>`;
+      break;
     }
     case 'image': {
       contentXml = `
@@ -20,6 +21,7 @@ module.exports = function (info) {
         <Image>
           <MediaId><![CDATA[${info.content.mediaId}]]></MediaId>
         </Image>`;
+      break;
     }
     case 'voice': {
       contentXml = `
@@ -27,6 +29,7 @@ module.exports = function (info) {
       <Voice>
         <MediaId><![CDATA[${info.content.mediaId}]]></MediaId>
       </Voice>`;
+      break;
     }
     case 'video': {
       contentXml = `
@@ -36,6 +39,7 @@ module.exports = function (info) {
         <Title><![CDATA[${info.content.title}]]></Title>
         <Description><![CDATA[${info.content.description}]]></Description>
       </Video> `;
+      break;
     }
     case 'music': {
       contentXml = `
@@ -47,6 +51,7 @@ module.exports = function (info) {
         <HQMusicUrl><![CDATA[${info.content.hqMusicUrl}]]></HQMusicUrl>
         <ThumbMediaId><![CDATA[${info.content.thumbMediaId}]]></ThumbMediaId>
       </Music>`;
+      break;
     }
     case 'news': {
       let articles = '';
@@ -65,6 +70,7 @@ module.exports = function (info) {
       <Articles>
         ${articles}
       </Articles>`;
+      break;
     }
     default:
       contentXml = `
