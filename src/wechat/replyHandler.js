@@ -33,7 +33,7 @@ module.exports = function (message) {
         title: '张二狗的日常测试',
         description: '张二狗的日常测试, 这是一个无法描述的工作量, 其工作量之巨大, 工作之艰难, 难以言表',
         picUrl: 'http://loocall.com/imgv2/logo.jpg',
-        Url: 'http://loocall.com'
+        url: 'http://loocall.com'
       }]
     }
 
