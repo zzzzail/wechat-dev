@@ -6,7 +6,6 @@
  */
 
 module.exports = function (message) {
-  console.log(message);
   if (message.MsgType == 'event') {
     if (message.Event == 'subscribe') {
       return '谢谢您订阅点影,';

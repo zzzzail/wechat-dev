@@ -45,6 +45,7 @@ module.exports = function (app) {
       let message = util.formatMessage(content.xml);
       ctx.wechatMessage = message;
       let replyMessage = replyHandler(message);
+      console.log(message, replyMessage);
 
       ctx.wechat.reply.call(ctx, replyMessage);
 
