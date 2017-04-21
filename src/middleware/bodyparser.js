@@ -5,6 +5,14 @@
  * @description
  */
 
-module.exports = function (app, param) {
+const koaBody = require('koa-body');
 
+module.exports = function (app, param) {
+  app.use(koaBody(param));
+  app.use(async (ctx, next) => {
+    if (ctx.request.method == 'POST') {
+      ctx.body = ctx.request.body;
+    }
+    await next();
+  });
 }

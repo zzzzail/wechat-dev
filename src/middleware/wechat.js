@@ -38,17 +38,16 @@ module.exports = function (app) {
     } else if (ctx.method == 'POST') {
       if (sha != signature) {
         await next();
+      } else {
+        let data = await getRawBody(ctx.req);
+        let content = await util.parseXMLAsync(data);
+        let message = util.formatMessage(content.xml);
+        ctx.wechatMessage = message;
+        let replyMessage = replyHandler(message);
+        console.log(message, replyMessage);
+
+        ctx.wechat.reply.call(ctx, replyMessage);
       }
-
-      let data = await getRawBody(ctx.req);
-      let content = await util.parseXMLAsync(data);
-      let message = util.formatMessage(content.xml);
-      ctx.wechatMessage = message;
-      let replyMessage = replyHandler(message);
-      console.log(message, replyMessage);
-
-      ctx.wechat.reply.call(ctx, replyMessage);
-
     } else {
       await next();
     }

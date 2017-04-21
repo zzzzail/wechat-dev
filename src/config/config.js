@@ -16,26 +16,35 @@ const wechatApiPrefix = 'https://api.weixin.qq.com/cgi-bin/';
 let config = {
   title: '点影微信服务号',
   env: 'production',
-  appName: 'wechat-open',
+  appName: 'dianying-open',
   port: 4700,
-  keys: '',
+  keys: ['dianying-open'],
   middleware: [
     {
       name: 'initial'
     }, {
       name: 'bodyparser',
-      params: {}
+      params: {
+        multipart: true,
+        formidable: {
+          uploadDir: path.join(__dirname, '../../public/upload')
+        }
+      }
     }, {
       name: 'koa-static',
       params: staticDir
     }, {
-      name: 'ejs',
+      name: 'xtpl',
       params: {
-        root: viewDir,
-        layout: false,
-        viewExt: 'ejs',
-        cache: true,
-        debug: true
+        views: viewDir
+      }
+    }, {
+      name: 'session',
+      params: {
+        key: 'koa:sess',
+        overwrite: true,
+        httpOnly: true,
+        signed: true
       }
     }, {
       name: 'mongoose',
