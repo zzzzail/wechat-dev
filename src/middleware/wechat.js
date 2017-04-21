@@ -44,6 +44,31 @@ module.exports = function (app) {
       let message = util.formatMessage(content.xml);
       console.log('微信post数据', message);
 
+      ctx.wechat.reply.call(this, ctx, next, message);
+      await next();
+
+      // if (message.MsgType == 'event') {
+      //   if (message.Event == 'subscribe') {
+      //     let now = new Date().getTime();
+      //
+      //     ctx.status = 200;
+      //     ctx.type = 'application/xml';
+      //     return ctx.body = `
+      //       <xml>
+      //         <ToUserName><![CDATA[${message.FromUserName}]]></ToUserName>
+      //         <FromUserName><![CDATA[${message.ToUserName}]]></FromUserName>
+      //         <CreateTime>${now}</CreateTime>
+      //         <MsgType><![CDATA[text]]></MsgType>
+      //         <Event><![CDATA[欢迎您订阅点影公众号.]]></Event>
+      //       </xml>
+      //     `;
+      //   } else if (message.event == 'unsubscribe') {
+      //
+      //   }
+      // } else if (message.MsgType == 'text') {
+      //
+      // }
+
     } else {
       await next();
     }

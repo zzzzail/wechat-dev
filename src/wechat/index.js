@@ -270,4 +270,9 @@ class Wechat {
 
 }
 
+Wechat.__proto__.reply = function (ctx, next, message) {
+  console.log(ctx, next, message);
+  console.log('123123')
+}
+
 module.exports = Wechat;

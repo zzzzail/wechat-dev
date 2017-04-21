@@ -45,3 +45,7 @@ exports.formatMessage = function (message) {
 
   return message;
 }
+
+exports.message = function () {
+
+}
