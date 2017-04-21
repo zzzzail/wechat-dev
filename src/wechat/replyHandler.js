@@ -28,6 +28,13 @@ module.exports = function (message) {
     // 回复策略
     if (content == '1') {
       reply = '您回复的1, 我不知道回复啥';
+    } else if (content == '2') {
+      reply = [{
+        title: '张二狗的日常测试',
+        description: '张二狗的日常测试, 这是一个无法描述的工作量, 其工作量之巨大, 工作之艰难, 难以言表',
+        picUrl: 'http://loocall.com/imgv2/logo.jpg',
+        Url: 'http://loocall.com'
+      }]
     }
 
     return reply;
