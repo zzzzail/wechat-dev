@@ -23,7 +23,7 @@ module.exports = function (message) {
       return '';
     }
   } else if (message.MsgType == 'text') {
-    let content = message.content;
+    let content = message.Content;
     let reply = `额, 您说的'${content}'太复杂了.`;
 
     // 回复策略
