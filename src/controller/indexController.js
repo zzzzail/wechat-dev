@@ -34,6 +34,11 @@ exports.postLogin = async (ctx, next) => {
   return ctx.redirect('/index');
 }
 
+exports.getLogout = async (ctx, next) => {
+  ctx.session.userToken = null;
+  return ctx.redirect('/login');
+}
+
 exports.getIndex = async (ctx, next) => {
   return ctx.render('index');
 }

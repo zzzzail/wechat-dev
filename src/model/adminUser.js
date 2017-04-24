@@ -9,9 +9,18 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const adminUserSchema = new Schema({
-  name: String,
+  // 昵称
+  nickname: String,
+  // 登录用户名
   username: String,
-  password: String
+  // 密码
+  password: String,
+  // 邮箱
+  email: String,
+  // 手机号码
+  phone: String
 });
+
+adminUserSchema.index({username: 1});
 
 module.exports = mongoose.model('AdminUser', adminUserSchema);

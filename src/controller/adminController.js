@@ -7,7 +7,5 @@
 
 // 系统管理员管理
 exports.getAdminUser = async (ctx, next) => {
-  let user = ctx.state._loginUser;
-  console.log(user);
   return ctx.render('admin/user');
 }

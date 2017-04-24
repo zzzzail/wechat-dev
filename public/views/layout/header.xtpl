@@ -216,22 +216,22 @@
         <li class="dropdown user user-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <img src="/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-            <span class="hidden-xs">Admin</span>
+            <span class="hidden-xs">{{_loginUser.username}}</span>
           </a>
           <ul class="dropdown-menu">
             <!-- User image -->
             <li class="user-header">
               <p></p>
               <img src="/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-              <p>点影</p>
+              <p>{{_loginUser.nickname}}</p>
             </li>
             <!-- Menu Footer-->
             <li class="user-footer">
               <div class="pull-left">
-                <a href="#" class="btn btn-default btn-flat">个人中心</a>
+                <a href="/admin/user" class="btn btn-default btn-flat">个人中心</a>
               </div>
               <div class="pull-right">
-                <a href="#" class="btn btn-default btn-flat">安全退出</a>
+                <a href="/logout" class="btn btn-default btn-flat">安全退出</a>
               </div>
             </li>
           </ul>
