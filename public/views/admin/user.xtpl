@@ -1,0 +1,5 @@
+{{extend ("../layout/layout")}}
+
+{{#block ("body")}}
+<div></div>
+{{/block}}

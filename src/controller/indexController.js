@@ -18,7 +18,7 @@ exports.getLogin = async (ctx, next) => {
 exports.postLogin = async (ctx, next) => {
   let username = ctx.body.username;
   let password = ctx.body.password;
-  const AdminUser = ctx.mongoose.model('adminUser');
+  const AdminUser = ctx.mongoose.model('AdminUser');
 
   if (username && password) {
     let user = await AdminUser.findOne({username: username}).exec();
@@ -32,21 +32,6 @@ exports.postLogin = async (ctx, next) => {
     }
   }
   return ctx.redirect('/index');
-}
-
-exports.isLogin = async (ctx, next) => {
-  if (ctx.session.userToken) {
-    let userToken = ctx.session.userToken;
-    const AdminUser = ctx.mongoose.model('adminUser');
-    let user = await AdminUser.findOne({username: userToken.username}).exec();
-    if (user.password == userToken.password) {
-      await next();
-    } else {
-      return ctx.render('login', {errorMsg: '登录过期, 请重新登录.'});
-    }
-  } else {
-    return ctx.redirect('/login');
-  }
 }
 
 exports.getIndex = async (ctx, next) => {

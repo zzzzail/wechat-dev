@@ -2,7 +2,8 @@
 
 {{#block('body')}}
 
-<div class="content-wrapper">
+<div>
+  123
 </div>
 
 {{/block}}
