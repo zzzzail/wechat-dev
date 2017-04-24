@@ -15,9 +15,6 @@
         </a>
         <ul class="treeview-menu">
           <li>
-            <a href="/material/interim"><i class="fa fa-circle-o"></i> 临时素材</a>
-          </li>
-          <li>
             <a href="/material/forever"><i class="fa fa-circle-o"></i> 永久素材</a>
           </li>
         </ul>

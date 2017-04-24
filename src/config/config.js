@@ -69,14 +69,17 @@ let config = {
     appId: "wx41cbb84cb6b1c9ee",
     secret: "c1b8b203c9f67a3907f0c9a6c9067a63",
     token: 'ZhangErGouWechatDeveloper',
-    tokenCacheFile: path.join(__dirname, '../../', 'cache/tokenCache.txt'),
-    ticketCacheFile: path.join(__dirname, '../../', 'cache/ticketCache.txt'),
+    tokenCacheFile: path.join(__dirname, '../../', 'cache/wechat/tokenCache.txt'),
+    ticketCacheFile: path.join(__dirname, '../../', 'cache/wechat/ticketCache.txt'),
     api: {
       access_token: {
-        get: wechatApiPrefix + 'token?grant_type=client_credential'
+        get: wechatApiPrefix + 'token?grant_type=client_credential&'
       },
       jsapi_ticket: {
         get: wechatApiPrefix + 'ticket/getticket?'
+      },
+      uploadMaterialForever: {
+        post: wechatApiPrefix + 'material/add_material?'
       }
     }
   }
