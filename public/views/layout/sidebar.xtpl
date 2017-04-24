@@ -8,14 +8,39 @@
         </a>
       </li>
       <li class="treeview">
-        <a href="/auto-response">
+        <a href="#">
           <i class="fa fa-files-o"></i>
-          <span>自动回复</span>
+          <span>素材管理</span>
+          <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
         </a>
+        <ul class="treeview-menu">
+          <li>
+            <a href="/material/interim"><i class="fa fa-circle-o"></i> 临时素材</a>
+          </li>
+          <li>
+            <a href="/material/forever"><i class="fa fa-circle-o"></i> 永久素材</a>
+          </li>
+        </ul>
       </li>
       <li class="treeview">
         <a href="#">
-          <i class="fa fa-files-o"></i><span>系统设置</span>
+          <i class="fa fa-files-o"></i>
+          <span>回复管理</span>
+          <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+        </a>
+        <ul class="treeview-menu">
+          <li>
+            <a href="/response/welcome"><i class="fa fa-circle-o"></i> 欢迎语设置</a>
+          </li>
+          <li>
+            <a href="/response/auto"><i class="fa fa-circle-o"></i> 自动回复</a>
+          </li>
+        </ul>
+      </li>
+      <li class="treeview">
+        <a href="#">
+          <i class="fa fa-files-o"></i>
+          <span>系统设置</span>
           <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
         </a>
         <ul class="treeview-menu">

@@ -9,7 +9,7 @@
 const router = require('koa-router')();
 const {isLogin} = require('../controller/publicController');
 const {getLogin, postLogin, getLogout, getIndex} = require('../controller/indexController');
-const {getAutoResponse} = require('../controller/responseController');
+const {getResponseWelcome, getResponseAuto} = require('../controller/responseController');
 const {isUniform, getAdminUserId, putAdminUserId} = require('../controller/adminController');
 
 module.exports = function (app) {
@@ -18,8 +18,12 @@ module.exports = function (app) {
   router.get('/logout', getLogout)
   router.get('/', isLogin, getIndex);
   router.get('/index', isLogin, getIndex);
-  router.get('/auto-response', isLogin, getAutoResponse);
 
+  // 回复管理
+  router.get('/response/welcome', isLogin, getResponseWelcome);
+  router.get('/response/auto', isLogin, getResponseAuto);
+
+  // 系统设置
   router.get('/admin/user/:_id', isLogin, isUniform, getAdminUserId);
   router.put('/admin/user/:_id', isLogin, isUniform, putAdminUserId);
 

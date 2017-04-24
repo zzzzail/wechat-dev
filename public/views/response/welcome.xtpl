@@ -1,0 +1,9 @@
+{{extend('../layout/layout')}}
+
+{{#block('body')}}
+
+<div>
+  welcome
+</div>
+
+{{/block}}

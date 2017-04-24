@@ -271,7 +271,7 @@ class Wechat {
 }
 
 const xmlTemplate = require('./util').xmlTemplate;
-
+// 微信自动回复
 Wechat.prototype.reply = function (replyMessage) {
   let message = this.wechatMessage;
   let xml = xmlTemplate(message, replyMessage);
@@ -279,5 +279,7 @@ Wechat.prototype.reply = function (replyMessage) {
   this.type = 'application/xml';
   return this.body = xml;
 }
+
+// 微信上传素材
 
 module.exports = Wechat;

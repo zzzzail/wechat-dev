@@ -5,6 +5,10 @@
  * @description 回复controller
  */
 
-exports.getAutoResponse = async (ctx, next) => {
-  return ctx.render('response/index');
+exports.getResponseWelcome = async (ctx, next) => {
+  return ctx.render('response/welcome');
+}
+
+exports.getResponseAuto = async (ctx, next) => {
+  return ctx.render('response/auto');
 }
