@@ -14,7 +14,13 @@ const local = require('./local');
 const wechatApiPrefix = 'https://api.weixin.qq.com/cgi-bin/';
 
 let config = {
-  title: '点影微信服务号',
+  version: '1.0.0',
+  title: '点影微信服务号', // 网站标题
+  keywords: '点影微信服务号', // 网站关键字
+  description: '管理点影微信公众号', // 网站说明
+  company: '洛客科技 loocall', // 公司名称
+  telephone: '', // 公司电话
+  icp: '', // 网站备案号
   env: 'production',
   appName: 'dianying-open',
   port: 4700,

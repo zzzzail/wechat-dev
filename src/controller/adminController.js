@@ -24,7 +24,7 @@ exports.getAdminUserId = async (ctx, next) => {
   return ctx.render('admin/user');
 }
 
-// 修改资料
+// 修改个人资料
 exports.putAdminUserId = async (ctx, next) => {
   let email = ctx.body.email;
   let phone = ctx.body.phone;

@@ -11,7 +11,12 @@ module.exports = function (app) {
   app.keys = config.keys;
 
   app.use(async (ctx, next) => {
+    ctx.state.version = config.version;
     ctx.state.title = config.title;
+    ctx.state.keywords = config.keywords;
+    ctx.state.company = config.company;
+    ctx.state.telephone = config.telephone;
+    ctx.state.icp = config.icp;
     ctx.state.moment = require('moment');
     ctx.state._ = require('lodash');
     await next();
