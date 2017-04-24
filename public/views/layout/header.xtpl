@@ -228,7 +228,7 @@
             <!-- Menu Footer-->
             <li class="user-footer">
               <div class="pull-left">
-                <a href="/admin/user" class="btn btn-default btn-flat">个人中心</a>
+                <a href="/admin/user/{{_loginUser._id}}" class="btn btn-default btn-flat">个人资料</a>
               </div>
               <div class="pull-right">
                 <a href="/logout" class="btn btn-default btn-flat">安全退出</a>

@@ -32,11 +32,13 @@
 <script src="/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="/dist/js/demo.js"></script>
+<!-- layer alert -->
+<script src="/plugins/layer/layer.js"></script>
+
 <script>
   $(document).ready(function(){
     /*导航高亮*/
     var scheme_less_url = window.location.pathname + window.location.search;
-    console.log(scheme_less_url)
     //二级链接高亮
     $('ul.sidebar-menu>li').find('a[href="'+scheme_less_url+'"]').closest('li').addClass('active');
     //一级栏目[含二级链接]高亮

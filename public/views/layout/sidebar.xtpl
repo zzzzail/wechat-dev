@@ -20,7 +20,7 @@
         </a>
         <ul class="treeview-menu">
           <li>
-            <a href="/admin/user"><i class="fa fa-circle-o"></i> 用户管理</a>
+            <a href="/admin/user/{{_loginUser._id}}"><i class="fa fa-circle-o"></i> 个人资料</a>
           </li>
         </ul>
       </li>
