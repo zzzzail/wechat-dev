@@ -280,7 +280,7 @@ Wechat.prototype.uploadMaterialForever = function (type, filePath, description) 
     _self.getAccessToken()
       .then(function (data) {
         let url = `${wechatCfg.api.uploadMaterialForever.post}access_token=${data.access_token}&type=${type}`;
-
+        console.log(url);
         request({method: 'POST', url, formData, json: true})
           .then(response => {
             let _data = response.body;

@@ -15,5 +15,9 @@ exports.getMaterialForeverUpload = async (ctx, next) => {
 
 exports.postMaterialForeverUpload = async (ctx, next) => {
   console.log(ctx.body);
+  let wechat = ctx.wechat;
+  let uploadFilePath = ctx.body.files.media.path;
+  let a = await wechat.uploadMaterialForever('image', uploadFilePath);
+  console.log(a);
   return ctx.body = '123';
 }
