@@ -44,3 +44,6 @@ jspm_packages
 
 # 缓存文件
 cache
+
+# 上传的文件
+public/upload
