@@ -81,7 +81,7 @@ let config = {
         get: wechatApiPrefix + 'ticket/getticket?'
       },
       uploadMaterialForever: {
-        post: wechatApiPrefix + 'media/upload?'
+        post: wechatApiPrefix + 'material/add_material?'
       }
     }
   }
