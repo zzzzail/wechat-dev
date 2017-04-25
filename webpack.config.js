@@ -33,7 +33,7 @@ module.exports = {
     __dirname: false
   },
   module: {
-    loaders: [{
+    rules: [{
       test: /\.js$/,
       loader: 'babel-loader',
       exclude: [
@@ -43,9 +43,6 @@ module.exports = {
         plugins: ['transform-runtime'],
         presets: ['es2015', 'stage-0']
       }
-    }, {
-      test: /\.json$/,
-      loader: 'json-loader'
     }]
   },
   resolve: {

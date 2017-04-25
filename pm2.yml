@@ -1,5 +1,6 @@
 apps:
-  - script: './app.js'
+  - interpreter: '/home/zhangxq/node/bin/node'
+    script: './app.js'
     name: 'dianying-open'
     watch: true
     ignore_watch:
