@@ -11,17 +11,21 @@ const {isLogin} = require('../controller/publicController');
 const {getLogin, postLogin, getLogout, getIndex} = require('../controller/indexController');
 const {getResponseWelcome, getResponseAuto} = require('../controller/responseController');
 const {isUniform, getAdminUserId, putAdminUserId} = require('../controller/adminController');
+const {getMaterialForever} = require('../controller/materialController');
 
 module.exports = function (app) {
   router.get('/login', getLogin);
   router.post('/login', postLogin);
-  router.get('/logout', getLogout)
+  router.get('/logout', getLogout);
   router.get('/', isLogin, getIndex);
   router.get('/index', isLogin, getIndex);
 
   // 回复管理
   router.get('/response/welcome', isLogin, getResponseWelcome);
   router.get('/response/auto', isLogin, getResponseAuto);
+
+  // 素材管理
+  router.get('/material/forever', isLogin, getMaterialForever);
 
   // 系统设置
   router.get('/admin/user/:_id', isLogin, isUniform, getAdminUserId);

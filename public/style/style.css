@@ -1,0 +1,46 @@
+.image-list {
+  list-style: none;
+  margin: 0;
+  padding: 10px 10px 10px 0;
+}
+.image-list .item-upload .item-image {
+  font-size: 40px;
+  font-weight: normal;
+  background-color: rgba(0,0,0,0.6);
+  text-align: center;
+  line-height: 200px;
+}
+.image-list .item-upload .item-image i {
+  color: #FFFFFF;
+}
+.image-list .item,
+.image-list .item-upload {
+  width: 220px;
+  height: 220px;
+  float: left;
+  overflow: hidden;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+.image-list .item {
+  position: relative;
+}
+.image-list .item-image,
+.image-list .item-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.image-list .item:hover .item-del{
+  display: block;
+}
+.image-list .item-del {
+  display: none;
+  position: absolute;
+  top: 1px;
+  right: 5px;
+}
+.image-list .item-del i {
+  color: #dd4b39;
+}

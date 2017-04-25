@@ -1,0 +1,79 @@
+{{extend ('../layout/layout')}}
+
+{{#block ('body')}}
+<div class="content">
+  <div class="nav-tabs-custom">
+    <ul class="nav nav-tabs">
+      <li class="active">
+        <a href="#material-image" data-toggle="tab">图片素材</a>
+      </li>
+      <li>
+        <a href="#material-voice" data-toggle="tab">语音素材</a>
+      </li>
+      <li>
+        <a href="#material-video" data-toggle="tab">视频素材</a>
+      </li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane active" id="material-image">
+        <ul class="image-list clearfix">
+          <li class="item-upload">
+            <a class="item-image" href="/material/forever/upload"><i class="fa fa-plus"></i></a>
+          </li>
+          <li class="item">
+            <a class="item-image" href="http://jy.yuanzhenginfo.com/Uploads/Picture/2017-04-24/58fda0d06f3a5.png" target="_blank">
+              <img src="http://jy.yuanzhenginfo.com/Uploads/Picture/2017-04-24/58fda0d06f3a5.png" alt="">
+            </a>
+            <div class="item-del" title="删除"><i class="fa fa-remove"></i></div>
+          </li>
+          <li class="item">
+            <a class="item-image" href="http://jy.yuanzhenginfo.com/Uploads/Picture/2017-04-24/58fda0d06f3a5.png" target="_blank">
+              <img src="http://jy.yuanzhenginfo.com/Uploads/Picture/2017-04-24/58fda0d06f3a5.png" alt="">
+            </a>
+            <div class="item-del" title="删除"><i class="fa fa-remove"></i></div>
+          </li>
+          <li class="item">
+            <a class="item-image" href="http://jy.yuanzhenginfo.com/Uploads/Picture/2017-04-24/58fda0d06f3a5.png" target="_blank">
+              <img src="http://jy.yuanzhenginfo.com/Uploads/Picture/2017-04-24/58fda0d06f3a5.png" alt="">
+            </a>
+            <div class="item-del" title="删除"><i class="fa fa-remove"></i></div>
+          </li>
+          <li class="item">
+            <a class="item-image" href="http://jy.yuanzhenginfo.com/Uploads/Picture/2017-04-24/58fda0d06f3a5.png" target="_blank">
+              <img src="http://jy.yuanzhenginfo.com/Uploads/Picture/2017-04-24/58fda0d06f3a5.png" alt="">
+            </a>
+            <div class="item-del" title="删除"><i class="fa fa-remove"></i></div>
+          </li>
+          <li class="item">
+            <a class="item-image" href="http://jy.yuanzhenginfo.com/Uploads/Picture/2017-04-24/58fda0d06f3a5.png" target="_blank">
+              <img src="http://jy.yuanzhenginfo.com/Uploads/Picture/2017-04-24/58fda0d06f3a5.png" alt="">
+            </a>
+            <div class="item-del" title="删除"><i class="fa fa-remove"></i></div>
+          </li>
+          <li class="item">
+            <a class="item-image" href="http://jy.yuanzhenginfo.com/Uploads/Picture/2017-04-24/58fda0d06f3a5.png" target="_blank">
+              <img src="http://jy.yuanzhenginfo.com/Uploads/Picture/2017-04-24/58fda0d06f3a5.png" alt="">
+            </a>
+            <div class="item-del" title="删除"><i class="fa fa-remove"></i></div>
+          </li>
+          <li class="item">
+            <a class="item-image" href="http://jy.yuanzhenginfo.com/Uploads/Picture/2017-04-24/58fda0d06f3a5.png" target="_blank">
+              <img src="http://jy.yuanzhenginfo.com/Uploads/Picture/2017-04-24/58fda0d06f3a5.png" alt="">
+            </a>
+            <div class="item-del" title="删除"><i class="fa fa-remove"></i></div>
+          </li>
+          <li class="item">
+            <a class="item-image" href="http://jy.yuanzhenginfo.com/Uploads/Picture/2017-04-24/58fda0d06f3a5.png" target="_blank">
+              <img src="http://jy.yuanzhenginfo.com/Uploads/Picture/2017-04-24/58fda0d06f3a5.png" alt="">
+            </a>
+            <div class="item-del" title="删除"><i class="fa fa-remove"></i></div>
+          </li>
+        </ul>
+      </div>
+      <div class="tab-pane" id="material-voice">语音素材</div>
+      <div class="tab-pane" id="material-video">视频素材</div>
+    </div>
+  </div>
+</div>
+
+{{/block}}
