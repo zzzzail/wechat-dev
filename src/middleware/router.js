@@ -11,7 +11,10 @@ const {isLogin} = require('../controller/publicController');
 const {getLogin, postLogin, getLogout, getIndex} = require('../controller/indexController');
 const {getResponseWelcome, getResponseAuto} = require('../controller/responseController');
 const {isUniform, getAdminUserId, putAdminUserId} = require('../controller/adminController');
-const {getMaterialForever} = require('../controller/materialController');
+const {
+  getMaterialForever,
+  getMaterialForeverUpload,
+  postMaterialForeverUpload} = require('../controller/materialController');
 
 module.exports = function (app) {
   router.get('/login', getLogin);
@@ -26,6 +29,8 @@ module.exports = function (app) {
 
   // 素材管理
   router.get('/material/forever', isLogin, getMaterialForever);
+  router.get('/material/forever/upload', isLogin, getMaterialForeverUpload);
+  router.post('/material/forever/upload', isLogin, postMaterialForeverUpload)
 
   // 系统设置
   router.get('/admin/user/:_id', isLogin, isUniform, getAdminUserId);

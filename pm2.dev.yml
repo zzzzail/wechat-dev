@@ -12,6 +12,7 @@ apps:
       - 'cache'
       - '.idea'
       - '*.md'
+      - 'public/upload'
     interpreter_args: '--harmony'
     log_date_format: 'YYYY-MM-DD HH:mm:ss'
     out_file: './logs/pm2-out.log'

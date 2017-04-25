@@ -33,6 +33,8 @@ let config = {
       params: {
         multipart: true,
         formidable: {
+          keepExtensions: true, // 保留上传文件格式
+          maxFieldsSize: (10 * 1024 * 1024),
           uploadDir: path.join(__dirname, '../../public/upload')
         }
       }

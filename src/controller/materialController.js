@@ -6,5 +6,14 @@
  */
 
 exports.getMaterialForever = async (ctx, next) => {
-  ctx.render('material/forever');
+  return ctx.render('material/forever/index');
+}
+
+exports.getMaterialForeverUpload = async (ctx, next) => {
+  return ctx.render('material/forever/upload');
+}
+
+exports.postMaterialForeverUpload = async (ctx, next) => {
+  console.log(ctx.body);
+  return ctx.body = '123';
 }

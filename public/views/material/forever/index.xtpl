@@ -1,4 +1,4 @@
-{{extend ('../layout/layout')}}
+{{extend ('../../layout/layout')}}
 
 {{#block ('body')}}
 <div class="content">

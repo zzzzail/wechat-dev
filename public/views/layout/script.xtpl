@@ -34,6 +34,8 @@
 <script src="/dist/js/demo.js"></script>
 <!-- layer alert -->
 <script src="/plugins/layer/layer.js"></script>
+<!-- Util -->
+<script src="/script/util.js"></script>
 
 <script>
   $(document).ready(function(){
