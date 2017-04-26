@@ -1,20 +1,32 @@
-uploadImage.xtpl{{extend ('../../layout/layout')}}
+{{extend ('../../layout/layout')}}
 
 {{#block ('body')}}
 
 <div class="content">
   <div class="box box-info">
     <div class="box-header with-border">
-      <h3 class="box-title">上传图片</h3>
+      <h3 class="box-title">上传视频</h3>
     </div>
     <form id="form">
       <div class="box-body">
 
-        {{include ('../../layout/warning', message = '语音大小不超过2M,播放长度不超过60秒,支持mp3/wma/wav/amr格式.')}}
+        {{include ('../../layout/warning', message = '视频不能超过20M，超过20M的视频可至腾讯视频上传后添加，也可通过添加视频详情页链接以及公众号文章链接插入视频，视频时长不少于1秒，不多于10小时，支持MP4格式.')}}
 
         <div class="form-group">
-          <label for="file">上传文件<span class="text-red">*</span></label>
+          <label for="file">素材名称<span class="text-green">(0-21)</span><span class="text-red">*</span></label>
+          <input type="text" class="form-control" id="name" placeholder="请输入素材名称.">
+        </div>
+        <div class="form-group">
+          <label for="file">上传文件<span class="text-green">(最大20M)</span><span class="text-red">*</span></label>
           <input type="file" class="form-control" id="file" placeholder="请选择上传文件.">
+        </div>
+        <div class="form-group">
+          <label for="file">视频标题<span class="text-green">(0-21)</span><span class="text-red">*</span></label>
+          <input type="text" class="form-control" id="title" placeholder="请输入视频标题.">
+        </div>
+        <div class="form-group">
+          <label for="file">视频简介<span class="text-green">(0-200)</span><span class="text-red">*</span></label>
+          <textarea class="form-control" id="introduction" rows="8" placeholder="请输入视频简介."></textarea>
         </div>
       </div>
       <div class="box-footer">
@@ -33,31 +45,49 @@ uploadImage.xtpl{{extend ('../../layout/layout')}}
       e.preventDefault();
 
       var _self = $(this);
+      var name = _self.find('input#name').val();
       var file = _self.find('input#file').val().toLowerCase();
-      if (!/.*\.(bmp|png|jpeg|jpg|gif)$/.test(file)) {
-        layer.alert('图片格式不正确, 请重新选择!', {skin: 'layui-layer-warning'});
+      var title = _self.find('input#title').val();
+      var introduction = _self.find('textarea#introduction').val();
+      if (name.length > 21) {
+        layer.alert('名称字数过长!', {skin: 'layui-layer-warning'});
         return false;
       }
-      var imgUploadMaxSize = 2048; // 允许上传图片最大为2048KB
+      if (!/.*\.(mp4)$/.test(file)) {
+        layer.alert('视频格式不正确, 请重新选择!', {skin: 'layui-layer-warning'});
+        return false;
+      }
+      var imgUploadMaxSize = 10240; // 允许上传视频最大为10240KB
       var fileSize = window.Util.getFileSize('file'); // KB
       if (fileSize > imgUploadMaxSize) {
-        layer.alert('上传图片太大, 请压缩后再上传!', {skin: 'layui-layer-warning'});
+        layer.alert('上传视频太大, 请压缩后再上传!', {skin: 'layui-layer-warning'});
+        return false;
+      }
+      if (title.length > 21) {
+        layer.alert('标题字数过长!', {skin: 'layui-layer-warning'});
+        return false;
+      }
+      if (introduction.length > 200) {
+        layer.alert('简介字数过长!', {skin: 'layui-layer-warning'});
         return false;
       }
       var formData = new FormData();
       var fileInputEle = document.getElementById('file');
       formData.append('media', fileInputEle.files[0]);
+      formData.append('name', name);
+      formData.append('title', title);
+      formData.append('introduction', introduction);
 
       $.ajax({
         type: 'POST',
-        url: '/material/forever/upload',
+        url: '/material/forever/upload?type=video',
         data: formData,
         processData: false,
         contentType: false,
         success: function (data) {
           if (data) {
             layer.alert('上传成功!', {skin: 'layui-layer-molv'}, function () {
-              window.location.href = '/material/forever';
+              window.location.href = '/material/forever?type=video';
             })
           }
         },

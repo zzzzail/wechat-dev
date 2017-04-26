@@ -22,12 +22,14 @@
           <li class="item-upload">
             <a class="item-image" href="/material/forever/upload?type=image"><i class="fa fa-plus"></i></a>
           </li>
+          {{#each (materials)}}
           <li class="item">
-            <a class="item-image" href="http://jy.yuanzhenginfo.com/Uploads/Picture/2017-04-24/58fda0d06f3a5.png" target="_blank">
-              <img src="http://jy.yuanzhenginfo.com/Uploads/Picture/2017-04-24/58fda0d06f3a5.png" alt="">
+            <a class="item-image" href="{{this.uri}}" target="_blank">
+              <img src="{{this.uri}}" alt="">
             </a>
             <div class="item-del" title="删除"><i class="fa fa-remove"></i></div>
           </li>
+          {{/each}}
         </ul>
       </div>
       <div class="tab-pane" id="material-voice">
@@ -36,26 +38,30 @@
           <li class="item-upload">
             <a class="item-image" href="/material/forever/upload?type=voice"><i class="fa fa-plus"></i></a>
           </li>
+          {{#each (materials)}}
           <li class="item">
-            <a class="item-image" href="http://jy.yuanzhenginfo.com/Uploads/Picture/2017-04-24/58fda0d06f3a5.png" target="_blank">
-              <img src="http://jy.yuanzhenginfo.com/Uploads/Picture/2017-04-24/58fda0d06f3a5.png" alt="">
+            <a class="item-image" href="{{this.uri}}" target="_blank">
+              <audio controls src="{{this.uri}}"></audio>
             </a>
             <div class="item-del" title="删除"><i class="fa fa-remove"></i></div>
           </li>
+          {{/each}}
         </ul>
       </div>
       <div class="tab-pane" id="material-video">
-        {{include ('../../layout/warning', message = '视频不能超过10M,支持mp4格式,超过10M的视频可至腾讯视频上传后添加.')}}
+        {{include ('../../layout/warning', message = '视频不能超过20M，超过20M的视频可至腾讯视频上传后添加，也可通过添加视频详情页链接以及公众号文章链接插入视频，视频时长不少于1秒，不多于10小时，支持MP4格式.')}}
         <ul class="image-list clearfix">
           <li class="item-upload">
             <a class="item-image" href="/material/forever/upload?type=video"><i class="fa fa-plus"></i></a>
           </li>
+          {{#each (materials)}}
           <li class="item">
-            <a class="item-image" href="http://jy.yuanzhenginfo.com/Uploads/Picture/2017-04-24/58fda0d06f3a5.png" target="_blank">
-              <img src="http://jy.yuanzhenginfo.com/Uploads/Picture/2017-04-24/58fda0d06f3a5.png" alt="">
+            <a class="item-image" href="{{this.uri}}" target="_blank">
+              <video controls src="{{this.uri}}"></video>
             </a>
             <div class="item-del" title="删除"><i class="fa fa-remove"></i></div>
           </li>
+          {{/each}}
         </ul>
       </div>
     </div>

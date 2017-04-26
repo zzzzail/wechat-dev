@@ -9,8 +9,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const materialSchema = new Schema({
+  name: String,
   type: String,
   uri: String,
+  description: Object,
+  isDeleted: Boolean,
   wechat: {
     media_id: String,
     url: String

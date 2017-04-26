@@ -273,7 +273,7 @@ Wechat.prototype.uploadMaterialForever = function (type, filePath, description) 
   }
 
   if (type == 'video') {
-    formData.description = description;
+    formData.description = JSON.stringify(description);
   }
 
   return new Promise(function (resolve, reject) {

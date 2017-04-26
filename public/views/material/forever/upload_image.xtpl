@@ -13,7 +13,11 @@
         {{include ('../../layout/warning', message = '图片大小不超过2M,支持bmp/png/jpeg/jpg/gif格式.')}}
 
         <div class="form-group">
-          <label for="file">上传文件<span class="text-red">*</span></label>
+          <label for="file">素材名称<span class="text-green">(0-21)</span><span class="text-red">*</span></label>
+          <input type="text" class="form-control" id="name" placeholder="请输入素材名称.">
+        </div>
+        <div class="form-group">
+          <label for="file">上传文件<span class="text-green">(最大2M)</span><span class="text-red">*</span></label>
           <input type="file" class="form-control" id="file" placeholder="请选择上传文件.">
         </div>
       </div>
@@ -33,7 +37,12 @@
       e.preventDefault();
 
       var _self = $(this);
+      var name = _self.find('input#name').val();
       var file = _self.find('input#file').val().toLowerCase();
+      if (name.length > 21) {
+        layer.alert('名称字数过长!', {skin: 'layui-layer-warning'});
+        return false;
+      }
       if (!/.*\.(bmp|png|jpeg|jpg|gif)$/.test(file)) {
         layer.alert('图片格式不正确, 请重新选择!', {skin: 'layui-layer-warning'});
         return false;
@@ -50,14 +59,14 @@
 
       $.ajax({
         type: 'POST',
-        url: '/material/forever/upload',
+        url: '/material/forever/upload?type=image',
         data: formData,
         processData: false,
         contentType: false,
         success: function (data) {
           if (data) {
             layer.alert('上传成功!', {skin: 'layui-layer-molv'}, function () {
-              window.location.href = '/material/forever';
+              window.location.href = '/material/forever?type=image';
             })
           }
         },
