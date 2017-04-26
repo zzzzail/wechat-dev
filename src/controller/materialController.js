@@ -10,7 +10,8 @@ exports.getMaterialForever = async (ctx, next) => {
 }
 
 exports.getMaterialForeverUpload = async (ctx, next) => {
-  return ctx.render('material/forever/upload');
+  let type = ctx.query.type || 'image';
+  return ctx.render('material/forever/upload_' + type);
 }
 
 // 上传永久素材

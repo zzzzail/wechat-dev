@@ -1,0 +1,69 @@
+uploadImage.xtpl{{extend ('../../layout/layout')}}
+
+{{#block ('body')}}
+
+<div class="content">
+  <div class="box box-info">
+    <div class="box-header with-border">
+      <h3 class="box-title">上传图片</h3>
+    </div>
+    <form id="form">
+      <div class="box-body">
+        <div class="form-group">
+          <label for="file">上传文件<span class="text-red">*</span></label>
+          <input type="file" class="form-control" id="file" placeholder="请选择上传文件.">
+        </div>
+      </div>
+      <div class="box-footer">
+        <button class="btn btn-primary" type="submit">提交</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+{{/block}}
+
+{{#block ('script')}}
+<script>
+  $(function () {
+    $('#form').submit(function (e) {
+      e.preventDefault();
+
+      var _self = $(this);
+      var file = _self.find('input#file').val().toLowerCase();
+      if (!/.*\.(bmp|png|jpeg|jpg|gif)$/.test(file)) {
+        layer.alert('图片格式不正确, 请重新选择!', {skin: 'layui-layer-warning'});
+        return false;
+      }
+      var imgUploadMaxSize = 2048; // 允许上传图片最大为2048KB
+      var fileSize = window.Util.getFileSize('file'); // KB
+      if (fileSize > imgUploadMaxSize) {
+        layer.alert('上传图片太大, 请压缩后再上传!', {skin: 'layui-layer-warning'});
+        return false;
+      }
+      var formData = new FormData();
+      var fileInputEle = document.getElementById('file');
+      formData.append('media', fileInputEle.files[0]);
+
+      $.ajax({
+        type: 'POST',
+        url: '/material/forever/upload',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (data) {
+          if (data) {
+            layer.alert('上传成功!', {skin: 'layui-layer-molv'}, function () {
+              window.location.href = '/material/forever';
+            })
+          }
+        },
+        error: function (err) {
+
+        }
+      })
+
+    })
+  })
+</script>
+{{/block}}
