@@ -52,7 +52,11 @@
         processData: false,
         contentType: false,
         success: function (data) {
-          console.log(data);
+          if (data) {
+            layer.alert('上传成功!', {skin: 'layui-layer-molv'}, function () {
+              window.location.href = '/material/forever';
+            })
+          }
         },
         error: function (err) {
 

@@ -15,7 +15,7 @@
         </a>
         <ul class="treeview-menu">
           <li>
-            <a href="/material/forever"><i class="fa fa-circle-o"></i> 永久素材</a>
+            <a href="/material/forever?type=image"><i class="fa fa-circle-o"></i> 永久素材</a>
           </li>
         </ul>
       </li>
