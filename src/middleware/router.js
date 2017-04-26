@@ -15,6 +15,7 @@ const {
   getMaterialForever,
   getMaterialForeverUpload,
   postMaterialForeverUpload} = require('../controller/materialController');
+const {getWechatUser} = require('../controller/wechatUserController');
 
 module.exports = function (app) {
   router.get('/login', getLogin);
@@ -31,6 +32,9 @@ module.exports = function (app) {
   router.get('/material/forever', isLogin, getMaterialForever);
   router.get('/material/forever/upload', isLogin, getMaterialForeverUpload);
   router.post('/material/forever/upload', isLogin, postMaterialForeverUpload)
+
+  // 微信用户管理
+  router.get('/wechat/user', isLogin, getWechatUser);
 
   // 系统设置
   router.get('/admin/user/:_id', isLogin, isUniform, getAdminUserId);

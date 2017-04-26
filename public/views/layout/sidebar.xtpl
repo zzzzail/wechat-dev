@@ -35,6 +35,12 @@
         </ul>
       </li>
       <li class="treeview">
+        <a href="/wechat/user">
+          <i class="fa fa-files-o"></i>
+          <span>微信用户管理</span>
+        </a>
+      </li>
+      <li class="treeview">
         <a href="#">
           <i class="fa fa-files-o"></i>
           <span>系统设置</span>
