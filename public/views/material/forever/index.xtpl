@@ -15,7 +15,11 @@
       </li>
     </ul>
     <div class="tab-content">
+
       <div class="tab-pane active" id="material-image">
+
+        {{include ('../../layout/warning', message = '图片大小不超过2M,支持bmp/png/jpeg/jpg/gif格式.')}}
+
         <ul class="image-list clearfix">
           <li class="item-upload">
             <a class="item-image" href="/material/forever/upload"><i class="fa fa-plus"></i></a>
@@ -70,8 +74,12 @@
           </li>
         </ul>
       </div>
-      <div class="tab-pane" id="material-voice">语音素材</div>
-      <div class="tab-pane" id="material-video">视频素材</div>
+      <div class="tab-pane" id="material-voice">
+        {{include ('../../layout/warning', message = '语音大小不超过2M,播放长度不超过60秒,支持mp3/wma/wav/amr格式.')}}
+      </div>
+      <div class="tab-pane" id="material-video">
+        {{include ('../../layout/warning', message = '视频不能超过10M,支持mp4格式,超过10M的视频可至腾讯视频上传后添加.')}}
+      </div>
     </div>
   </div>
 </div>

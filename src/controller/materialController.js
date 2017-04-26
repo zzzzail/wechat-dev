@@ -33,6 +33,7 @@ exports.postMaterialForeverUpload = async (ctx, next) => {
       url: wechatMaterial.url
     }
   });
+  material = await material.save();
 
-  return ctx.body = wechatMaterial;
+  return ctx.body = material;
 }
