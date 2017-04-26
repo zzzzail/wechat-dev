@@ -9,6 +9,9 @@ uploadImage.xtpl{{extend ('../../layout/layout')}}
     </div>
     <form id="form">
       <div class="box-body">
+
+        {{include ('../../layout/warning', message = '视频不能超过10M,支持mp4格式,超过10M的视频可至腾讯视频上传后添加.')}}
+
         <div class="form-group">
           <label for="file">上传文件<span class="text-red">*</span></label>
           <input type="file" class="form-control" id="file" placeholder="请选择上传文件.">

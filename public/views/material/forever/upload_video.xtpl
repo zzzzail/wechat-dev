@@ -9,6 +9,9 @@ uploadImage.xtpl{{extend ('../../layout/layout')}}
     </div>
     <form id="form">
       <div class="box-body">
+
+        {{include ('../../layout/warning', message = '语音大小不超过2M,播放长度不超过60秒,支持mp3/wma/wav/amr格式.')}}
+
         <div class="form-group">
           <label for="file">上传文件<span class="text-red">*</span></label>
           <input type="file" class="form-control" id="file" placeholder="请选择上传文件.">

@@ -9,6 +9,9 @@
     </div>
     <form id="form">
       <div class="box-body">
+
+        {{include ('../../layout/warning', message = '图片大小不超过2M,支持bmp/png/jpeg/jpg/gif格式.')}}
+
         <div class="form-group">
           <label for="file">上传文件<span class="text-red">*</span></label>
           <input type="file" class="form-control" id="file" placeholder="请选择上传文件.">
