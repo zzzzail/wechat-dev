@@ -82,23 +82,33 @@
       e.stopPropagation();
 
       var id = $(this).attr('data-id');
-      $.ajax({
-        type: 'DELETE',
-        url: '/material/forever',
-        data: {
-          _id: id
-        },
-        success: function (data) {
-          console.log(data);
-          if (data.success) {
-            layer.alert('删除成功!', {skin: 'layui-layer-molv'});
-            window.location.href = '/material/forever?type=' + type;
+      Util.confirm('您确定要删除该素材吗?')
+        .then(function (data) {
+          if (data) {
+            return new Promise(function (resolve, reject) {
+              $.ajax({
+                type: 'DELETE',
+                url: '/material/forever',
+                data: {
+                  _id: id
+                },
+                success: function (data) {
+                  resolve(data);
+                }
+              })
+            })
           }
-        },
-        error: function (err) {
-          console.log(err);
-        }
-      })
+        })
+        .then(function (data) {
+          if (data.success) {
+            layer.alert('删除成功!', {skin: 'layui-layer-molv'}, function () {
+              window.location.href = '/material/forever?type=' + type;
+            });
+          } else {
+            layer.alert('删除失败!', {skin: 'layui-layer-molv'});
+          }
+        })
+
     })
 
   })

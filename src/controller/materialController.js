@@ -5,10 +5,13 @@
  * @description 素材管理
  */
 
+const fs = require('fs');
+const path = require('path');
+
 exports.getMaterialForever = async (ctx, next) => {
   let type = ctx.query.type || 'image';
   const Material = ctx.mongoose.model('Material');
-  let materials = await Material.find({type, isDeleted: false}).exec();
+  let materials = await Material.find({type}).exec();
   return ctx.render('material/forever/index', {materials});
 }
 
@@ -21,19 +24,25 @@ exports.deleteMaterialForever = async (ctx, next) => {
   let wechat = ctx.wechat;
   let media_id = material.wechat.media_id;
   let wresult = await wechat.deleteMaterialForever(media_id);
-  console.log(wresult);
 
   if (wresult.errcode == 0) {
+    // 服务器上删除该资源
+    let filepath = path.join(__dirname, `../../public${material.uri}`);
+    fs.unlinkSync(filepath);
+
     // 从 mongodb 中删除
     let mresult = await material.remove();
-    console.log(mresult);
-    return ctx.body = mresult;
+    if (mresult) {
+      return ctx.body = {
+        success: true
+      }
+    }
   }
 
   return ctx.body = {
     success: false,
     errorMsg: '删除失败'
-  };
+  }
 }
 
 exports.getMaterialForeverUpload = async (ctx, next) => {
@@ -58,7 +67,6 @@ exports.postMaterialForeverUpload = async (ctx, next) => {
   }
 
   let wechatMaterial = await wechat.uploadMaterialForever(type, uploadFilePath, description);
-  console.log(wechatMaterial);
   if (wechatMaterial.errcode) {
     throw new Error(`Wechat material upload fails: ${wechatMaterial.errmsg}`);
   }
@@ -69,7 +77,6 @@ exports.postMaterialForeverUpload = async (ctx, next) => {
     type,
     uri,
     description,
-    isDeleted: false,
     wechat: {
       media_id: wechatMaterial.media_id,
       url: wechatMaterial.url

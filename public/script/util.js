@@ -5,7 +5,8 @@
  * @description
  */
 
-var Util = function () {}
+var Util = function () {
+}
 
 // 获取上传文件大小 单位为KB
 Util.__proto__.getFileSize = function (id) {
@@ -22,6 +23,17 @@ Util.__proto__.QueryString = function (name, url) {
   if (!results) return null;
   if (!results[2]) return '';
   return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+Util.__proto__.confirm = function (text) {
+  return new Promise(function (resolve, reject) {
+    if (!layer) reject(new Error('请引入layer弹出框!'));
+
+    layer.confirm(text, {btn: ['确定', '取消']},
+      function () {
+        resolve(true);
+      });
+  })
 }
 
 window.Util = Util;

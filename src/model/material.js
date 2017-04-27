@@ -13,7 +13,6 @@ const materialSchema = new Schema({
   type: String,
   uri: String,
   description: Object,
-  isDeleted: Boolean,
   wechat: {
     media_id: String,
     url: String

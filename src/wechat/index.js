@@ -300,14 +300,13 @@ Wechat.prototype.uploadMaterialForever = function (type, filePath, description) 
 
 Wechat.prototype.deleteMaterialForever = function (media_id) {
   let _self = this;
-  let formData = {media_id}
+  let form = {media_id};
 
   return new Promise(function (resolve, reject) {
     _self.getAccessToken()
       .then(data => {
         let url = `${wechatCfg.api.materialForever.del}access_token=${data.access_token}`;
-        console.log(url)
-        request({method: 'POST', url, formData, json: true})
+        request({method: 'POST', url, body: form, json: true})
           .then(response => {
             let _data = response.body;
 
