@@ -12,6 +12,30 @@ exports.getMaterialForever = async (ctx, next) => {
   return ctx.render('material/forever/index', {materials});
 }
 
+exports.deleteMaterialForever = async (ctx, next) => {
+  const Material = ctx.mongoose.model('Material');
+  let _id = ctx.body._id;
+  let material = await Material.findOne({_id: _id}).exec();
+
+  // 微信删除素材
+  let wechat = ctx.wechat;
+  let media_id = material.wechat.media_id;
+  let wresult = await wechat.deleteMaterialForever(media_id);
+  console.log(wresult);
+
+  if (wresult.errcode == 0) {
+    // 从 mongodb 中删除
+    let mresult = await material.remove();
+    console.log(mresult);
+    return ctx.body = mresult;
+  }
+
+  return ctx.body = {
+    success: false,
+    errorMsg: '删除失败'
+  };
+}
+
 exports.getMaterialForeverUpload = async (ctx, next) => {
   let type = ctx.query.type || 'image';
   return ctx.render('material/forever/upload_' + type);

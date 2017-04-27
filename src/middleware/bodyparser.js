@@ -12,6 +12,7 @@ const koaBody = require('koa-body');
 
 module.exports = function (app, param) {
 
+  // 上传文件
   param.formidable.onFileBegin = function (name, file) {
     let fileName = file.path.slice(file.path.lastIndexOf('/') + 1);
     let filePath = file.path.slice(0, file.path.lastIndexOf('/') + 1);
@@ -31,7 +32,7 @@ module.exports = function (app, param) {
 
   app.use(koaBody(param));
   app.use(async (ctx, next) => {
-    if (ctx.request.method == 'POST' || ctx.request.method == 'PUT') {
+    if (ctx.request.method != 'GET') {
       ctx.body = ctx.request.body;
     }
     await next();

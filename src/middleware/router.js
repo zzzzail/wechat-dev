@@ -13,6 +13,7 @@ const {getResponseWelcome, getResponseAuto} = require('../controller/responseCon
 const {isUniform, getAdminUserId, putAdminUserId} = require('../controller/adminController');
 const {
   getMaterialForever,
+  deleteMaterialForever,
   getMaterialForeverUpload,
   postMaterialForeverUpload} = require('../controller/materialController');
 const {getWechatUser} = require('../controller/wechatUserController');
@@ -30,6 +31,7 @@ module.exports = function (app) {
 
   // 素材管理
   router.get('/material/forever', isLogin, getMaterialForever);
+  router.delete('/material/forever', isLogin, deleteMaterialForever);
   router.get('/material/forever/upload', isLogin, getMaterialForeverUpload);
   router.post('/material/forever/upload', isLogin, postMaterialForeverUpload)
 

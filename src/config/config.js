@@ -32,6 +32,7 @@ let config = {
       name: 'bodyparser',
       params: {
         multipart: true,
+        strict: false,
         formidable: {
           keepExtensions: true, // 保留上传文件格式
           maxFieldsSize: (10 * 1024 * 1024),
@@ -80,8 +81,9 @@ let config = {
       jsapi_ticket: {
         get: wechatApiPrefix + 'ticket/getticket?'
       },
-      uploadMaterialForever: {
-        post: wechatApiPrefix + 'material/add_material?'
+      materialForever: {
+        post: wechatApiPrefix + 'material/add_material?',
+        del: wechatApiPrefix + 'material/del_material?'
       }
     }
   }

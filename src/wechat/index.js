@@ -279,7 +279,7 @@ Wechat.prototype.uploadMaterialForever = function (type, filePath, description) 
   return new Promise(function (resolve, reject) {
     _self.getAccessToken()
       .then(function (data) {
-        let url = `${wechatCfg.api.uploadMaterialForever.post}access_token=${data.access_token}&type=${type}`;
+        let url = `${wechatCfg.api.materialForever.post}access_token=${data.access_token}&type=${type}`;
         request({method: 'POST', url, formData, json: true})
           .then(response => {
             let _data = response.body;
@@ -296,6 +296,32 @@ Wechat.prototype.uploadMaterialForever = function (type, filePath, description) 
       })
   })
 
+}
+
+Wechat.prototype.deleteMaterialForever = function (media_id) {
+  let _self = this;
+  let formData = {media_id}
+
+  return new Promise(function (resolve, reject) {
+    _self.getAccessToken()
+      .then(data => {
+        let url = `${wechatCfg.api.materialForever.del}access_token=${data.access_token}`;
+        console.log(url)
+        request({method: 'POST', url, formData, json: true})
+          .then(response => {
+            let _data = response.body;
+
+            if (_data) {
+              resolve(_data);
+            } else {
+              throw new Error('Delete material fails.');
+            }
+          })
+          .catch(err => {
+            reject(err)
+          })
+      })
+  })
 }
 
 module.exports = Wechat;

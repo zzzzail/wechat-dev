@@ -86,10 +86,14 @@
         type: 'DELETE',
         url: '/material/forever',
         data: {
-          id: id
+          _id: id
         },
         success: function (data) {
           console.log(data);
+          if (data.success) {
+            layer.alert('删除成功!', {skin: 'layui-layer-molv'});
+            window.location.href = '/material/forever?type=' + type;
+          }
         },
         error: function (err) {
           console.log(err);
