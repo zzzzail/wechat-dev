@@ -1,4 +1,4 @@
-uploadImage.xtpl{{extend ('../../layout/layout')}}
+{{extend ('../../layout/layout')}}
 
 {{#block ('body')}}
 
@@ -25,6 +25,9 @@ uploadImage.xtpl{{extend ('../../layout/layout')}}
         <button class="btn btn-primary" type="submit">提交</button>
       </div>
     </form>
+    <div class="overlay" style="display: none;">
+      <i class="fa fa-refresh fa-spin"></i>
+    </div>
   </div>
 </div>
 
@@ -35,29 +38,33 @@ uploadImage.xtpl{{extend ('../../layout/layout')}}
   $(function () {
     $('#form').submit(function (e) {
       e.preventDefault();
+      $('.overlay').show();
 
       var _self = $(this);
       var name = _self.find('input#name').val();
       var file = _self.find('input#file').val().toLowerCase();
       if (name.length > 21) {
         layer.alert('名称字数过长!', {skin: 'layui-layer-warning'});
+        $('.overlay').hide();
         return false;
       }
       if (!/.*\.(mp3|wma|wav|amr)$/.test(file)) {
         layer.alert('语音格式不正确, 请重新选择!', {skin: 'layui-layer-warning'});
+        $('.overlay').hide();
         return false;
       }
       var imgUploadMaxSize = 2048; // 允许上传语音最大为2048KB
       var fileSize = window.Util.getFileSize('file'); // KB
       if (fileSize > imgUploadMaxSize) {
         layer.alert('上传语音文件太大, 请压缩后再上传!', {skin: 'layui-layer-warning'});
+        $('.overlay').hide();
         return false;
       }
       var formData = new FormData();
       var fileInputEle = document.getElementById('file');
       formData.append('media', fileInputEle.files[0]);
       formData.append('name', name);
-
+      
       $.ajax({
         type: 'POST',
         url: '/material/forever/upload?type=voice',
@@ -66,7 +73,7 @@ uploadImage.xtpl{{extend ('../../layout/layout')}}
         contentType: false,
         success: function (data) {
           if (data) {
-            layer.alert('上传成功!', {skin: 'layui-layer-molv'}, function () {
+            layer.alert('上传成功!', {skin: 'layui-layer-molv', closeBtn: 0}, function () {
               window.location.href = '/material/forever?type=voice';
             })
           }

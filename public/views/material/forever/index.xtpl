@@ -27,7 +27,7 @@
             <a class="item-image" href="{{this.uri}}" target="_blank">
               <img src="{{this.uri}}" alt="">
             </a>
-            <div class="item-del" title="删除"><i class="fa fa-remove"></i></div>
+            <div class="item-del" title="删除" data-id="{{this._id}}"><i class="fa fa-remove"></i></div>
           </li>
           {{/each}}
         </ul>
@@ -43,7 +43,7 @@
             <a class="item-image" href="{{this.uri}}" target="_blank">
               <audio controls src="{{this.uri}}"></audio>
             </a>
-            <div class="item-del" title="删除"><i class="fa fa-remove"></i></div>
+            <div class="item-del" title="删除" data-id="{{this._id}}"><i class="fa fa-remove"></i></div>
           </li>
           {{/each}}
         </ul>
@@ -59,7 +59,7 @@
             <a class="item-image" href="{{this.uri}}" target="_blank">
               <video controls src="{{this.uri}}"></video>
             </a>
-            <div class="item-del" title="删除"><i class="fa fa-remove"></i></div>
+            <div class="item-del" title="删除" data-id="{{this._id}}"><i class="fa fa-remove"></i></div>
           </li>
           {{/each}}
         </ul>
@@ -76,6 +76,27 @@
     var type = Util.QueryString('type');
     $('.nav-type-' + type).addClass('active');
     $('#material-' + type).addClass('active');
+
+    // 删除素材
+    $('.item-del').click(function (e) {
+      e.stopPropagation();
+
+      var id = $(this).attr('data-id');
+      $.ajax({
+        type: 'DELETE',
+        url: '/material/forever',
+        data: {
+          id: id
+        },
+        success: function (data) {
+          console.log(data);
+        },
+        error: function (err) {
+          console.log(err);
+        }
+      })
+    })
+
   })
 </script>
 {{/block}}
