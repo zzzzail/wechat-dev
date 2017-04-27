@@ -18,6 +18,7 @@ module.exports = function (app) {
 
   app.use(async (ctx, next) => {
     ctx.wechat = wechat;
+    ctx.wechat.accessToken = await wechat.getAccessToken();
     await next();
   });
 

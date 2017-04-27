@@ -8,7 +8,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const adminUserSchema = new Schema({
+let adminUserSchema = new Schema({
   // 昵称
   nickname: String,
   // 登录用户名

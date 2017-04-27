@@ -8,14 +8,15 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const responseModel = new Schema({
-  keyword: String, // 关键字
-  response: { // 根据关键字回复内容
-
-  },
-  enable: Boolean, // 是否启用
+let responseModel = new Schema({
+  // 关键字
+  keyword: String,
+  // 根据关键字回复内容
+  response: Object,
+  // 是否启用
+  enable: Boolean
 });
 
-responseModel.index({request: 1});
+responseModel.index({keyword: 1});
 
 module.exports = mongoose.model('Response', responseModel);
