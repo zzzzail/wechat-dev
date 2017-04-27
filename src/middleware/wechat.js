@@ -42,11 +42,13 @@ module.exports = function (app) {
         let data = await getRawBody(ctx.req);
         let content = await util.parseXMLAsync(data);
         let message = util.formatMessage(content.xml);
-        ctx.wechatMessage = message;
+        // 回复信息
         let replyMessage = replyHandler(message);
-        console.log(message, replyMessage);
-
-        ctx.wechat.reply.call(ctx, replyMessage);
+        // 把回复的信息解析为xml
+        let xml = util.xmlTemplate(message, replyMessage);
+        this.status = 200;
+        this.type = 'application/xml';
+        return this.body = xml;
       }
     } else {
       await next();

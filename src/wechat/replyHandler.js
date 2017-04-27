@@ -35,6 +35,11 @@ module.exports = function (message) {
         picUrl: 'http://loocall.com/imgv2/logo.jpg',
         url: 'http://loocall.com'
       }]
+    } else if (content == '3') {
+      reply = {
+        type: 'image',
+        mediaId: 'http://loocall.com/imgv2/logo.jpg'
+      }
     }
 
     return reply;

@@ -10,7 +10,9 @@ const Schema = mongoose.Schema;
 
 const responseModel = new Schema({
   keyword: String, // 关键字
-  response: Object, // 根据关键字回复内容
+  response: { // 根据关键字回复内容
+
+  },
   enable: Boolean, // 是否启用
 });
 

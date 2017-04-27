@@ -12,7 +12,6 @@ const crypto = require('crypto');
 const mkp = require('mkp');
 const cfg = require('../config/config');
 const wechatCfg = cfg.wechat;
-const xmlTemplate = require('./util').xmlTemplate;
 
 class Wechat {
   constructor() {
@@ -254,15 +253,6 @@ Wechat.prototype.createSign = function (ticket, url) {
     timestamp,
     signature
   }
-}
-
-// 微信自动回复
-Wechat.prototype.reply = function (replyMessage) {
-  let message = this.wechatMessage;
-  let xml = xmlTemplate(message, replyMessage);
-  this.status = 200;
-  this.type = 'application/xml';
-  return this.body = xml;
 }
 
 // 微信上传素材
