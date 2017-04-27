@@ -47,9 +47,9 @@ module.exports = function (app) {
         // 把回复的信息解析为xml
         let xml = util.xmlTemplate(message, replyMessage);
         console.log(xml);
-        this.status = 200;
-        this.type = 'application/xml';
-        return this.body = xml;
+        ctx.status = 200;
+        ctx.type = 'application/xml';
+        return ctx.body = xml;
       }
     } else {
       await next();
