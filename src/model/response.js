@@ -9,12 +9,14 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let responseModel = new Schema({
+  // 回复类型
+  type: String,
   // 关键字
-  keyword: String,
+  keyword: Array,
   // 匹配规则 'exact': 完全匹配
   rule: String,
-  // 根据关键字回复内容
-  content: Object,
+  // 根据关键字回复内容 String OR ObjectId
+  content: String,
   // 是否启用
   enable: Boolean
 });

@@ -10,6 +10,8 @@
 <script src="/plugins/layer/layer.js"></script>
 <!-- Promise -->
 <script src="/script/bluebird.js"></script>
+<!-- lodash -->
+<script src="/script/lodash.js"></script>
 <!-- AdminLTE App -->
 <script src="/dist/js/app.min.js"></script>
 <!-- AdminLTE for demo purposes -->

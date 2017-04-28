@@ -10,15 +10,19 @@
     <form id="form">
       <div class="box-body">
         <div class="form-group">
-          <label for="keyword">关键词<span class="text-green">(多个关键词可以用分号分开, 如"高富帅;白富美")</span><span class="text-red">*</span></label>
-          <input type="text" class="form-control" id="keyword" placeholder="请输入关键词.">
+          <label for="keyword">关键词<span class="text-green">(多个关键词可以用空格分开, 如"高富帅 白富美")</span><span class="text-red">*</span></label>
+          <input type="text" class="form-control" id="keyword" placeholder="请输入关键词." value="{{response.keyword}}">
         </div>
         <div class="form-group">
           <label>是否启用<span class="text-red">*</span></label>
           <div class="radio">
-            <label><input type="radio" name="enable" checked="checked" value="true"> 启用</label>
+
+            <label><input type="radio" name="enable" {{#if (response.enable)}}checked="checked"{{/if}} value="true"> 启用</label>
+
             &nbsp;&nbsp;&nbsp;
-            <label><input type="radio" name="enable" value="false"> 禁用</label>
+
+            <label><input type="radio" name="enable" {{#if (!response.enable == false)}}checked="checked"{{/if}} value="false"> 禁用</label>
+
           </div>
         </div>
         <div class="form-group">
@@ -46,8 +50,9 @@
       $('.overlay').show();
 
       var _self = $(this);
+      var type = Util.QueryString('type');
       var keyword = _self.find('#keyword').val();
-      var enable = _self.find('input[type=enable, checked=checked]').val()
+      var enable = _self.find('input[name=enable]:checked').val();
       var content = _self.find('#content').val();
       if (!keyword.length > 0) {
         layer.alert('请输入关键字!', {skin: 'layui-layer-warning'});
@@ -60,12 +65,18 @@
         return false;
       }
 
+      keyword = keyword.trim().split(' ');
+      _.remove(keyword, function (n) {return n == ''}); // 删除中间空格
+
       $.ajax({
         type: 'POST',
         url: '/response/auto/edit',
         data: {
+          type: type,
           keyword: keyword,
-          content: {content}
+          rule: 'exact', // 完全匹配
+          content: content,
+          enable: enable
         },
         success: function (data) {
           console.log(data);

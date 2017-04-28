@@ -37,22 +37,28 @@
           </tr>
           </thead>
           <tbody>
+          {{#each (responses)}}
           <tr>
             <td>
-              <span class="label label-success">相册</span>
-              <span class="label label-success">相册</span>
+              {{#each (this.keyword)}}
+              <span class="label label-success">{{this}}</span>
+              {{/each}}
             </td>
-            <td>回复内容</td>
+            <td>{{this.content}}</td>
             <td>
+              {{#if (this.enable)}}
               <span class="text-green"><i class="fa fa-check"></i></span>
+              {{else}}
               <span class="text-red"><i class="fa fa-close"></i></span>
+              {{/if}}
             </td>
             <td>
-              <a href="">修改</a>
+              <a href="/response/auto/{{this._id}}?type=text">修改</a>
               <a href="">禁用</a>
               <a href="">删除</a>
             </td>
           </tr>
+          {{/each}}
           </tbody>
         </table>
       </div>
