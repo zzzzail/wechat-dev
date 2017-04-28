@@ -9,7 +9,12 @@
 const router = require('koa-router')();
 const {isLogin} = require('../controller/publicController');
 const {getLogin, postLogin, getLogout, getIndex} = require('../controller/indexController');
-const {getResponseWelcome, getResponseAuto} = require('../controller/responseController');
+const {
+  getResponseWelcome,
+  getResponseAuto,
+  getResponseAutoEdit,
+  postResponseAutoEdit
+} = require('../controller/responseController');
 const {isUniform, getAdminUserId, putAdminUserId} = require('../controller/adminController');
 const {
   getMaterialForever,
@@ -28,6 +33,8 @@ module.exports = function (app) {
   // 回复管理
   router.get('/response/welcome', isLogin, getResponseWelcome);
   router.get('/response/auto', isLogin, getResponseAuto);
+  router.get('/response/auto/:_id', isLogin, getResponseAutoEdit);
+  router.post('/response/auto/:_id', isLogin, postResponseAutoEdit);
 
   // 素材管理
   router.get('/material/forever', isLogin, getMaterialForever);

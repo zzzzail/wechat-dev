@@ -1,0 +1,67 @@
+{{extend('../../layout/layout')}}
+
+{{#block('body')}}
+
+<div class="content">
+  <div class="nav-tabs-custom">
+    <ul class="nav nav-tabs">
+      <li class="nav-type-image active">
+        <a href="/response/auto?type=text">回复文字</a>
+      </li>
+      <li class="nav-type-image">
+        <a href="/response/auto?type=image">回复图片</a>
+      </li>
+      <li class="nav-type-voice">
+        <a href="/response/auto?type=voice">回复语音</a>
+      </li>
+      <li class="nav-type-video">
+        <a href="/response/auto?type=video">回复视频</a>
+      </li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane active">
+
+        {{include ('../../layout/warning', message = '请不设置相同的关键词! 相同的关键词只回复最新的设置.')}}
+
+        <div class="margin-bottom">
+          <a class="btn btn-success" href="/response/auto/edit?type=text">新增</a>
+        </div>
+
+        <table class="table no-margin">
+          <thead>
+          <tr>
+            <th>关键字</th>
+            <th>回复内容</th>
+            <th>是否启用</th>
+            <th>操作</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>
+              <span class="label label-success">相册</span>
+              <span class="label label-success">相册</span>
+            </td>
+            <td>回复内容</td>
+            <td>
+              <span class="text-green"><i class="fa fa-check"></i></span>
+              <span class="text-red"><i class="fa fa-close"></i></span>
+            </td>
+            <td>
+              <a href="">修改</a>
+              <a href="">禁用</a>
+              <a href="">删除</a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="box-footer clearfix" style="display: block;">
+      <a href="javascript:void(0)" class="btn btn-info">上一页</a>
+      <a href="javascript:void(0)" class="btn btn-info">下一页</a>
+    </div>
+  </div>
+</div>
+
+{{/block}}

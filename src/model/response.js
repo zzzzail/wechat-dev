@@ -14,7 +14,7 @@ let responseModel = new Schema({
   // 匹配规则 'exact': 完全匹配
   rule: String,
   // 根据关键字回复内容
-  response: Object,
+  content: Object,
   // 是否启用
   enable: Boolean
 });

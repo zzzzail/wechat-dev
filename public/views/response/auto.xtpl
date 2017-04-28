@@ -1,9 +1,0 @@
-{{extend('../layout/layout')}}
-
-{{#block('body')}}
-
-<div>
-  123
-</div>
-
-{{/block}}
