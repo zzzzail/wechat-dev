@@ -1,6 +1,3 @@
-{{extend ('../../layout/layout')}}
-
-{{#block ('body')}}
 <div class="content">
   <div class="nav-tabs-custom">
     <ul class="nav nav-tabs">
@@ -17,49 +14,49 @@
     <div class="tab-content">
 
       <div class="tab-pane" id="material-image">
-        {{include ('../../layout/warning', message = '图片大小不超过2M,支持bmp/png/jpeg/jpg/gif格式.')}}
+        {{> warning message='图片大小不超过2M,支持bmp/png/jpeg/jpg/gif格式.'}}
         <ul class="image-list clearfix">
           <li class="item-upload">
             <a class="item-image" href="/material/forever/upload?type=image"><i class="fa fa-plus"></i></a>
           </li>
-          {{#each (materials)}}
+          {{#each materials}}
           <li class="item">
-            <a class="item-image" href="{{this.uri}}" target="_blank">
-              <img src="{{this.uri}}" alt="">
+            <a class="item-image" href="{{uri}}" target="_blank">
+              <img src="{{uri}}" alt="">
             </a>
-            <div class="item-del" title="删除" data-id="{{this._id}}"><i class="fa fa-remove"></i></div>
+            <div class="item-del" title="删除" data-id="{{_id}}"><i class="fa fa-remove"></i></div>
           </li>
           {{/each}}
         </ul>
       </div>
       <div class="tab-pane" id="material-voice">
-        {{include ('../../layout/warning', message = '语音大小不超过2M,播放长度不超过60秒,支持mp3/wma/wav/amr格式.')}}
+        {{> warning message='语音大小不超过2M,播放长度不超过60秒,支持mp3/wma/wav/amr格式.'}}
         <ul class="image-list clearfix">
           <li class="item-upload">
             <a class="item-image" href="/material/forever/upload?type=voice"><i class="fa fa-plus"></i></a>
           </li>
-          {{#each (materials)}}
+          {{#each materials}}
           <li class="item">
-            <a class="item-image" href="{{this.uri}}" target="_blank">
-              <audio controls src="{{this.uri}}"></audio>
+            <a class="item-image" href="{{uri}}" target="_blank">
+              <audio controls src="{{uri}}"></audio>
             </a>
-            <div class="item-del" title="删除" data-id="{{this._id}}"><i class="fa fa-remove"></i></div>
+            <div class="item-del" title="删除" data-id="{{_id}}"><i class="fa fa-remove"></i></div>
           </li>
           {{/each}}
         </ul>
       </div>
       <div class="tab-pane" id="material-video">
-        {{include ('../../layout/warning', message = '视频不能超过20M，超过20M的视频可至腾讯视频上传后添加，也可通过添加视频详情页链接以及公众号文章链接插入视频，视频时长不少于1秒，不多于10小时，支持MP4格式.')}}
+        {{> warning message='视频不能超过20M，超过20M的视频可至腾讯视频上传后添加，也可通过添加视频详情页链接以及公众号文章链接插入视频，视频时长不少于1秒，不多于10小时，支持MP4格式.'}}
         <ul class="image-list clearfix">
           <li class="item-upload">
             <a class="item-image" href="/material/forever/upload?type=video"><i class="fa fa-plus"></i></a>
           </li>
-          {{#each (materials)}}
+          {{#each materials}}
           <li class="item">
-            <a class="item-image" href="{{this.uri}}" target="_blank">
-              <video controls src="{{this.uri}}"></video>
+            <a class="item-image" href="{{uri}}" target="_blank">
+              <video controls src="{{uri}}"></video>
             </a>
-            <div class="item-del" title="删除" data-id="{{this._id}}"><i class="fa fa-remove"></i></div>
+            <div class="item-del" title="删除" data-id="{{_id}}"><i class="fa fa-remove"></i></div>
           </li>
           {{/each}}
         </ul>
@@ -68,12 +65,11 @@
   </div>
 </div>
 
-{{/block}}
-
-{{#block ('script')}}
+{{#contentFor "script"}}
 <script>
   $(function () {
     var type = Util.QueryString('type');
+    console.log(type)
     $('.nav-type-' + type).addClass('active');
     $('#material-' + type).addClass('active');
 
@@ -113,4 +109,4 @@
 
   })
 </script>
-{{/block}}
+{{/contentFor}}

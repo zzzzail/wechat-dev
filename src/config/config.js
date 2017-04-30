@@ -9,7 +9,7 @@
 const path = require('path');
 const _ = require('lodash');
 const staticDir = path.join(__dirname, '../../public');
-const viewDir = path.join(__dirname, '../../public/views');
+const viewPath = path.join(__dirname, '../../public/views');
 const local = require('./local');
 
 let config = {
@@ -44,7 +44,10 @@ let config = {
     }, {
       name: 'xtpl',
       params: {
-        views: viewDir
+	      viewPath: viewPath,
+	      partialsPath: path.join(viewPath, 'partials'),
+	      defaultLayout: 'layout',
+	      disableCache: false
       }
     }, {
       name: 'session',
