@@ -10,18 +10,6 @@
           <input type="text" class="form-control" id="keyword" placeholder="请输入关键词." value="{{response.keyword}}">
         </div>
         <div class="form-group">
-          <label>是否启用<span class="text-red">*</span></label>
-          <div class="radio">
-
-            <label><input type="radio" name="enable" {{#if (response.enable)}}checked="checked"{{/if}} value="true"> 启用</label>
-
-            &nbsp;&nbsp;&nbsp;
-
-            <label><input type="radio" name="enable" {{#if (!response.enable == false)}}checked="checked"{{/if}} value="false"> 禁用</label>
-
-          </div>
-        </div>
-        <div class="form-group">
           <label for="content">回复文本内容<span class="text-red">*</span></label>
           <textarea class="form-control" id="content" rows="10"></textarea>
         </div>
@@ -46,7 +34,6 @@
       var _self = $(this);
       var type = Util.QueryString('type');
       var keyword = _self.find('#keyword').val();
-      var enable = _self.find('input[name=enable]:checked').val();
       var content = _self.find('#content').val();
       if (!keyword.length > 0) {
         layer.alert('请输入关键字!', {skin: 'layui-layer-warning'});
@@ -70,7 +57,7 @@
           keyword: keyword,
           rule: 'exact', // 完全匹配
           content: content,
-          enable: enable
+          enable: true
         },
         success: function (data) {
           console.log(data);

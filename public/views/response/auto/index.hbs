@@ -1,67 +1,113 @@
 <div class="content">
-  <div class="nav-tabs-custom">
-    <ul class="nav nav-tabs">
-      <li class="nav-type-image active">
-        <a href="/response/auto?type=text">回复文字</a>
-      </li>
-      <li class="nav-type-image">
-        <a href="/response/auto?type=image">回复图片</a>
-      </li>
-      <li class="nav-type-voice">
-        <a href="/response/auto?type=voice">回复语音</a>
-      </li>
-      <li class="nav-type-video">
-        <a href="/response/auto?type=video">回复视频</a>
-      </li>
-    </ul>
-    <div class="tab-content">
-      <div class="tab-pane active">
+	<div class="nav-tabs-custom">
+		<ul class="nav nav-tabs">
+			<li class="nav-type-image active">
+				<a href="/response/auto?type=text">回复文字</a>
+			</li>
+			<li class="nav-type-image">
+				<a href="/response/auto?type=image">回复图片</a>
+			</li>
+			<li class="nav-type-voice">
+				<a href="/response/auto?type=voice">回复语音</a>
+			</li>
+			<li class="nav-type-video">
+				<a href="/response/auto?type=video">回复视频</a>
+			</li>
+		</ul>
+		<div class="tab-content">
+			<div class="tab-pane active">
 
-        {{> warning message='请不设置相同的关键词! 相同的关键词只回复最新的设置.'}}
+				{{> warning message='请不设置相同的关键词! 相同的关键词只回复最新的设置.'}}
 
-        <div class="margin-bottom">
-          <a class="btn btn-success" href="/response/auto/edit?type=text">新增</a>
-        </div>
+				<div class="margin-bottom">
+					<a class="btn btn-success" href="/response/auto/edit?type=text">新增</a>
+				</div>
 
-        <table class="table no-margin">
-          <thead>
-          <tr>
-            <th>关键字</th>
-            <th>回复内容</th>
-            <th>是否启用</th>
-            <th>操作</th>
-          </tr>
-          </thead>
-          <tbody>
-          {{#each responses}}
-          <tr>
-            <td>
-              {{#each this.keyword}}
-              <span class="label label-success">{{this}}</span>
-              {{/each}}
-            </td>
-            <td>{{this.content}}</td>
-            <td>
-              {{#if (this.enable)}}
-              <span class="text-green"><i class="fa fa-check"></i></span>
-              {{else}}
-              <span class="text-red"><i class="fa fa-close"></i></span>
-              {{/if}}
-            </td>
-            <td>
-              <a href="/response/auto/{{this._id}}?type=text">修改</a>
-              <a href="">禁用</a>
-              <a href="">删除</a>
-            </td>
-          </tr>
-          {{/each}}
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="box-footer clearfix" style="display: block;">
-      <a href="javascript:void(0)" class="btn btn-info">上一页</a>
-      <a href="javascript:void(0)" class="btn btn-info">下一页</a>
-    </div>
-  </div>
+				<table class="table no-margin">
+					<thead>
+					<tr>
+						<th>关键字</th>
+						<th>回复内容</th>
+						<th>是否启用</th>
+						<th>操作</th>
+					</tr>
+					</thead>
+					<tbody>
+					{{#each responses}}
+						<tr>
+							<td>
+								{{#each keyword}}
+									<span class="label label-success">{{this}}</span>
+								{{/each}}
+							</td>
+							<td>{{content}}</td>
+							<td>
+								{{#if enable}}
+									<span class="text-green"><i class="fa fa-check"></i></span>
+								{{else}}
+									<span class="text-red"><i class="fa fa-close"></i></span>
+								{{/if}}
+							</td>
+							<td>
+								<a href="/response/auto/{{_id}}?type=text">修改</a>
+								<a href="javascript:;" class="enable" data-value="{{enable}}" data-id="{{_id}}">
+									{{#if enable}}禁用{{else}}启用{{/if}}
+								</a>
+								<a href="javascript:;">删除</a>
+							</td>
+						</tr>
+					{{/each}}
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="box-footer clearfix" style="display: block;">
+			<a href="javascript:void(0)" class="btn btn-info">上一页</a>
+			<a href="javascript:void(0)" class="btn btn-info">下一页</a>
+		</div>
+	</div>
 </div>
+
+{{#contentFor "script"}}
+	<script>
+		$(function () {
+			$('.enable').click(function (e) {
+				e.stopPropagation();
+				e.preventDefault();
+
+				var _self = $(this);
+				var value = _self.attr('data-value');
+				if (value == 'false') value = false;
+				var _id = _self.attr('data-id');
+				Util.confirm('确定修改为<span class="text-green">' + _self.text() + "</span>吗?")
+					.then(function () {
+						return new Promise(function (resolve, reject) {
+							$.ajax({
+								type: 'PUT',
+								url: '/response/auto/' + _id,
+								data: {
+									enable: !value
+								},
+								success: function (data) {
+									resolve(data);
+								},
+								error: function (err) {
+									reject(err);
+								}
+							})
+						})
+					})
+					.catch(function (err) {
+						console.log(err);
+					})
+					.then(function (data) {
+						if (data.success) {
+							layer.alert('修改成功!', {skin: 'layui-layer-molv', closeBtn: 0}, function () {
+								window.location.href = window.location.href;
+							})
+						}
+					})
+			})
+		})
+	</script>
+{{/contentFor}}

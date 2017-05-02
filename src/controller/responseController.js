@@ -66,3 +66,19 @@ exports.postResponseAutoEdit = async (ctx, next) => {
     success: true
   };
 }
+
+exports.putResponseAutoEdit = async (ctx, next) => {
+	const Response = ctx.mongoose.model('Response');
+	let _id = ctx.params._id;
+	let response = await Response.findOne({_id}).exec();
+	
+	let enable = ctx.body.enable;
+	if (enable != undefined) {
+		response.enable = enable;
+	}
+	
+	response = await response.save();
+	return ctx.body = {
+		success: true
+	};
+}
