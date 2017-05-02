@@ -71,3 +71,17 @@
 .image-list .item-del i {
   color: #FFFFFF;
 }
+.choose-material {
+	width: 310px;
+	min-height: 310px;
+	height: auto;
+}
+.choose-material-link {
+	display: block;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	line-height: 310px;
+	border: 1px #dddddd dashed;
+	background-color: #eee;
+}

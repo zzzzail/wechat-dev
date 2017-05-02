@@ -13,8 +13,6 @@ let responseModel = new Schema({
   type: String,
   // 关键字
   keyword: Array,
-  // 匹配规则 'exact': 完全匹配
-  rule: String,
   // 根据关键字回复内容 String OR ObjectId
   content: String,
   // 是否启用

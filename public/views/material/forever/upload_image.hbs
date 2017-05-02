@@ -6,7 +6,7 @@
     <form id="form">
       <div class="box-body">
 
-        {{include ('../../layout/warning', message = '图片大小不超过2M,支持bmp/png/jpeg/jpg/gif格式.')}}
+        {{> warning warningMessage='图片大小不超过2M,支持bmp/png/jpeg/jpg/gif格式.'}}
 
         <div class="form-group">
           <label for="file">素材名称<span class="text-green">(0-21)</span><span class="text-red">*</span></label>

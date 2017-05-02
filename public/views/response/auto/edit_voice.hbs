@@ -1,0 +1,76 @@
+<div class="content">
+  <div class="box box-info">
+    <div class="box-header with-border">
+      <h3 class="box-title">回复文字</h3>
+    </div>
+    <form id="form">
+      <div class="box-body">
+        <div class="form-group">
+          <label for="keyword">关键词<span class="text-green">(多个关键词可以用空格分开, 如"高富帅 白富美")</span><span class="text-red">*</span></label>
+          <input type="text" class="form-control" id="keyword" placeholder="请输入关键词." value="{{response.keyword}}">
+        </div>
+        <div class="form-group">
+          <label for="content">回复文本内容<span class="text-red">*</span></label>
+          <textarea class="form-control" id="content" rows="10"></textarea>
+        </div>
+      </div>
+      <div class="box-footer">
+        <button class="btn btn-primary" type="submit">提交</button>
+      </div>
+    </form>
+    <div class="overlay" style="display: none;">
+      <i class="fa fa-refresh fa-spin"></i>
+    </div>
+  </div>
+</div>
+
+{{#contentFor "script"}}
+<script>
+  $(function () {
+    $('#form').submit(function (e) {
+      e.preventDefault();
+      $('.overlay').show();
+
+      var _self = $(this);
+      var type = Util.QueryString('type');
+      var keyword = _self.find('#keyword').val();
+      var content = _self.find('#content').val();
+      if (!keyword.length > 0) {
+        layer.alert('请输入关键字!', {skin: 'layui-layer-warning'});
+        $('.overlay').hide();
+        return false;
+      }
+      if (!content.length > 0) {
+        layer.alert('请输入回复文本!', {skin: 'layui-layer-warning'});
+        $('.overlay').hide();
+        return false;
+      }
+
+      keyword = keyword.trim().split(' ');
+      _.remove(keyword, function (n) {return n == ''}); // 删除中间空格
+
+      $.ajax({
+        type: 'POST',
+        url: '/response/auto/edit',
+        data: {
+          type: type,
+          keyword: keyword,
+          content: content,
+          enable: true
+        },
+        success: function (data) {
+          console.log(data);
+          if (data.success) {
+            layer.alert('提交成功!', {skin: 'layui-layer-molv', closeBtn: 0}, function () {
+              window.location.href = '/response/auto?type=text';
+            })
+          }
+        },
+        error: function (err) {
+          console.log(err);
+        }
+      })
+    })
+  })
+</script>
+{{/contentFor}}

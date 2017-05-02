@@ -6,7 +6,7 @@
     <form id="form">
       <div class="box-body">
 
-        {{include ('../../layout/warning', message = '语音大小不超过2M,播放长度不超过60秒,支持mp3/wma/wav/amr格式.')}}
+        {{> warning warningMessage='语音大小不超过2M,播放长度不超过60秒,支持mp3/wma/wav/amr格式.'}}
 
         <div class="form-group">
           <label for="file">素材名称<span class="text-green">(0-21)</span><span class="text-red">*</span></label>

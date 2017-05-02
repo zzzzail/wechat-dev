@@ -45,6 +45,14 @@ exports.deleteMaterialForever = async (ctx, next) => {
   }
 }
 
+exports.getMaterialList = async (ctx, next) => {
+	const Material = ctx.mongoose.model('Material');
+	let type = ctx.query.type;
+	let materials = Material.find({type}).exec();
+	
+	return ctx.render('material/list', {materials});
+}
+
 exports.getMaterialForeverUpload = async (ctx, next) => {
   let type = ctx.query.type || 'image';
   return ctx.render('material/forever/upload_' + type);
