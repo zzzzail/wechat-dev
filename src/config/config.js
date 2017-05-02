@@ -46,6 +46,7 @@ let config = {
       params: {
 	      viewPath: viewPath,
 	      partialsPath: path.join(viewPath, 'partials'),
+	      layoutsPath: path.join(viewPath, 'layouts'),
 	      defaultLayout: 'layout',
 	      disableCache: false
       }
