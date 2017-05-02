@@ -12,8 +12,10 @@
         <div class="form-group">
 	        <label for="">素材</label>
 	        <div class="choose-material">
-		        <input type="hidden">
+		        <input id="content" type="hidden">
 		        <a class="choose-material-link" href="javascript:;">从素材库选择图片</a>
+		        <img id="media-img" src="" alt="">
+		        <div id="media-del" title="删除"><i class="fa fa-remove"></i></div>
 	        </div>
         </div>
       </div>
@@ -39,8 +41,20 @@
 			  title: '选择图片',
 			  shadeClose: false,
 			  area: ['70%', '80%'],
-			  content: '/material/list?type=image'
+			  content: '/material/list?type=image',
+			  end: function () {
+			  }
 		  })
+	  })
+
+	  $('#media-del').click(function (e) {
+		  e.stopPropagation();
+		  e.preventDefault();
+
+		  $('#content').val('');
+		  $('#media-img').hide();
+		  $('#media-img').attr('src', '');
+		  $(this).hide();
 	  })
 
 
@@ -58,7 +72,7 @@
         return false;
       }
       if (!content.length > 0) {
-        layer.alert('请输入回复文本!', {skin: 'layui-layer-warning'});
+        layer.alert('请输选择素材!', {skin: 'layui-layer-warning'});
         $('.overlay').hide();
         return false;
       }
@@ -79,7 +93,7 @@
           console.log(data);
           if (data.success) {
             layer.alert('提交成功!', {skin: 'layui-layer-molv', closeBtn: 0}, function () {
-              window.location.href = '/response/auto?type=text';
+              window.location.href = '/response/auto?type=' + type;
             })
           }
         },

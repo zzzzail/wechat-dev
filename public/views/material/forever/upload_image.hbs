@@ -58,6 +58,7 @@
       var formData = new FormData();
       var fileInputEle = document.getElementById('file');
       formData.append('media', fileInputEle.files[0]);
+      formData.append('name', name);
 
       $.ajax({
         type: 'POST',

@@ -13,6 +13,25 @@ exports.getResponseAuto = async (ctx, next) => {
   const Response = ctx.mongoose.model('Response');
   let type = ctx.query.type;
   let responses = await Response.find({type}).exec();
+	const Material = ctx.mongoose.model('Material');
+  if (type == 'image') {
+	  for (let i=0; i<responses.length; i++) {
+		  let material = await Material.findOne({_id: responses[i].content}).exec();
+		  responses[i].content = `<img src="${material.uri}">`;
+	  }
+  }
+  if (type == 'voice') {
+	  for (let i=0; i<responses.length; i++) {
+		  let material = await Material.findOne({_id: responses[i].content}).exec();
+		  responses[i].content = `<audio controls src="${material.uri}"></audio>`;
+	  }
+  }
+	if (type == 'video') {
+		for (let i=0; i<responses.length; i++) {
+			let material = await Material.findOne({_id: responses[i].content}).exec();
+			responses[i].content = `<video controls src="${material.uri}"></video>`;
+		}
+	}
 
   return ctx.render('response/auto/index', {responses});
 }

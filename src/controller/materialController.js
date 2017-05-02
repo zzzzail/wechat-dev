@@ -48,9 +48,9 @@ exports.deleteMaterialForever = async (ctx, next) => {
 exports.getMaterialList = async (ctx, next) => {
 	const Material = ctx.mongoose.model('Material');
 	let type = ctx.query.type;
-	let materials = Material.find({type}).exec();
+	let materials = await Material.find({type}).exec();
 	
-	return ctx.render('material/list', {materials});
+	return ctx.render(`material/list_${type}`, {materials});
 }
 
 exports.getMaterialForeverUpload = async (ctx, next) => {
@@ -63,9 +63,9 @@ exports.postMaterialForeverUpload = async (ctx, next) => {
   let wechat = ctx.wechat;
   let uploadFilePath = ctx.body.files.media.path;
   let uri = uploadFilePath.slice(uploadFilePath.indexOf('upload/') - 1);
-  let type = ctx.query.type || 'image';
+  let type = ctx.query.type;
 
-  let name = ctx.body.name;
+  let name = ctx.body.fields.name;
   let description = null;
   if (type == 'video') {
     description = {

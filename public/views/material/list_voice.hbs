@@ -1,0 +1,33 @@
+{{!< listLayout}}
+
+<div class="material-ul">
+	{{#each materials}}
+		<div class="material-li" data-id="{{_id}}" data-uri="{{uri}}">
+			<audio controls src="{{uri}}"></audio>
+			<div class="hover-area"></div>
+		</div>
+	{{/each}}
+</div>
+
+{{#contentFor "script"}}
+	<script>
+		$(function () {
+			var index = parent.layer.getFrameIndex(window.name);
+			if (index) {
+				$('.material-li').click(function (e) {
+					e.stopPropagation();
+					e.preventDefault();
+
+					var _self = $(this);
+					var _id = _self.attr('data-id');
+					var uri = _self.attr('data-uri');
+					parent.$('#content').val(_id);
+					parent.$('#media-voice').show();
+					parent.$('#media-voice').attr('src', uri);
+					parent.$('#media-del').show();
+					parent.layer.close(index);
+				})
+			}
+		})
+	</script>
+{{/contentFor}}

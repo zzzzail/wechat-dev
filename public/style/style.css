@@ -75,13 +75,104 @@
 	width: 310px;
 	min-height: 310px;
 	height: auto;
+	border: 1px #dddddd dashed;
+	position: relative;
 }
 .choose-material-link {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	text-align: center;
+	line-height: 310px;
+	background-color: #eee;
+}
+.choose-material #media-img {
+	display: none;
+	width: 100%;
+	height: auto;
+	position: relative;
+	z-index: 9;
+}
+.choose-material #media-voice {
+	display: none;
+	width: 100%;
+	position: relative;
+	bottom: -276px;
+	z-index: 9;
+}
+.choose-material #media-video {
+	display: none;
+	width: 100%;
+	height: 310px;
+	position: relative;
+	z-index: 12;
+}
+.choose-material #media-del {
+	display: none;
+	width: 20px;
+	height: 20px;
+	text-align: center;
+	line-height: 20px;
+	background-color: #dd4b39;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	z-index: 12;
+	cursor: pointer;
+}
+.choose-material #media-del i {
+	color: #FFFFFF;
+}
+
+.material-ul {
+	margin-top: 10px;
+}
+.material-ul .material-li {
+	width: 220px;
+	height: 220px;
+	float: left;
+	overflow: hidden;
+	margin-left: 10px;
+	margin-bottom: 10px;
+	border: 1px #ddd solid;
+	position: relative;
+	cursor: pointer;
+}
+.material-li .hover-area {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	z-index: 8;
+	background-color: rgba(0,0,0,0.5);
+}
+.material-ul .material-li:hover .hover-area {
+	display: block;
+}
+.material-ul .material-li img{
 	display: block;
 	width: 100%;
 	height: 100%;
-	text-align: center;
-	line-height: 310px;
-	border: 1px #dddddd dashed;
-	background-color: #eee;
+}
+.material-ul .material-li audio {
+	display: block;
+	width: 100%;
+	height: 100%;
+	background-image: url("../dist/img/music.png");
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 50px 50px;
+}
+.material-ul .material-li video {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.table video, .table img {
+	max-width: 300px;
 }
