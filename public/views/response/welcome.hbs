@@ -3,7 +3,7 @@
 		<div class="box-header with-border">
 			<h3 class="box-title">欢迎语设置</h3>
 		</div>
-		<form class="form">
+		<form id="form">
 			<div class="box-body">
 
 				{{> warning warningTitle="常用配置地址：" warningMessage='&lt;a href="[follow]"&gt;绑定帐号&lt;/a&gt;<br>&lt;a href="[website]"&gt;微首页&lt;/a&gt;'}}
@@ -11,26 +11,21 @@
 				<div class="form-group">
 					<div class="radio">
 						<label>
-							<input type="radio" name="type" value="text" checked="checked"> 文字
-						</label>
-						&nbsp;&nbsp;&nbsp;
+							<input type="radio" name="type" value="text"> 文字
+						</label>&nbsp;&nbsp;&nbsp;
 						<label>
-							<input type="radio"name="type" value="image"> 图片
-						</label>
-						&nbsp;&nbsp;&nbsp;
+							<input type="radio" name="type" value="image"> 图片
+						</label>&nbsp;&nbsp;&nbsp;
 						<label>
-							<input type="radio" name="type" value="vioce"> 语音
-						</label>
-						&nbsp;&nbsp;&nbsp;
+							<input type="radio" name="type" value="voice"> 语音
+						</label>&nbsp;&nbsp;&nbsp;
 						<label>
 							<input type="radio" name="type" value="video"> 视频
 						</label>
 					</div>
 				</div>
-				<div class="form-group">
 
-				</div>
-
+				<div class="form-group" id="content-group"></div>
 			</div>
 			<div class="box-footer">
 				<button class="btn btn-primary" type="submit">提交</button>
@@ -38,3 +33,115 @@
 		</form>
 	</div>
 </div>
+
+{{#contentFor "script"}}
+<script type="text/html" id="text-content">
+	<textarea class="form-control" id="content" name="content" rows="10">{{response.content}}</textarea>
+</script>
+{{#with response.content}}
+<script type="text/html" id="image-content">
+	<div class="choose-material">
+		<input id="content" type="hidden">
+		<a class="choose-material-link" href="javascript:;">从素材库选择图片</a>
+		<img id="media-image" src="{{uri}}">
+		<div id="media-del" title="删除"><i class="fa fa-remove"></i></div>
+	</div>
+</script>
+<script type="text/html" id="voice-content">
+	<div class="choose-material">
+		<input id="content" type="hidden">
+		<a class="choose-material-link" href="javascript:;">从素材库选择语音</a>
+		<audio id="media-voice" controls src="{{uri}}"></audio>
+		<div id="media-del" title="删除"><i class="fa fa-remove"></i></div>
+	</div>
+</script>
+<script type="text/html" id="video-content">
+	<div class="choose-material">
+		<input id="content" type="hidden">
+		<a class="choose-material-link" href="javascript:;">从素材库选择视频</a>
+		<video id="media-video" controls src="{{uri}}"></video>
+		<div id="media-del" title="删除"><i class="fa fa-remove"></i></div>
+	</div>
+</script>
+{{/with}}
+<script>
+	$(function () {
+		$('input[name=type][value={{response.type}}]').attr('checked', 'checked');
+
+		$('input[name=type]').change(function (e) {
+			changeContent($(this).val());
+		})
+		changeContent($('input[name=type]:checked').val());
+		function changeContent(type) {
+			console.log(type);
+			$('#content-group').html($('#' + type + '-content').html());
+			$('#media-' + type).show();
+			$('#media-del').show();
+		}
+		$(document).on('click', '.choose-material-link', function (e) {
+			e.stopPropagation();
+			e.preventDefault();
+
+			var type = $('input[name=type]:checked').val();
+			layer.open({
+				type: 2,
+				title: '选择素材',
+				shadeClose: false,
+				area: ['70%', '80%'],
+				content: '/material/list?type=' + type,
+				end: function () {
+				}
+			})
+		})
+
+		$(document).on('click', '#media-del', function (e) {
+			e.stopPropagation();
+			e.preventDefault();
+
+			var type = $('input[name=type]:checked').val();
+			$('#content').val('');
+			$('#media-' + type).hide();
+			$('#media-' + type).attr('src', '');
+			$(this).hide();
+		})
+
+		$('#form').submit(function (e) {
+			e.preventDefault();
+			$('.overlay').show();
+
+			var _self = $(this);
+			var type = $('input[name=type]:checked').val();
+			var keyword = ["welcome"];
+			var content = _self.find('#content').val();
+			if (!content.length > 0) {
+				layer.alert('请输入或选择素材!', {skin: 'layui-layer-warning'});
+				$('.overlay').hide();
+				return false;
+			}
+
+			$.ajax({
+				type: 'POST',
+				url: '/response/auto/{{response._id}}',
+				data: {
+					type: type,
+					keyword: keyword,
+					content: content,
+					enable: true
+				},
+				success: function (data) {
+					console.log(data);
+					if (data.success) {
+						layer.alert('提交成功!', {skin: 'layui-layer-molv', closeBtn: 0}, function () {
+							window.location.href = window.location.href;
+						})
+					}
+				},
+				error: function (err) {
+					console.log(err);
+				}
+			})
+
+		})
+	})
+</script>
+{{/contentFor}}

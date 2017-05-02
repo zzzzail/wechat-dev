@@ -6,7 +6,15 @@
  */
 
 exports.getResponseWelcome = async (ctx, next) => {
-  return ctx.render('response/welcome');
+	const Response = ctx.mongoose.model('Response');
+	let response = await Response.findOne({keyword: ["welcome"]}).exec();
+	if (response.type != 'text') {
+		const Material = ctx.mongoose.model('Material');
+		let material = await Material.findOne({_id: response.content}).exec();
+		response.content = material;
+	}
+
+  return ctx.render('response/welcome', {response});
 }
 
 exports.getResponseAuto = async (ctx, next) => {

@@ -14,7 +14,7 @@
 	        <div class="choose-material">
 		        <input id="content" type="hidden">
 		        <a class="choose-material-link" href="javascript:;">从素材库选择图片</a>
-		        <img id="media-img" src="" alt="">
+		        <img id="media-image" src="" alt="">
 		        <div id="media-del" title="删除"><i class="fa fa-remove"></i></div>
 	        </div>
         </div>
@@ -52,8 +52,8 @@
 		  e.preventDefault();
 
 		  $('#content').val('');
-		  $('#media-img').hide();
-		  $('#media-img').attr('src', '');
+		  $('#media-image').hide();
+		  $('#media-image').attr('src', '');
 		  $(this).hide();
 	  })
 
