@@ -14,7 +14,8 @@ const {
   getResponseAuto,
   getResponseAutoEdit,
   postResponseAutoEdit,
-	putResponseAutoEdit
+	putResponseAutoEdit,
+	deleteResponseAutoEdit
 } = require('../controller/responseController');
 const {isUniform, getAdminUserId, putAdminUserId} = require('../controller/adminController');
 const {
@@ -37,6 +38,7 @@ module.exports = function (app) {
   router.get('/response/auto/:_id', isLogin, getResponseAutoEdit);
   router.post('/response/auto/:_id', isLogin, postResponseAutoEdit);
 	router.put('/response/auto/:_id', isLogin, putResponseAutoEdit);
+	router.delete('/response/auto/:_id', isLogin, deleteResponseAutoEdit);
 
   // 素材管理
   router.get('/material/forever', isLogin, getMaterialForever);

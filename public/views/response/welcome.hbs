@@ -1,3 +1,40 @@
-<div>
-  welcome
+<div class="content">
+	<div class="box box-info">
+		<div class="box-header with-border">
+			<h3 class="box-title">欢迎语设置</h3>
+		</div>
+		<form class="form">
+			<div class="box-body">
+
+				{{> warning title="常用配置地址：" message='&lt;a href="[follow]"&gt;绑定帐号&lt;/a&gt;<br>&lt;a href="[website]"&gt;微首页&lt;/a&gt;'}}
+
+				<div class="form-group">
+					<div class="radio">
+						<label>
+							<input type="radio" name="type" value="text" checked="checked"> 文字
+						</label>
+						&nbsp;&nbsp;&nbsp;
+						<label>
+							<input type="radio"name="type" value="image"> 图片
+						</label>
+						&nbsp;&nbsp;&nbsp;
+						<label>
+							<input type="radio" name="type" value="vioce"> 语音
+						</label>
+						&nbsp;&nbsp;&nbsp;
+						<label>
+							<input type="radio" name="type" value="video"> 视频
+						</label>
+					</div>
+				</div>
+				<div class="form-group">
+
+				</div>
+
+			</div>
+			<div class="box-footer">
+				<button class="btn btn-primary" type="submit">提交</button>
+			</div>
+		</form>
+	</div>
 </div>

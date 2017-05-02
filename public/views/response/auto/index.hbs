@@ -1,7 +1,7 @@
 <div class="content">
 	<div class="nav-tabs-custom">
 		<ul class="nav nav-tabs">
-			<li class="nav-type-image active">
+			<li class="nav-type-text">
 				<a href="/response/auto?type=text">回复文字</a>
 			</li>
 			<li class="nav-type-image">
@@ -53,7 +53,7 @@
 								<a href="javascript:;" class="enable" data-value="{{enable}}" data-id="{{_id}}">
 									{{#if enable}}禁用{{else}}启用{{/if}}
 								</a>
-								<a href="javascript:;">删除</a>
+								<a href="javascript:;" class="delete" data-id="{{_id}}">删除</a>
 							</td>
 						</tr>
 					{{/each}}
@@ -71,6 +71,10 @@
 {{#contentFor "script"}}
 	<script>
 		$(function () {
+			var type = Util.QueryString('type');
+			$('.nav-type-' + type).addClass('active');
+
+			// 修改启用或禁用
 			$('.enable').click(function (e) {
 				e.stopPropagation();
 				e.preventDefault();
@@ -92,7 +96,7 @@
 									resolve(data);
 								},
 								error: function (err) {
-									reject(err);
+									throw err;
 								}
 							})
 						})
@@ -103,6 +107,40 @@
 					.then(function (data) {
 						if (data.success) {
 							layer.alert('修改成功!', {skin: 'layui-layer-molv', closeBtn: 0}, function () {
+								window.location.href = window.location.href;
+							})
+						}
+					})
+			})
+
+			// 删除
+			$('.delete').click(function (e) {
+				e.stopPropagation();
+				e.preventDefault();
+
+				var id = $(this).attr('data-id');
+				Util.confirm('确定删除吗?')
+					.then(function (data) {
+						return new Promise(function (resolve, reject) {
+							$.ajax({
+								type: 'DELETE',
+								url: '/response/auto/' + id,
+								success: function (data) {
+									resolve(data);
+								},
+								error: function (err) {
+									throw err;
+								}
+							})
+						});
+					})
+					.catch(function (err) {
+						console.log(err)
+					})
+					.then(function (data) {
+						console.log(data)
+						if (data.success) {
+							layer.alert('删除成功!', {skin: 'layui-layer-molv', closeBtn: 0}, function () {
 								window.location.href = window.location.href;
 							})
 						}

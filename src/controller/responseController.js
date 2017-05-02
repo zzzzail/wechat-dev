@@ -82,3 +82,14 @@ exports.putResponseAutoEdit = async (ctx, next) => {
 		success: true
 	};
 }
+
+exports.deleteResponseAutoEdit = async (ctx, next) => {
+	const Response = ctx.mongoose.model('Response');
+	let _id = ctx.params._id;
+	let response = await Response.findOne({_id}).exec();
+	
+	await response.remove();
+	return ctx.body = {
+		success: true
+	}
+}
