@@ -5,7 +5,14 @@
  * @description
  */
 
-module.exports = function (message) {
+const Promise = require('bluebird');
+
+module.exports = async function (ctx, message) {
+	
+	return new Promise(function (resolve, reject) {
+		resolve('heheda');
+	});
+	
   if (message.MsgType == 'event') {
     if (message.Event == 'subscribe') {
       return '谢谢您订阅点影,';

@@ -288,6 +288,7 @@ Wechat.prototype.uploadMaterialForever = function (type, filePath, description) 
 
 }
 
+// 删除素材
 Wechat.prototype.deleteMaterialForever = function (media_id) {
   let _self = this;
   let form = {media_id};

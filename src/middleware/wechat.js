@@ -44,7 +44,7 @@ module.exports = function (app) {
         let content = await util.parseXMLAsync(data);
         let message = util.formatMessage(content.xml);
         // 回复信息
-        let replyMessage = replyHandler(message);
+        let replyMessage = await replyHandler(ctx, message);
         // 把回复的信息解析为xml
         let xml = util.xmlTemplate(message, replyMessage);
         console.log(xml);
