@@ -6,26 +6,27 @@
 		</div>
 		<form id="form">
 			<div class="box-body">
-
 				<%- include('../partials/warning', {warningTitle: "常用配置地址：", warningMessage: '&lt;a href="[follow]"&gt;绑定帐号&lt;/a&gt;<br>&lt;a href="[website]"&gt;微首页&lt;/a&gt;'}) %>
-
 				<div class="form-group">
 					<div class="radio">
+						<%
+						var type;
+						typeof(response) !== 'undefined' ? type = response.type : type = 'text';
+						%>
 						<label>
-							<input type="radio" name="type" value="text"> 文字
+							<input type="radio" name="type" value="text" <%- type == 'text' ? 'checked="checked"' : '' %>> 文字
 						</label>&nbsp;&nbsp;&nbsp;
 						<label>
-							<input type="radio" name="type" value="image"> 图片
+							<input type="radio" name="type" value="image" <%- type == 'image' ? 'checked="checked"' : '' %>> 图片
 						</label>&nbsp;&nbsp;&nbsp;
 						<label>
-							<input type="radio" name="type" value="voice"> 语音
+							<input type="radio" name="type" value="voice" <%- type == 'voice' ? 'checked="checked"' : '' %>> 语音
 						</label>&nbsp;&nbsp;&nbsp;
 						<label>
-							<input type="radio" name="type" value="video"> 视频
+							<input type="radio" name="type" value="video" <%- type == 'video' ? 'checked="checked"' : '' %>> 视频
 						</label>
 					</div>
 				</div>
-
 				<div class="form-group" id="content-group"></div>
 			</div>
 			<div class="box-footer">
@@ -38,36 +39,34 @@
 <%- include('../layouts/adminFooter') %>
 
 <script type="text/html" id="text-content">
-	<textarea class="form-control" id="content" name="content" rows="10"><%= response.content %></textarea>
+	<textarea class="form-control" id="content" name="content" rows="10"><%= typeof(response) !== 'undefined' && type == 'text' ? response.content : '' %></textarea>
 </script>
 <script type="text/html" id="image-content">
 	<div class="choose-material">
-		<input id="content" type="hidden">
+		<input id="content" type="hidden" value="<%= typeof(response) !== 'undefined' && type == 'image' ? response.material._id : '' %>">
 		<a class="choose-material-link" href="javascript:;">从素材库选择图片</a>
-		<img id="media-image" src="<%= response.content.uri %>">
+		<img id="media-image" src="<%= typeof(response) !== 'undefined' && type == 'image' ? response.material.uri : '' %>">
 		<div id="media-del" title="删除"><i class="fa fa-remove"></i></div>
 	</div>
 </script>
 <script type="text/html" id="voice-content">
 	<div class="choose-material">
-		<input id="content" type="hidden">
+		<input id="content" type="hidden" value="<%= typeof(response) !== 'undefined' && type == 'voice' ? response.material._id : '' %>">
 		<a class="choose-material-link" href="javascript:;">从素材库选择语音</a>
-		<audio id="media-voice" controls src="<%= response.content.uri %>"></audio>
+		<audio id="media-voice" controls src="<%= typeof(response) !== 'undefined' && type == 'voice' ? response.material.uri : '' %>"></audio>
 		<div id="media-del" title="删除"><i class="fa fa-remove"></i></div>
 	</div>
 </script>
 <script type="text/html" id="video-content">
 	<div class="choose-material">
-		<input id="content" type="hidden">
+		<input id="content" type="hidden" value="<%= typeof(response) !== 'undefined' && type == 'video' ? response.material._id : '' %>">
 		<a class="choose-material-link" href="javascript:;">从素材库选择视频</a>
-		<video id="media-video" controls src="<%= response.content.uri %>"></video>
+		<video id="media-video" controls src="<%= typeof(response) !== 'undefined' && type == 'video' ? response.material.uri : '' %>"></video>
 		<div id="media-del" title="删除"><i class="fa fa-remove"></i></div>
 	</div>
 </script>
 <script>
 	$(function () {
-		$('input[name=type][value=<%= response.type %>]').attr('checked', 'checked');
-
 		$('input[name=type]').change(function (e) {
 			changeContent($(this).val());
 		})
@@ -75,9 +74,10 @@
 		function changeContent(type) {
 			console.log(type);
 			$('#content-group').html($('#' + type + '-content').html());
-			$('#media-' + type).show();
-			$('#media-del').show();
+			$('#media-' + type).css({display: 'block'});
+			$('#media-del').css({display: 'block'});
 		}
+
 		$(document).on('click', '.choose-material-link', function (e) {
 			e.stopPropagation();
 			e.preventDefault();
@@ -121,7 +121,7 @@
 
 			$.ajax({
 				type: 'POST',
-				url: '/response/auto/<%= response._id %>',
+				url: '/response/auto/<%= typeof(response) !== 'undefined' ? response._id : 'edit' %>',
 				data: {
 					type: type,
 					keyword: keyword,

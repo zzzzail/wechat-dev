@@ -8,12 +8,14 @@
 exports.getResponseWelcome = async (ctx, next) => {
 	const Response = ctx.mongoose.model('Response');
 	let response = await Response.findOne({keyword: ["welcome"]}).exec();
-	if (response.type != 'text') {
+	if (response && response.type != 'text') {
 		const Material = ctx.mongoose.model('Material');
 		let material = await Material.findOne({_id: response.content}).exec();
-		response.content = material;
+		response.material = material;
 	}
-
+	
+	console.log(response);
+	response = response || undefined
   return ctx.render('response/welcome', {response});
 }
 
