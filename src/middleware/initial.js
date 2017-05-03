@@ -14,6 +14,7 @@ module.exports = function (app) {
     ctx.state.version = config.version;
     ctx.state.title = config.title;
     ctx.state.keywords = config.keywords;
+    ctx.state.description = config.description;
     ctx.state.company = config.company;
     ctx.state.telephone = config.telephone;
     ctx.state.icp = config.icp;

@@ -1,0 +1,39 @@
+<header class="main-header">
+  <a href="/index" class="logo">
+    <span class="logo-mini">点影</span>
+    <span class="logo-lg">点影微信管理后台</span>
+  </a>
+  <nav class="navbar navbar-static-top">
+    <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+      <span class="sr-only">Toggle navigation</span>
+    </a>
+
+    <div class="navbar-custom-menu">
+      <ul class="nav navbar-nav">
+
+        <li class="dropdown user user-menu">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <img src="/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+            <span class="hidden-xs"><%= _loginUser.username %></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li class="user-header">
+              <p></p>
+              <img src="/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+              <p><%= _loginUser.nickname %></p>
+            </li>
+            <li class="user-footer">
+              <div class="pull-left">
+                <a href="/admin/user/{{_loginUser._id}}" class="btn btn-default btn-flat">个人资料</a>
+              </div>
+              <div class="pull-right">
+                <a href="/logout" class="btn btn-default btn-flat">安全退出</a>
+              </div>
+            </li>
+          </ul>
+        </li>
+
+      </ul>
+    </div>
+  </nav>
+</header>

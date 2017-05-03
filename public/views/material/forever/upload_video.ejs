@@ -1,3 +1,5 @@
+<%- include('../../layouts/adminHeader') %>
+
 <div class="content">
   <div class="box box-info">
     <div class="box-header with-border">
@@ -5,9 +7,7 @@
     </div>
     <form id="form">
       <div class="box-body">
-
-        {{> warning warningMessage='视频不能超过20M，超过20M的视频可至腾讯视频上传后添加，也可通过添加视频详情页链接以及公众号文章链接插入视频，视频时长不少于1秒，不多于10小时，支持MP4格式.'}}
-
+	      <%- include('../../partials/warning', {warningMessage: '视频不能超过20M，超过20M的视频可至腾讯视频上传后添加，也可通过添加视频详情页链接以及公众号文章链接插入视频，视频时长不少于1秒，不多于10小时，支持MP4格式.'}) %>
         <div class="form-group">
           <label for="file">素材名称<span class="text-green">(0-21)</span><span class="text-red">*</span></label>
           <input type="text" class="form-control" id="name" placeholder="请输入素材名称.">
@@ -35,7 +35,8 @@
   </div>
 </div>
 
-{{#contentFor "script"}}
+<%- include('../../layouts/adminFooter') %>
+
 <script>
   $(function () {
     $('#form').submit(function (e) {
@@ -102,4 +103,3 @@
     })
   })
 </script>
-{{/contentFor}}

@@ -1,0 +1,119 @@
+<%- include('../../layouts/adminHeader') %>
+
+<div class="content">
+	<div class="nav-tabs-custom">
+		<ul class="nav nav-tabs">
+			<li class="nav-type-image">
+				<a href="/material/forever?type=image">图片素材</a>
+			</li>
+			<li class="nav-type-voice">
+				<a href="/material/forever?type=voice">语音素材</a>
+			</li>
+			<li class="nav-type-video">
+				<a href="/material/forever?type=video">视频素材</a>
+			</li>
+		</ul>
+		<div class="tab-content">
+
+			<div class="tab-pane" id="material-image">
+				<%- include('../../partials/warning', {warningMessage: '图片大小不超过2M,支持bmp/png/jpeg/jpg/gif格式.'}) %>
+				<ul class="image-list clearfix">
+					<li class="item-upload">
+						<a class="item-image" href="/material/forever/upload?type=image"><i class="fa fa-plus"></i></a>
+					</li>
+					<% if (typeof(materials) !== 'undefined' && materials.length > 0) { %>
+					<% materials.forEach(function (mat) { %>
+					<li class="item">
+						<a class="item-image" href="<%= mat.uri %>" target="_blank">
+							<img src="<%= mat.uri %>" alt="">
+						</a>
+						<div class="item-del" title="删除" data-id="<%= mat._id %>"><i class="fa fa-remove"></i></div>
+					</li>
+					<% }) %>
+					<% } %>
+				</ul>
+			</div>
+			<div class="tab-pane" id="material-voice">
+				<%- include('../../partials/warning', {warningMessage: '语音大小不超过2M,播放长度不超过60秒,支持mp3/wma/wav/amr格式.'}) %>
+				<ul class="image-list clearfix">
+					<li class="item-upload">
+						<a class="item-image" href="/material/forever/upload?type=voice"><i class="fa fa-plus"></i></a>
+					</li>
+					<% if (typeof(materials) !== 'undefined' && materials.length > 0) { %>
+					<% materials.forEach(function (mat) { %>
+					<li class="item">
+						<a class="item-image" href="<%= mat.uri %>" target="_blank">
+							<audio controls src="<%= mat.uri %>"></audio>
+						</a>
+						<div class="item-del" title="删除" data-id="<%= mat._id %>"><i class="fa fa-remove"></i></div>
+					</li>
+					<% }) %>
+					<% } %>
+				</ul>
+			</div>
+			<div class="tab-pane" id="material-video">
+				<%- include('../../partials/warning', {warningMessage: '视频不能超过20M，超过20M的视频可至腾讯视频上传后添加，也可通过添加视频详情页链接以及公众号文章链接插入视频，视频时长不少于1秒，不多于10小时，支持MP4格式.'}) %>
+				<ul class="image-list clearfix">
+					<li class="item-upload">
+						<a class="item-image" href="/material/forever/upload?type=video"><i class="fa fa-plus"></i></a>
+					</li>
+					<% if (typeof(materials) !== 'undefined' && materials.length > 0) { %>
+					<% materials.forEach(function (mat) { %>
+					<li class="item">
+						<a class="item-image" href="<%= mat.uri %>" target="_blank">
+							<video controls src="<%= mat.uri %>"></video>
+						</a>
+						<div class="item-del" title="删除" data-id="<%= mat._id %>"><i class="fa fa-remove"></i></div>
+					</li>
+					<% }) %>
+					<% } %>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<%- include('../../layouts/adminFooter') %>
+
+<script>
+	$(function () {
+		var type = Util.QueryString('type');
+		$('.nav-type-' + type).addClass('active');
+		$('#material-' + type).addClass('active');
+
+		// 删除素材
+		$('.item-del').click(function (e) {
+			e.stopPropagation();
+
+			var id = $(this).attr('data-id');
+			Util.confirm('您确定要删除该素材吗?')
+				.then(function (data) {
+					if (data) {
+						return new Promise(function (resolve, reject) {
+							$.ajax({
+								type: 'DELETE',
+								url: '/material/forever',
+								data: {
+									_id: id
+								},
+								success: function (data) {
+									resolve(data);
+								}
+							})
+						})
+					}
+				})
+				.then(function (data) {
+					if (data.success) {
+						layer.alert('删除成功!', {skin: 'layui-layer-molv'}, function () {
+							window.location.href = '/material/forever?type=' + type;
+						});
+					} else {
+						layer.alert('删除失败!', {skin: 'layui-layer-molv'});
+					}
+				})
+
+		})
+
+	})
+</script>

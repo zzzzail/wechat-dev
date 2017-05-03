@@ -1,0 +1,154 @@
+<%- include('../../layouts/adminHeader') %>
+
+<div class="content">
+	<div class="nav-tabs-custom">
+		<ul class="nav nav-tabs">
+			<li class="nav-type-text">
+				<a href="/response/auto?type=text">回复文字</a>
+			</li>
+			<li class="nav-type-image">
+				<a href="/response/auto?type=image">回复图片</a>
+			</li>
+			<li class="nav-type-voice">
+				<a href="/response/auto?type=voice">回复语音</a>
+			</li>
+			<li class="nav-type-video">
+				<a href="/response/auto?type=video">回复视频</a>
+			</li>
+		</ul>
+		<div class="tab-content">
+			<div class="tab-pane active">
+
+				<%- include('../../partials/warning', {warningMessage: '请不设置相同的关键词! 相同的关键词只回复最新的设置.'}) %>
+
+				<div class="margin-bottom">
+					<a class="btn btn-success" id="add" href="/response/auto/edit?type=">新增</a>
+				</div>
+
+				<table class="table no-margin">
+					<thead>
+					<tr>
+						<th>关键字</th>
+						<th>回复内容</th>
+						<th>是否启用</th>
+						<th>操作</th>
+					</tr>
+					</thead>
+					<tbody>
+					<% responses.forEach(function (res) { %>
+					<tr>
+						<td>
+							<% res.keyword.forEach(function (key) { %>
+							<span class="label label-success"><%= key %></span>
+							<% }) %>
+						</td>
+						<td><%- res.content %></td>
+						<td>
+							<% if (res.enable) { %>
+							<span class="text-green"><i class="fa fa-check"></i></span>
+							<% } else { %>
+							<span class="text-red"><i class="fa fa-close"></i></span>
+							<% } %>
+						</td>
+						<td>
+							<a href="/response/auto/<%= res._id %>?type=text">修改</a>
+							<a href="javascript:;" class="enable" data-value="<%= res.enable %>" data-id="<%= res._id %>">
+								<%- res.enable ? '禁用' : '启用' %>
+							</a>
+							<a href="javascript:;" class="delete" data-id="<%= res._id %>">删除</a>
+						</td>
+					</tr>
+					<% }) %>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="box-footer clearfix" style="display: block;">
+			<a href="javascript:void(0)" class="btn btn-info">上一页</a>
+			<a href="javascript:void(0)" class="btn btn-info">下一页</a>
+		</div>
+	</div>
+</div>
+
+<%- include('../../layouts/adminFooter') %>
+
+<script>
+	$(function () {
+		var type = Util.QueryString('type');
+		$('.nav-type-' + type).addClass('active');
+		$('#add').attr('href', $('#add').attr('href') + type);
+
+		// 修改启用或禁用
+		$('.enable').click(function (e) {
+			e.stopPropagation();
+			e.preventDefault();
+
+			var _self = $(this);
+			var value = _self.attr('data-value');
+			if (value == 'false') value = false;
+			var _id = _self.attr('data-id');
+			Util.confirm('确定修改为<span class="text-green">' + _self.text() + "</span>吗?")
+				.then(function () {
+					return new Promise(function (resolve, reject) {
+						$.ajax({
+							type: 'PUT',
+							url: '/response/auto/' + _id,
+							data: {
+								enable: !value
+							},
+							success: function (data) {
+								resolve(data);
+							},
+							error: function (err) {
+								throw err;
+							}
+						})
+					})
+				})
+				.catch(function (err) {
+					console.log(err);
+				})
+				.then(function (data) {
+					if (data.success) {
+						layer.alert('修改成功!', {skin: 'layui-layer-molv', closeBtn: 0}, function () {
+							window.location.href = window.location.href;
+						})
+					}
+				})
+		})
+
+		// 删除
+		$('.delete').click(function (e) {
+			e.stopPropagation();
+			e.preventDefault();
+
+			var id = $(this).attr('data-id');
+			Util.confirm('确定删除吗?')
+				.then(function (data) {
+					return new Promise(function (resolve, reject) {
+						$.ajax({
+							type: 'DELETE',
+							url: '/response/auto/' + id,
+							success: function (data) {
+								resolve(data);
+							},
+							error: function (err) {
+								throw err;
+							}
+						})
+					});
+				})
+				.catch(function (err) {
+					console.log(err)
+				})
+				.then(function (data) {
+					console.log(data)
+					if (data.success) {
+						layer.alert('删除成功!', {skin: 'layui-layer-molv', closeBtn: 0}, function () {
+							window.location.href = window.location.href;
+						})
+					}
+				})
+		})
+	})
+</script>

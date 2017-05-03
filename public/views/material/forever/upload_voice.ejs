@@ -1,13 +1,13 @@
+<%- include('../../layouts/adminHeader') %>
+
 <div class="content">
   <div class="box box-info">
     <div class="box-header with-border">
-      <h3 class="box-title">上传图片</h3>
+      <h3 class="box-title">上传语音</h3>
     </div>
     <form id="form">
       <div class="box-body">
-
-        {{> warning warningMessage='图片大小不超过2M,支持bmp/png/jpeg/jpg/gif格式.'}}
-
+	      <%- include('../../partials/warning', {warningMessage: '语音大小不超过2M,播放长度不超过60秒,支持mp3/wma/wav/amr格式.'}) %>
         <div class="form-group">
           <label for="file">素材名称<span class="text-green">(0-21)</span><span class="text-red">*</span></label>
           <input type="text" class="form-control" id="name" placeholder="请输入素材名称.">
@@ -27,12 +27,12 @@
   </div>
 </div>
 
-{{#contentFor "script"}}
+<%- include('../../layouts/adminFooter') %>
+
 <script>
   $(function () {
     $('#form').submit(function (e) {
       e.preventDefault();
-
       $('.overlay').show();
 
       var _self = $(this);
@@ -43,15 +43,15 @@
         $('.overlay').hide();
         return false;
       }
-      if (!/.*\.(bmp|png|jpeg|jpg|gif)$/.test(file)) {
-        layer.alert('图片格式不正确, 请重新选择!', {skin: 'layui-layer-warning'});
+      if (!/.*\.(mp3|wma|wav|amr)$/.test(file)) {
+        layer.alert('语音格式不正确, 请重新选择!', {skin: 'layui-layer-warning'});
         $('.overlay').hide();
         return false;
       }
-      var imgUploadMaxSize = 2048; // 允许上传图片最大为2048KB
+      var imgUploadMaxSize = 2048; // 允许上传语音最大为2048KB
       var fileSize = window.Util.getFileSize('file'); // KB
       if (fileSize > imgUploadMaxSize) {
-        layer.alert('上传图片太大, 请压缩后再上传!', {skin: 'layui-layer-warning'});
+        layer.alert('上传语音文件太大, 请压缩后再上传!', {skin: 'layui-layer-warning'});
         $('.overlay').hide();
         return false;
       }
@@ -59,17 +59,17 @@
       var fileInputEle = document.getElementById('file');
       formData.append('media', fileInputEle.files[0]);
       formData.append('name', name);
-
+      
       $.ajax({
         type: 'POST',
-        url: '/material/forever/upload?type=image',
+        url: '/material/forever/upload?type=voice',
         data: formData,
         processData: false,
         contentType: false,
         success: function (data) {
           if (data) {
             layer.alert('上传成功!', {skin: 'layui-layer-molv', closeBtn: 0}, function () {
-              window.location.href = '/material/forever?type=image';
+              window.location.href = '/material/forever?type=voice';
             })
           }
         },
@@ -81,4 +81,3 @@
     })
   })
 </script>
-{{/contentFor}}

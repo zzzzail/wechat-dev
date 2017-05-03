@@ -42,13 +42,13 @@ let config = {
       name: 'koa-static',
       params: staticDir
     }, {
-      name: 'xtpl',
+      name: 'ejs',
       params: {
-	      viewPath: viewPath,
-	      partialsPath: path.join(viewPath, 'partials'),
-	      layoutsPath: path.join(viewPath, 'layouts'),
-	      defaultLayout: 'layout',
-	      disableCache: false
+	      root: viewPath,
+	      layout: 'layouts/layout',
+	      viewExt: 'ejs',
+	      cache: true,
+	      debug: true
       }
     }, {
       name: 'session',

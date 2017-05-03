@@ -1,3 +1,5 @@
+<%- include('../layouts/adminHeader') %>
+
 <div class="content">
   <div class="row">
     <div class="col-md-12">
@@ -6,25 +8,25 @@
           <h3 class="box-title">修改个人资料</h3>
           <p>以下为您作为当前用户的个人资料,登录密码项留空,则不修改登录密码.</p>
           <ul>
-            <li>昵称: <span class="text-primary">{{_loginUser.nickname}}</span></li>
-            <li>登录用户名: <span class="text-primary">{{_loginUser.username}}</span></li>
-            <li>邮箱: <span class="text-primary">{{_loginUser.email}}</span></li>
-            <li>手机号码: <span class="text-primary">{{_loginUser.phone}}</span></li>
+            <li>昵称: <span class="text-primary"><%= typeof(_loginUser) !== 'undefined' ? _loginUser.nickname : '' %></span></li>
+            <li>登录用户名: <span class="text-primary"><%= typeof(_loginUser) !== 'undefined' ? _loginUser.username : '' %></span></li>
+            <li>邮箱: <span class="text-primary"><%= typeof(_loginUser) !== 'undefined' ? _loginUser.email : '' %></span></li>
+            <li>手机号码: <span class="text-primary"><%= typeof(_loginUser) !== 'undefined' ? _loginUser.phone : '' %></span></li>
           </ul>
         </div>
         <form id="form">
           <div class="box-body">
             <div class="form-group">
               <label for="email">邮箱<small class="text-red">*</small></label>
-              <input type="email" class="form-control" id="email" name="email" value="{{_loginUser.email}}" placeholder="请输入邮箱.">
+              <input type="email" class="form-control" id="email" name="email" value="<%= typeof(_loginUser) !== 'undefined' ? _loginUser.email : '' %>" placeholder="请输入邮箱.">
             </div>
             <div class="form-group">
               <label for="phone">手机号码<small class="text-red">*</small></label>
-              <input type="text" class="form-control" id="phone" name="phone" value="{{_loginUser.phone}}" placeholder="请输入手机号码.">
+              <input type="text" class="form-control" id="phone" name="phone" value="<%= typeof(_loginUser) !== 'undefined' ? _loginUser.phone : '' %>" placeholder="请输入手机号码.">
             </div>
             <div class="form-group">
               <label for="nickname">昵称<small class="text-red">*</small></label>
-              <input type="text" class="form-control" id="nickname" name="nickname" value="{{_loginUser.nickname}}" placeholder="请输入昵称.">
+              <input type="text" class="form-control" id="nickname" name="nickname" value="<%= typeof(_loginUser) !== 'undefined' ? _loginUser.nickname : '' %>" placeholder="请输入昵称.">
             </div>
             <div class="form-group">
               <label for="password">登录密码<small class="text-red">*</small></label>
@@ -44,7 +46,8 @@
   </div>
 </div>
 
-{{#contentFor "script"}}
+<%- include('../layouts/adminFooter') %>
+
 <script>
   $(function () {
     $('#form').submit(function (e) {
@@ -82,7 +85,7 @@
 
       $.ajax({
         type: 'PUT',
-        url: '/admin/user/{{_loginUser._id}}',
+        url: '/admin/user/<%= typeof(_loginUser) !== 'undefined' ? _loginUser._id : '' %>',
         data: {
           email: email,
           phone: phone,
@@ -103,4 +106,3 @@
     })
   })
 </script>
-{{/contentFor}}
