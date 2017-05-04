@@ -45,6 +45,7 @@ module.exports = function (app) {
         let message = util.formatMessage(content.xml);
         // 执行回复信息
         replyHandler.call(ctx, message);
+        return false;
       }
     } else {
       await next();

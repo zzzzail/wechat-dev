@@ -9,7 +9,6 @@ const util = require('../wechat/util');
 
 module.exports = async function (message) {
 	let ctx = this;
-	console.log(ctx);
 	const Response = ctx.mongoose.model('Response');
 	const Material = ctx.mongoose.model('Material');
 	let content = message.Content;
@@ -42,14 +41,16 @@ module.exports = async function (message) {
 						mediaId: material.wechat.media_id
 					}
 				}
-			} else if (content.type == 'voice') {
+			}
+			if (content.type == 'voice') {
 				reply = {
 					type: 'voice',
 					content: {
 						mediaId: material.wechat.media_id
 					}
 				}
-			} else if (content.type == 'video') {
+			}
+			if (content.type == 'video') {
 				reply = {
 					type: 'video',
 					content: {
@@ -79,14 +80,16 @@ module.exports = async function (message) {
 						mediaId: material.wechat.media_id
 					}
 				}
-			} else if (response.type == 'voice') {
+			}
+			if (response.type == 'voice') {
 				reply = {
 					type: 'voice',
 					content: {
 						mediaId: material.wechat.media_id
 					}
 				}
-			} else if (response.type == 'video') {
+			}
+			if (response.type == 'video') {
 				reply = {
 					type: 'video',
 					content: {
