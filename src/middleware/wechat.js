@@ -44,7 +44,7 @@ module.exports = function (app) {
         let content = await util.parseXMLAsync(data);
         let message = util.formatMessage(content.xml);
         // 执行回复信息
-        replyHandler(ctx, message);
+        replyHandler.call(ctx, message);
       }
     } else {
       await next();

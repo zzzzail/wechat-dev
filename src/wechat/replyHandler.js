@@ -7,7 +7,8 @@
 
 const util = require('../wechat/util');
 
-module.exports = async(ctx, message) => {
+module.exports = async function (message) {
+	let ctx = this;
 	const Response = ctx.mongoose.model('Response');
 	const Material = ctx.mongoose.model('Material');
 	let content = message.Content;
