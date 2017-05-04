@@ -9,6 +9,7 @@ const util = require('../wechat/util');
 
 module.exports = async function (message) {
 	let ctx = this;
+	console.log(ctx);
 	const Response = ctx.mongoose.model('Response');
 	const Material = ctx.mongoose.model('Material');
 	let content = message.Content;
@@ -60,13 +61,16 @@ module.exports = async function (message) {
 			}
 		}
 	} else if (message.MsgType == 'text') {
+		console.log('text', content);
 		let response = await Response.findOne({keyword: {$in: [content]}}).exec();
+		console.log('response', response);
 		let material;
 		if (response) {
 			if (response.type == 'text') {
 				reply = response.content;
 			} else {
 				material = await Material.findOne({_id: response.content}).exec();
+				console.log('material', material);
 			}
 			if (response.type == 'image') {
 				reply = {
