@@ -43,9 +43,16 @@ module.exports = function (app) {
         let data = await getRawBody(ctx.req);
         let content = await util.parseXMLAsync(data);
         let message = util.formatMessage(content.xml);
-        // 执行回复信息
-        replyHandler.call(ctx, message);
-        return false;
+        
+        // 回复信息
+        let replyMessage = await replyHandler.call(ctx, message);
+        console.log(replyMessage);
+        // 把回复的信息解析为xml
+        let xml = util.xmlTemplate(message, replyMessage);
+        console.log(xml);
+        ctx.status = 200;
+        ctx.type = 'application/xml';
+        return ctx.body = xml;
       }
     } else {
       await next();

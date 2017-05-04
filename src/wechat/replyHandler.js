@@ -5,8 +5,6 @@
  * @description
  */
 
-const util = require('../wechat/util');
-
 module.exports = async function (message) {
 	let ctx = this;
 	const Response = ctx.mongoose.model('Response');
@@ -30,12 +28,12 @@ module.exports = async function (message) {
 		
 		if (response) {
 			if (response.type == 'text') {
-				reply = response.content;
+				return response.content;
 			} else {
 				material = await Material.findOne({_id: response.content}).exec();
 			}
 			if (content.type == 'image') {
-				reply = {
+				return {
 					type: 'image',
 					content: {
 						mediaId: material.wechat.media_id
@@ -43,7 +41,7 @@ module.exports = async function (message) {
 				}
 			}
 			if (content.type == 'voice') {
-				reply = {
+				return {
 					type: 'voice',
 					content: {
 						mediaId: material.wechat.media_id
@@ -51,7 +49,7 @@ module.exports = async function (message) {
 				}
 			}
 			if (content.type == 'video') {
-				reply = {
+				return {
 					type: 'video',
 					content: {
 						mediaId: material.wechat.media_id,
@@ -68,13 +66,13 @@ module.exports = async function (message) {
 		let material;
 		if (response) {
 			if (response.type == 'text') {
-				reply = response.content;
+				return response.content;
 			} else {
 				material = await Material.findOne({_id: response.content}).exec();
 				console.log('material', material);
 			}
 			if (response.type == 'image') {
-				reply = {
+				return {
 					type: 'image',
 					content: {
 						mediaId: material.wechat.media_id
@@ -82,7 +80,7 @@ module.exports = async function (message) {
 				}
 			}
 			if (response.type == 'voice') {
-				reply = {
+				return {
 					type: 'voice',
 					content: {
 						mediaId: material.wechat.media_id
@@ -90,7 +88,7 @@ module.exports = async function (message) {
 				}
 			}
 			if (response.type == 'video') {
-				reply = {
+				return {
 					type: 'video',
 					content: {
 						mediaId: material.wechat.media_id,
@@ -100,12 +98,7 @@ module.exports = async function (message) {
 				}
 			}
 		}
+	} else {
+		return reply;
 	}
-	
-	// 把回复的信息解析为xml
-	let xml = util.xmlTemplate(message, reply);
-	console.log(xml);
-	ctx.status = 200;
-	ctx.type = 'application/xml';
-	return ctx.body = xml;
 }
