@@ -15,25 +15,29 @@ module.exports = async function (message) {
 		let response;
 		if (message.Event == 'subscribe') {
 			response = await Response.findOne({keyword: {$in: ['subscribe']}}).exec();
-		} else if (message.event == 'unsubscribe') {
+		}
+		if (message.event == 'unsubscribe') {
 			response = await Response.findOne({keyword: {$in: ['unsubscribe']}}).exec();
-		} else if (message.Event == 'LOCATION') {
+		}
+		if (message.Event == 'LOCATION') {
 			response = await Response.findOne({keyword: {$in: ['LOCATION']}}).exec();
-		} else if (message.Event == 'CLICK') {
+		}
+		if (message.Event == 'CLICK') {
 			response = await Response.findOne({keyword: {$in: ['CLICK']}}).exec();
-		} else if (message.Event == 'VIEW') {
+		}
+		if (message.Event == 'VIEW') {
 			response = await Response.findOne({keyword: {$in: ['VIEW']}}).exec();
 		}
 		let material;
 		
 		if (response) {
 			if (response.type == 'text') {
-				return response.content;
+				reply = response.content;
 			} else {
 				material = await Material.findOne({_id: response.content}).exec();
 			}
 			if (content.type == 'image') {
-				return {
+				reply = {
 					type: 'image',
 					content: {
 						mediaId: material.wechat.media_id
@@ -41,7 +45,7 @@ module.exports = async function (message) {
 				}
 			}
 			if (content.type == 'voice') {
-				return {
+				reply = {
 					type: 'voice',
 					content: {
 						mediaId: material.wechat.media_id
@@ -49,7 +53,7 @@ module.exports = async function (message) {
 				}
 			}
 			if (content.type == 'video') {
-				return {
+				reply = {
 					type: 'video',
 					content: {
 						mediaId: material.wechat.media_id,
@@ -60,19 +64,17 @@ module.exports = async function (message) {
 			}
 		}
 	} else if (message.MsgType == 'text') {
-		console.log('text', content);
 		let response = await Response.findOne({keyword: {$in: [content]}}).exec();
-		console.log('response', response);
 		let material;
 		if (response) {
 			if (response.type == 'text') {
-				return response.content;
+				reply = response.content;
 			} else {
 				material = await Material.findOne({_id: response.content}).exec();
 				console.log('material', material);
 			}
 			if (response.type == 'image') {
-				return {
+				reply = {
 					type: 'image',
 					content: {
 						mediaId: material.wechat.media_id
@@ -80,7 +82,7 @@ module.exports = async function (message) {
 				}
 			}
 			if (response.type == 'voice') {
-				return {
+				reply = {
 					type: 'voice',
 					content: {
 						mediaId: material.wechat.media_id
@@ -88,7 +90,7 @@ module.exports = async function (message) {
 				}
 			}
 			if (response.type == 'video') {
-				return {
+				reply = {
 					type: 'video',
 					content: {
 						mediaId: material.wechat.media_id,
@@ -98,7 +100,7 @@ module.exports = async function (message) {
 				}
 			}
 		}
-	} else {
-		return reply;
 	}
+	
+	return reply;
 }
