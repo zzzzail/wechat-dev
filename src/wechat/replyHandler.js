@@ -16,7 +16,7 @@ module.exports = async function (message) {
 		if (message.Event == 'subscribe') {
 			response = await Response.findOne({keyword: {$in: ['subscribe']}}).exec();
 		}
-		if (message.event == 'unsubscribe') {
+		if (message.Event == 'unsubscribe') {
 			response = await Response.findOne({keyword: {$in: ['unsubscribe']}}).exec();
 		}
 		if (message.Event == 'LOCATION') {
@@ -71,7 +71,6 @@ module.exports = async function (message) {
 				reply = response.content;
 			} else {
 				material = await Material.findOne({_id: response.content}).exec();
-				console.log('material', material);
 			}
 			if (response.type == 'image') {
 				reply = {
