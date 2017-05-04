@@ -10,7 +10,7 @@ module.exports = async function (message) {
 	const Response = ctx.mongoose.model('Response');
 	const Material = ctx.mongoose.model('Material');
 	let content = message.Content;
-	let reply = ' ';
+	let reply = '';
 	if (message.MsgType == 'event') {
 		let response;
 		if (message.Event == 'subscribe') {
