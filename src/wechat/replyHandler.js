@@ -7,7 +7,7 @@
 
 const util = require('../wechat/util');
 
-module.exports = async (ctx, message) => {
+module.exports = async(ctx, message) => {
 	const Response = ctx.mongoose.model('Response');
 	const Material = ctx.mongoose.model('Material');
 	let content = message.Content;
@@ -26,65 +26,69 @@ module.exports = async (ctx, message) => {
 			response = await Response.findOne({keyword: {$in: ['VIEW']}}).exec();
 		}
 		let material;
-		if (response.type == 'text') {
-			reply = response.content;
-		} else {
-			material = await Material.findOne({_id: response.content}).exec();
-		}
 		
-		if (content.type == 'image') {
-			reply = {
-				type: 'image',
-				content: {
-					mediaId: material.wechat.media_id
-				}
+		if (response) {
+			if (response.type == 'text') {
+				reply = response.content;
+			} else {
+				material = await Material.findOne({_id: response.content}).exec();
 			}
-		} else if (content.type == 'voice') {
-			reply = {
-				type: 'voice',
-				content: {
-					mediaId: material.wechat.media_id
+			if (content.type == 'image') {
+				reply = {
+					type: 'image',
+					content: {
+						mediaId: material.wechat.media_id
+					}
 				}
-			}
-		} else if (content.type == 'video') {
-			reply = {
-				type: 'video',
-				content: {
-					mediaId: material.wechat.media_id,
-					title: material.description.title,
-					description: material.description.introduction
+			} else if (content.type == 'voice') {
+				reply = {
+					type: 'voice',
+					content: {
+						mediaId: material.wechat.media_id
+					}
+				}
+			} else if (content.type == 'video') {
+				reply = {
+					type: 'video',
+					content: {
+						mediaId: material.wechat.media_id,
+						title: material.description.title,
+						description: material.description.introduction
+					}
 				}
 			}
 		}
 	} else if (message.MsgType == 'text') {
 		let response = await Response.findOne({keyword: {$in: [content]}}).exec();
 		let material;
-		if (response.type == 'text') {
-			reply = response.content;
-		} else {
-			material = await Material.findOne({_id: response.content}).exec();
-		}
-		if (response.type == 'image') {
-			reply = {
-				type: 'image',
-				content: {
-					mediaId: material.wechat.media_id
-				}
+		if (response) {
+			if (response.type == 'text') {
+				reply = response.content;
+			} else {
+				material = await Material.findOne({_id: response.content}).exec();
 			}
-		} else if (response.type == 'voice') {
-			reply = {
-				type: 'voice',
-				content: {
-					mediaId: material.wechat.media_id
+			if (response.type == 'image') {
+				reply = {
+					type: 'image',
+					content: {
+						mediaId: material.wechat.media_id
+					}
 				}
-			}
-		} else if (response.type == 'video') {
-			reply = {
-				type: 'video',
-				content: {
-					mediaId: material.wechat.media_id,
-					title: material.description.title,
-					description: material.description.introduction
+			} else if (response.type == 'voice') {
+				reply = {
+					type: 'voice',
+					content: {
+						mediaId: material.wechat.media_id
+					}
+				}
+			} else if (response.type == 'video') {
+				reply = {
+					type: 'video',
+					content: {
+						mediaId: material.wechat.media_id,
+						title: material.description.title,
+						description: material.description.introduction
+					}
 				}
 			}
 		}
