@@ -21,7 +21,7 @@ exports.isUniform = async (ctx, next) => {
 
 // 个人资料
 exports.getAdminUserId = async (ctx, next) => {
-  return ctx.render('admin/user');
+  return ctx.render('system/user');
 }
 
 // 修改个人资料
