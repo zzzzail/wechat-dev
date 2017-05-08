@@ -25,4 +25,4 @@ let materialSchema = new Schema({
   }
 });
 
-module.exports = mongoose.model('Material', materialSchema)
+module.exports = mongoose.model('admin-material', materialSchema)

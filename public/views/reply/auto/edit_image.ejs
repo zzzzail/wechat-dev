@@ -9,7 +9,7 @@
       <div class="box-body">
         <div class="form-group">
           <label for="keyword">关键词<span class="text-green">(多个关键词可以用空格分开, 如"高富帅 白富美")</span><span class="text-red">*</span></label>
-          <input type="text" class="form-control" id="keyword" placeholder="请输入关键词." value="<%= typeof(response) !== 'undefined' ? response.keyword : '' %>">
+          <input type="text" class="form-control" id="keyword" placeholder="请输入关键词." value="<%= typeof(reply) !== 'undefined' ? reply.keyword : '' %>">
         </div>
         <div class="form-group">
 	        <label for="">素材</label>
@@ -44,7 +44,7 @@
 			  title: '选择图片',
 			  shadeClose: false,
 			  area: ['70%', '80%'],
-			  content: '/material/list?type=image',
+			  content: '/admin/material/list?type=image',
 			  end: function () {
 			  }
 		  })
@@ -85,7 +85,7 @@
 
       $.ajax({
         type: 'POST',
-        url: '/response/auto/edit',
+        url: '/admin/reply/auto/edit',
         data: {
           type: type,
           keyword: keyword,
@@ -96,7 +96,7 @@
           console.log(data);
           if (data.success) {
             layer.alert('提交成功!', {skin: 'layui-layer-molv', closeBtn: 0}, function () {
-              window.location.href = '/response/auto?type=' + type;
+              window.location.href = '/admin/reply/auto?type=' + type;
             })
           }
         },

@@ -10,13 +10,13 @@ const path = require('path');
 
 exports.getMaterialForever = async (ctx, next) => {
   let type = ctx.query.type || 'image';
-  const Material = ctx.mongoose.model('Material');
+  const Material = ctx.mongoose.model('admin-material');
   let materials = await Material.find({type}).exec();
   return ctx.render('material/forever/index', {materials});
 }
 
 exports.deleteMaterialForever = async (ctx, next) => {
-  const Material = ctx.mongoose.model('Material');
+  const Material = ctx.mongoose.model('admin-material');
   let _id = ctx.body._id;
   let material = await Material.findOne({_id: _id}).exec();
 

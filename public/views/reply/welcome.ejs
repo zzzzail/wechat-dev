@@ -11,7 +11,7 @@
 					<div class="radio">
 						<%
 						var type;
-						typeof(response) !== 'undefined' ? type = response.type : type = 'text';
+						typeof(reply) !== 'undefined' ? type = reply.type : type = 'text';
 						%>
 						<label>
 							<input type="radio" name="type" value="text" <%- type == 'text' ? 'checked="checked"' : '' %>> 文字
@@ -39,29 +39,29 @@
 <%- include('../layouts/adminFooter') %>
 
 <script type="text/html" id="text-content">
-	<textarea class="form-control" id="content" name="content" rows="10"><%= typeof(response) !== 'undefined' && type == 'text' ? response.content : '' %></textarea>
+	<textarea class="form-control" id="content" name="content" rows="10"><%= typeof(reply) !== 'undefined' && type == 'text' ? reply.content : '' %></textarea>
 </script>
 <script type="text/html" id="image-content">
 	<div class="choose-material">
-		<input id="content" type="hidden" value="<%= typeof(response) !== 'undefined' && type == 'image' ? response.material._id : '' %>">
+		<input id="content" type="hidden" value="<%= typeof(reply) !== 'undefined' && type == 'image' ? reply.material._id : '' %>">
 		<a class="choose-material-link" href="javascript:;">从素材库选择图片</a>
-		<img id="media-image" src="<%= typeof(response) !== 'undefined' && type == 'image' ? response.material.uri : '' %>">
+		<img id="media-image" src="<%= typeof(reply) !== 'undefined' && type == 'image' ? reply.material.uri : '' %>">
 		<div id="media-del" title="删除"><i class="fa fa-remove"></i></div>
 	</div>
 </script>
 <script type="text/html" id="voice-content">
 	<div class="choose-material">
-		<input id="content" type="hidden" value="<%= typeof(response) !== 'undefined' && type == 'voice' ? response.material._id : '' %>">
+		<input id="content" type="hidden" value="<%= typeof(reply) !== 'undefined' && type == 'voice' ? reply.material._id : '' %>">
 		<a class="choose-material-link" href="javascript:;">从素材库选择语音</a>
-		<audio id="media-voice" controls src="<%= typeof(response) !== 'undefined' && type == 'voice' ? response.material.uri : '' %>"></audio>
+		<audio id="media-voice" controls src="<%= typeof(reply) !== 'undefined' && type == 'voice' ? reply.material.uri : '' %>"></audio>
 		<div id="media-del" title="删除"><i class="fa fa-remove"></i></div>
 	</div>
 </script>
 <script type="text/html" id="video-content">
 	<div class="choose-material">
-		<input id="content" type="hidden" value="<%= typeof(response) !== 'undefined' && type == 'video' ? response.material._id : '' %>">
+		<input id="content" type="hidden" value="<%= typeof(reply) !== 'undefined' && type == 'video' ? reply.material._id : '' %>">
 		<a class="choose-material-link" href="javascript:;">从素材库选择视频</a>
-		<video id="media-video" controls src="<%= typeof(response) !== 'undefined' && type == 'video' ? response.material.uri : '' %>"></video>
+		<video id="media-video" controls src="<%= typeof(reply) !== 'undefined' && type == 'video' ? reply.material.uri : '' %>"></video>
 		<div id="media-del" title="删除"><i class="fa fa-remove"></i></div>
 	</div>
 </script>
@@ -88,7 +88,7 @@
 				title: '选择素材',
 				shadeClose: false,
 				area: ['70%', '80%'],
-				content: '/material/list?type=' + type,
+				content: '/admin/material/list?type=' + type,
 				end: function () {
 				}
 			})
@@ -121,7 +121,7 @@
 
 			$.ajax({
 				type: 'POST',
-				url: '/response/auto/<%= typeof(response) !== 'undefined' ? response._id : 'edit' %>',
+				url: '/admin/reply/auto/<%= typeof(reply) !== 'undefined' ? reply._id : 'edit' %>',
 				data: {
 					type: type,
 					keyword: keyword,

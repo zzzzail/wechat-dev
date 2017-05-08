@@ -10,7 +10,7 @@ const sha1 = require('sha1');
 
 exports.getLogin = async (ctx, next) => {
   if (ctx.session.userToken) {
-    return ctx.redirect('/index');
+    return ctx.redirect('/admin/index');
   }
   return ctx.render('login');
 }
@@ -18,7 +18,7 @@ exports.getLogin = async (ctx, next) => {
 exports.postLogin = async (ctx, next) => {
   let username = ctx.body.username;
   let password = ctx.body.password;
-  const AdminUser = ctx.mongoose.model('AdminUser');
+  const AdminUser = ctx.mongoose.model('admin-user');
 
   if (username && password) {
     let user = await AdminUser.findOne({username: username}).exec();
@@ -31,12 +31,12 @@ exports.postLogin = async (ctx, next) => {
       return ctx.render('login', {errorMsg: '密码错误, 请重新登录.'});
     }
   }
-  return ctx.redirect('/index');
+  return ctx.redirect('/admin/index');
 }
 
 exports.getLogout = async (ctx, next) => {
   ctx.session.userToken = null;
-  return ctx.redirect('/login');
+  return ctx.redirect('/admin/login');
 }
 
 exports.getIndex = async (ctx, next) => {

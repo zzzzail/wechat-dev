@@ -8,7 +8,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-let responseModel = new Schema({
+let replyModel = new Schema({
   // 回复类型
   type: String,
   // 关键字
@@ -19,6 +19,6 @@ let responseModel = new Schema({
   enable: Boolean
 });
 
-responseModel.index({keyword: 1});
+replyModel.index({keyword: 1});
 
-module.exports = mongoose.model('Response', responseModel);
+module.exports = mongoose.model('admin-reply', replyModel);

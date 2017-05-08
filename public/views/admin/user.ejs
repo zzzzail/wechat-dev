@@ -85,7 +85,7 @@
 
       $.ajax({
         type: 'PUT',
-        url: '/admin/user/<%= typeof(_loginUser) !== 'undefined' ? _loginUser._id : '' %>',
+        url: '/admin/system/user/<%= typeof(_loginUser) !== 'undefined' ? _loginUser._id : '' %>',
         data: {
           email: email,
           phone: phone,
@@ -95,7 +95,7 @@
         success: function (data) {
           if (data.success) {
             layer.alert('修改成功!', {skin: 'layui-layer-molv', closeBtn: 0}, function () {
-              window.location.href = '/admin/user';
+              window.location.href = '/admin/system/user';
             });
           }
         },

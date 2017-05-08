@@ -3,20 +3,20 @@
 <div class="content">
 	<div class="box box-info">
 		<div class="box-header with-border">
-			<h3 class="box-title">回复视频</h3>
+			<h3 class="box-title">回复语音</h3>
 		</div>
 		<form id="form">
 			<div class="box-body">
 				<div class="form-group">
 					<label for="keyword">关键词<span class="text-green">(多个关键词可以用空格分开, 如"高富帅 白富美")</span><span class="text-red">*</span></label>
-					<input type="text" class="form-control" id="keyword" placeholder="请输入关键词." value="<%= typeof(response) !== 'undefined' ? response.keyword : '' %>">
+					<input type="text" class="form-control" id="keyword" placeholder="请输入关键词." value="<%= typeof(reply) !== 'undefined' ? reply.keyword : '' %>">
 				</div>
 				<div class="form-group">
 					<label for="">素材</label>
 					<div class="choose-material">
 						<input id="content" type="hidden">
-						<a class="choose-material-link" href="javascript:;">从素材库选择视频</a>
-						<video id="media-video" controls src=""></video>
+						<a class="choose-material-link" href="javascript:;">从素材库选择语音</a>
+						<audio id="media-voice" controls src=""></audio>
 						<div id="media-del" title="删除"><i class="fa fa-remove"></i></div>
 					</div>
 				</div>
@@ -43,10 +43,10 @@
 
 			layer.open({
 				type: 2,
-				title: '选择视频',
+				title: '选择语音',
 				shadeClose: false,
 				area: ['70%', '80%'],
-				content: '/material/list?type=' + type,
+				content: '/admin/material/list?type=' + type,
 				end: function () {
 				}
 			})
@@ -87,7 +87,7 @@
 
 			$.ajax({
 				type: 'POST',
-				url: '/response/auto/edit',
+				url: '/admin/reply/auto/edit',
 				data: {
 					type: type,
 					keyword: keyword,
@@ -98,7 +98,7 @@
 					console.log(data);
 					if (data.success) {
 						layer.alert('提交成功!', {skin: 'layui-layer-molv', closeBtn: 0}, function () {
-							window.location.href = '/response/auto?type=' + type;
+							window.location.href = '/admin/reply/auto?type=' + type;
 						})
 					}
 				},

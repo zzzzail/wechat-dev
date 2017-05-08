@@ -4,16 +4,16 @@
 	<div class="nav-tabs-custom">
 		<ul class="nav nav-tabs">
 			<li class="nav-type-text">
-				<a href="/response/auto?type=text">回复文字</a>
+				<a href="/admin/reply/auto?type=text">回复文字</a>
 			</li>
 			<li class="nav-type-image">
-				<a href="/response/auto?type=image">回复图片</a>
+				<a href="/admin/reply/auto?type=image">回复图片</a>
 			</li>
 			<li class="nav-type-voice">
-				<a href="/response/auto?type=voice">回复语音</a>
+				<a href="/admin/reply/auto?type=voice">回复语音</a>
 			</li>
 			<li class="nav-type-video">
-				<a href="/response/auto?type=video">回复视频</a>
+				<a href="/admin/reply/auto?type=video">回复视频</a>
 			</li>
 		</ul>
 		<div class="tab-content">
@@ -22,7 +22,7 @@
 				<%- include('../../partials/warning', {warningMessage: '请不设置相同的关键词! 相同的关键词只回复最新的设置.'}) %>
 
 				<div class="margin-bottom">
-					<a class="btn btn-success" id="add" href="/response/auto/edit?type=">新增</a>
+					<a class="btn btn-success" id="add" href="/admin/reply/auto/edit?type=">新增</a>
 				</div>
 
 				<table class="table no-margin">
@@ -35,7 +35,7 @@
 					</tr>
 					</thead>
 					<tbody>
-					<% responses.forEach(function (res) { %>
+					<% replys.forEach(function (res) { %>
 					<tr>
 						<td>
 							<% res.keyword.forEach(function (key) { %>
@@ -51,7 +51,7 @@
 							<% } %>
 						</td>
 						<td>
-							<a href="/response/auto/<%= res._id %>?type=text">修改</a>
+							<a href="/admin/reply/auto/<%= res._id %>?type=text">修改</a>
 							<a href="javascript:;" class="enable" data-value="<%= res.enable %>" data-id="<%= res._id %>">
 								<%- res.enable ? '禁用' : '启用' %>
 							</a>
@@ -92,7 +92,7 @@
 					return new Promise(function (resolve, reject) {
 						$.ajax({
 							type: 'PUT',
-							url: '/response/auto/' + _id,
+							url: '/admin/reply/auto/' + _id,
 							data: {
 								enable: !value
 							},
@@ -128,7 +128,7 @@
 					return new Promise(function (resolve, reject) {
 						$.ajax({
 							type: 'DELETE',
-							url: '/response/auto/' + id,
+							url: '/admin/reply/auto/' + id,
 							success: function (data) {
 								resolve(data);
 							},

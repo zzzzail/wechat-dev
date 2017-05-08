@@ -62,14 +62,14 @@
       
       $.ajax({
         type: 'POST',
-        url: '/material/forever/upload?type=voice',
+        url: '/admin/material/forever/upload?type=voice',
         data: formData,
         processData: false,
         contentType: false,
         success: function (data) {
           if (data) {
             layer.alert('上传成功!', {skin: 'layui-layer-molv', closeBtn: 0}, function () {
-              window.location.href = '/material/forever?type=voice';
+              window.location.href = '/admin/material/forever?type=voice';
             })
           }
         },

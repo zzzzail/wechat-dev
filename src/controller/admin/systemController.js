@@ -9,12 +9,12 @@ const sha1 = require('sha1');
 
 // 判断登录用户和传入id是否一致
 exports.isUniform = async (ctx, next) => {
-  const AdminUser = ctx.mongoose.model('AdminUser');
+  const AdminUser = ctx.mongoose.model('admin-user');
   let _id = ctx.params._id;
   let user = await AdminUser.findOne({_id: _id}).exec();
   let loginUser = ctx.state._loginUser;
   if (loginUser._id.toString() != user._id.toString()) {
-    return ctx.redirect('/logout');
+    return ctx.redirect('/admin/logout');
   }
   await next();
 }

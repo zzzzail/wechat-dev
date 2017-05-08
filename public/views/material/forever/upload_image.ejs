@@ -63,14 +63,14 @@
 
 			$.ajax({
 				type: 'POST',
-				url: '/material/forever/upload?type=image',
+				url: '/admin/material/forever/upload?type=image',
 				data: formData,
 				processData: false,
 				contentType: false,
 				success: function (data) {
 					if (data) {
 						layer.alert('上传成功!', {skin: 'layui-layer-molv', closeBtn: 0}, function () {
-							window.location.href = '/material/forever?type=image';
+							window.location.href = '/admin/material/forever?type=image';
 						})
 					}
 				},

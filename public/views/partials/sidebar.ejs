@@ -3,7 +3,7 @@
     <ul class="sidebar-menu">
       <li class="header">导航</li>
       <li class="treeview">
-        <a href="/index">
+        <a href="/admin/index">
           <i class="fa fa-dashboard"></i> <span>首页</span>
         </a>
       </li>
@@ -15,7 +15,7 @@
         </a>
         <ul class="treeview-menu">
           <li>
-            <a href="/material/forever?type=image"><i class="fa fa-circle-o"></i> 永久素材</a>
+            <a href="/admin/material/forever?type=image"><i class="fa fa-circle-o"></i> 永久素材</a>
           </li>
         </ul>
       </li>
@@ -27,15 +27,15 @@
         </a>
         <ul class="treeview-menu">
           <li>
-            <a href="/response/welcome"><i class="fa fa-circle-o"></i> 欢迎语设置</a>
+            <a href="/admin/reply/welcome"><i class="fa fa-circle-o"></i> 欢迎语设置</a>
           </li>
           <li>
-            <a href="/response/auto?type=text"><i class="fa fa-circle-o"></i> 自动回复</a>
+            <a href="/admin/reply/auto?type=text"><i class="fa fa-circle-o"></i> 自动回复</a>
           </li>
         </ul>
       </li>
       <li class="treeview">
-        <a href="/wechat/user">
+        <a href="/admin/wechat/user">
           <i class="fa fa-files-o"></i>
           <span>微信用户管理</span>
         </a>
@@ -48,7 +48,7 @@
         </a>
         <ul class="treeview-menu">
           <li>
-            <a href="/admin/user/{{_loginUser._id}}"><i class="fa fa-circle-o"></i> 个人资料</a>
+            <a href="/admin/system/user/<%= _loginUser._id %>"><i class="fa fa-circle-o"></i> 个人资料</a>
           </li>
         </ul>
       </li>

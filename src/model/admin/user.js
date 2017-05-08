@@ -23,4 +23,4 @@ let adminUserSchema = new Schema({
 
 adminUserSchema.index({username: 1});
 
-module.exports = mongoose.model('AdminUser', adminUserSchema);
+module.exports = mongoose.model('admin-user', adminUserSchema);
