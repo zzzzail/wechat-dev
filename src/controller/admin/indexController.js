@@ -12,7 +12,7 @@ exports.getLogin = async (ctx, next) => {
   if (ctx.session.userToken) {
     return ctx.redirect('/admin/index');
   }
-  return ctx.render('login');
+  return ctx.render('admin/login');
 }
 
 exports.postLogin = async (ctx, next) => {
@@ -28,7 +28,7 @@ exports.postLogin = async (ctx, next) => {
         password: sha1(password)
       }
     } else {
-      return ctx.render('login', {errorMsg: '密码错误, 请重新登录.'});
+      return ctx.render('admin/login', {errorMsg: '密码错误, 请重新登录.'});
     }
   }
   return ctx.redirect('/admin/index');
@@ -40,5 +40,5 @@ exports.getLogout = async (ctx, next) => {
 }
 
 exports.getIndex = async (ctx, next) => {
-  return ctx.render('index');
+  return ctx.render('admin/index');
 }

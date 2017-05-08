@@ -16,7 +16,7 @@ exports.getReplyWelcome = async (ctx, next) => {
 	
 	console.log(reply);
 	reply = reply || undefined;
-  return ctx.render('reply/welcome', {reply});
+  return ctx.render('admin/reply/welcome', {reply});
 }
 
 exports.getReplyAuto = async (ctx, next) => {
@@ -43,7 +43,7 @@ exports.getReplyAuto = async (ctx, next) => {
 		}
 	}
 
-  return ctx.render('reply/auto/index', {replys});
+  return ctx.render('admin/reply/auto/index', {replys});
 }
 
 exports.getReplyAutoEdit = async (ctx, next) => {
@@ -56,7 +56,7 @@ exports.getReplyAutoEdit = async (ctx, next) => {
 	reply.keyword = reply.keyword.join(' ');
 	
 	
-  return ctx.render(`reply/auto/edit_${type}`, {reply});
+  return ctx.render(`admin/reply/auto/edit_${type}`, {reply});
 }
 
 exports.postReplyAutoEdit = async (ctx, next) => {

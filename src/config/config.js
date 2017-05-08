@@ -45,7 +45,7 @@ let config = {
       name: 'ejs',
       params: {
 	      root: viewPath,
-	      layout: 'layouts/layout',
+	      layout: false,
 	      viewExt: 'ejs',
 	      cache: true,
 	      debug: true

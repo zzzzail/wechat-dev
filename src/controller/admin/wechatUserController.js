@@ -6,5 +6,5 @@
  */
 
 exports.getWechatUser = async (ctx, next) => {
-  return ctx.render('wechatUser/index')
+  return ctx.render('admin/wechatUser/index')
 }

@@ -16,7 +16,7 @@ exports.isLogin = async (ctx, next) => {
       ctx.state._loginUser = user;
       await next();
     } else {
-      return ctx.render('login', {errorMsg: '登录过期, 请重新登录.'});
+      return ctx.render('admin/login', {errorMsg: '登录过期, 请重新登录.'});
     }
   } else {
     return ctx.redirect('/admin/login');

@@ -1,4 +1,4 @@
-<%- include('../layouts/adminHeader') %>
+<%- include('../layouts/header') %>
 <div class="content">
 	<div class="box box-info">
 		<div class="box-header with-border">
@@ -36,7 +36,7 @@
 	</div>
 </div>
 
-<%- include('../layouts/adminFooter') %>
+<%- include('../layouts/footer') %>
 
 <script type="text/html" id="text-content">
 	<textarea class="form-control" id="content" name="content" rows="10"><%= typeof(reply) !== 'undefined' && type == 'text' ? reply.content : '' %></textarea>
