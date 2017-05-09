@@ -5,12 +5,13 @@
  * @description
  */
 
+let cache = {};
+
 module.exports = async function (message) {
 	let ctx = this;
 	const Response = ctx.mongoose.model('admin-reply');
 	const Material = ctx.mongoose.model('admin-material');
 	let content = message.Content;
-	console.log('event', message);
 	let reply = '';
 	if (message.MsgType == 'event') {
 		let response;
@@ -29,6 +30,11 @@ module.exports = async function (message) {
 		if (message.Event == 'VIEW') {
 			response = await Response.findOne({keyword: {$in: ['VIEW']}}).exec();
 		}
+		// 电子相册事件
+		if (message.Event == 'pic_photo_or_album') {
+		  let key = message.EventKey;
+      cache[message.FromUserName] = key;
+    }
 		let material;
 		
 		if (response) {
@@ -101,7 +107,16 @@ module.exports = async function (message) {
 			}
 		}
 	} else if (message.MsgType == 'image') {
-	  console.log('image', message);
+	  let key;
+	  // 缓存中有用户的key则为电子相册事件
+	  if (cache[message.FromUserName]) {
+	    key = cache[message.FromUserName];
+      cache[message.FromUserName] = null;
+	    console.log(key);
+	    
+    } else {
+	    console.log('不是电子相册!');
+    }
   }
 	
 	return reply;
