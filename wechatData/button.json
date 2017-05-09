@@ -1,0 +1,50 @@
+{
+	"button": [
+		{
+			"name": "电子相册",
+			"sub_button": [
+				{
+					"type": "pic_photo_or_album",
+					"name": "创建相册",
+					"key": "create"
+				},
+				{
+					"type": "pic_photo_or_album",
+					"name": "添加图片",
+					"key": "add"
+				},
+				{
+					"type": "view",
+					"name": "我的相册",
+					"url": "http://open.shuitagushi.com/wechat/album/"
+				},
+				{
+					"type": "view",
+					"name": "相册教程",
+					"url": "http://open.shuitagushi.com/wechat/album/faq",
+				}
+			]
+		},
+		{
+			"name": "制作相册",
+			"sub_button": [
+				{
+					"type": "view",
+					"name": "APP下载",
+					"url": "http://www.loocall.com"
+				},
+				{
+					"type": "view",
+					"name": "小程序",
+					"url": "http://www.loocall.com"
+				}
+			]
+		},
+		{
+			"type": "view",
+			"name": "关于点影",
+			"url": "http://www.loocall.com",
+			"sub_button": []
+		}
+	]
+}

@@ -99,7 +99,9 @@ module.exports = async function (message) {
 				}
 			}
 		}
-	}
+	} else if (message.MsgType == 'image') {
+	  console.log('image', message);
+  }
 	
 	return reply;
 }
