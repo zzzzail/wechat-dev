@@ -7,11 +7,12 @@
  */
 
 const router = new require('koa-router')();
-const {getIndex} = require('../../controller/front/indexController');
+const {getOpenWechatJs, getIndex} = require('../../controller/front/indexController');
 
 module.exports = function () {
-  
+  router.get('/open/js/wechat.js', getOpenWechatJs)
   router.get('/', getIndex);
+  router.get('/index', getIndex);
   
   return router;
 }
