@@ -10,6 +10,7 @@ module.exports = async function (message) {
 	const Response = ctx.mongoose.model('admin-reply');
 	const Material = ctx.mongoose.model('admin-material');
 	let content = message.Content;
+	console.log('event', message);
 	let reply = '';
 	if (message.MsgType == 'event') {
 		let response;
