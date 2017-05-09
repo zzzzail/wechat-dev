@@ -7,8 +7,8 @@
 
 module.exports = async function (message) {
 	let ctx = this;
-	const Response = ctx.mongoose.model('Response');
-	const Material = ctx.mongoose.model('Material');
+	const Response = ctx.mongoose.model('admin-reply');
+	const Material = ctx.mongoose.model('admin-material');
 	let content = message.Content;
 	let reply = '';
 	if (message.MsgType == 'event') {

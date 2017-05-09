@@ -46,7 +46,7 @@ exports.deleteMaterialForever = async (ctx, next) => {
 }
 
 exports.getMaterialList = async (ctx, next) => {
-	const Material = ctx.mongoose.model('Material');
+	const Material = ctx.mongoose.model('admin-material');
 	let type = ctx.query.type;
 	let materials = await Material.find({type}).exec();
 	
@@ -79,7 +79,7 @@ exports.postMaterialForeverUpload = async (ctx, next) => {
     throw new Error(`Wechat material upload fails: ${wechatMaterial.errmsg}`);
   }
 
-  const Material = ctx.mongoose.model('Material');
+  const Material = ctx.mongoose.model('admin-material');
   let material = new Material({
     name,
     type,
