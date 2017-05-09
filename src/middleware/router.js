@@ -8,11 +8,13 @@
 
 
 module.exports = function (app) {
-	
+	let frontRouter = require('../router/front')();
 	let adminRouter = require('../router/admin')();
 	
-  
+  app
+    .use(frontRouter.routes())
+    .use(frontRouter.allowedMethods());
   app
     .use(adminRouter.routes())
-    .use(adminRouter.allowedMethods())
+    .use(adminRouter.allowedMethods());
 }
