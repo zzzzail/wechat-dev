@@ -18,7 +18,7 @@ exports.parseXMLAsync = function (xml) {
   })
 }
 
-exports.formatMessage = function (message) {
+let formatMessage = function (message) {
   if (typeof message == 'object') {
     let keys = Object.keys(message);
 
@@ -46,6 +46,7 @@ exports.formatMessage = function (message) {
 
   return message;
 }
+exports.formatMessage = formatMessage;
 
 exports.xmlTemplate = function (message, content) {
   let type = 'text';
