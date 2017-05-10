@@ -9,7 +9,7 @@ const path = require('path');
 const downloadFile = require('../util/downloadFile');
 let cache = {};
 
-function wait2s() {
+let wait2s = () => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve()
