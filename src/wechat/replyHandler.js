@@ -5,30 +5,31 @@
  * @description
  */
 
+const downloadFile = require('../util/downloadFile');
 let cache = {};
 
 module.exports = async function (message) {
 	let ctx = this;
-	const Response = ctx.mongoose.model('admin-reply');
+	const Reply = ctx.mongoose.model('admin-reply');
 	const Material = ctx.mongoose.model('admin-material');
 	let content = message.Content;
 	let reply = '';
 	if (message.MsgType == 'event') {
-		let response;
+		let reply;
 		if (message.Event == 'subscribe') {
-			response = await Response.findOne({keyword: {$in: ['subscribe']}}).exec();
+			reply = await Reply.findOne({keyword: {$in: ['subscribe']}}).exec();
 		}
 		if (message.Event == 'unsubscribe') {
-			response = await Response.findOne({keyword: {$in: ['unsubscribe']}}).exec();
+			reply = await Reply.findOne({keyword: {$in: ['unsubscribe']}}).exec();
 		}
 		if (message.Event == 'LOCATION') {
-			response = await Response.findOne({keyword: {$in: ['LOCATION']}}).exec();
+			reply = await Reply.findOne({keyword: {$in: ['LOCATION']}}).exec();
 		}
 		if (message.Event == 'CLICK') {
-			response = await Response.findOne({keyword: {$in: ['CLICK']}}).exec();
+			reply = await Reply.findOne({keyword: {$in: ['CLICK']}}).exec();
 		}
 		if (message.Event == 'VIEW') {
-			response = await Response.findOne({keyword: {$in: ['VIEW']}}).exec();
+			reply = await Reply.findOne({keyword: {$in: ['VIEW']}}).exec();
 		}
 		// 电子相册事件
 		if (message.Event == 'pic_photo_or_album') {
@@ -37,11 +38,11 @@ module.exports = async function (message) {
     }
 		let material;
 		
-		if (response) {
-			if (response.type == 'text') {
-				reply = response.content;
+		if (reply) {
+			if (reply.type == 'text') {
+				reply = reply.content;
 			} else {
-				material = await Material.findOne({_id: response.content}).exec();
+				material = await Material.findOne({_id: reply.content}).exec();
 			}
 			if (content.type == 'image') {
 				reply = {
@@ -71,15 +72,15 @@ module.exports = async function (message) {
 			}
 		}
 	} else if (message.MsgType == 'text') {
-		let response = await Response.findOne({keyword: {$in: [content]}}).exec();
+		let reply = await Reply.findOne({keyword: {$in: [content]}}).exec();
 		let material;
-		if (response) {
-			if (response.type == 'text') {
-				reply = response.content;
+		if (reply) {
+			if (reply.type == 'text') {
+				reply = reply.content;
 			} else {
-				material = await Material.findOne({_id: response.content}).exec();
+				material = await Material.findOne({_id: reply.content}).exec();
 			}
-			if (response.type == 'image') {
+			if (reply.type == 'image') {
 				reply = {
 					type: 'image',
 					content: {
@@ -87,7 +88,7 @@ module.exports = async function (message) {
 					}
 				}
 			}
-			if (response.type == 'voice') {
+			if (reply.type == 'voice') {
 				reply = {
 					type: 'voice',
 					content: {
@@ -95,7 +96,7 @@ module.exports = async function (message) {
 					}
 				}
 			}
-			if (response.type == 'video') {
+			if (reply.type == 'video') {
 				reply = {
 					type: 'video',
 					content: {
@@ -107,13 +108,38 @@ module.exports = async function (message) {
 			}
 		}
 	} else if (message.MsgType == 'image') {
-	  let key;
-	  // 缓存中有用户的key则为电子相册事件
-	  if (cache[message.FromUserName]) {
-	    key = cache[message.FromUserName];
-      cache[message.FromUserName] = null;
-	    console.log(key);
-	    
+    const WechatAlbum = ctx.mongoose.model('wechat-album');
+    
+    // 缓存中有用户的key则为电子相册事件
+    let key;
+    if (cache[message.FromUserName]) {
+      key = cache[message.FromUserName];
+      let album;
+      let uri = await downloadFile(message.PicUrl, path.join(__dirname, '../../public/upload/wechat/album'));
+      uri = uri.substring(uri.lastIndexOf('/upload') + 1);
+      console.log(uri);
+	    if (key == 'create') { // 创建电子相册
+        cache[message.FromUserName] = 'add';
+        album = new WechatAlbum({
+          openId: key,
+          title: '这个相册里有我的照片和故事,打开看看吧.',
+          list: [{
+            wechatUrl: message.PicUrl,
+            uri: uri
+          }]
+        });
+      } else if (key == 'add') { // 增加到相册
+        album = await WechatAlbum.findOne({openId: key}).sort({'meta.createAt': -1}).exec();
+        console.log('add', album);
+        
+        album.list.push({
+          wechatUrl: message.PicUrl,
+          uri: uri
+        })
+      }
+  
+      await album.save();
+      reply = '恭喜您上传图片成功';
     } else {
 	    console.log('不是电子相册!');
     }
