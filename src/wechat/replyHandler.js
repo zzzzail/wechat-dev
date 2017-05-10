@@ -11,7 +11,7 @@ const downloadFile = require('../util/downloadFile');
 let cache = {};
 
 module.exports = async function (message) {
-  let wait2s = () => {
+  var wait2s = () => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve()
