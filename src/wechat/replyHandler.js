@@ -117,8 +117,7 @@ module.exports = async function (message) {
       key = cache[message.FromUserName];
       let album;
       let uri = await downloadFile(message.PicUrl, path.join(__dirname, '../../public/upload/wechat/album'));
-      uri = uri.substring(uri.lastIndexOf('/upload') + 1);
-      console.log(uri);
+      uri = uri.substring(uri.lastIndexOf('/upload'));
 	    if (key == 'create') { // 创建电子相册
         cache[message.FromUserName] = 'add';
         album = new WechatAlbum({
@@ -140,7 +139,12 @@ module.exports = async function (message) {
       }
   
       await album.save();
-      reply = '恭喜您上传图片成功';
+	    
+      reply = `<a href="http://open.shuitagushi.com/wechat/album/${album._id}">
+          已收到您的图片,点击这里开始制作
+        </a>
+        <br>
+        点击"添加图片"上传更多图片`;
     } else {
 	    console.log('不是电子相册!');
     }

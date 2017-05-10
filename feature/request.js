@@ -27,13 +27,17 @@
 // 	})
 
 
-const downloadFile = require('../src/util/downloadFile');
-const path = require('path');
+// const downloadFile = require('../src/util/downloadFile');
+// const path = require('path');
+//
+// downloadFile(
+// 	'https://gss0.bdstatic.com/5bVWsj_p_tVS5dKfpU_Y_D3/res/r/image/2017-05-10/c255b7a558127b35bd16c2a524ea32f4.jpg',
+// 	path.join(__dirname, 'img')
+// )
+// .then((data) => {
+// 	console.log(data)
+// })
 
-downloadFile(
-	'https://gss0.bdstatic.com/5bVWsj_p_tVS5dKfpU_Y_D3/res/r/image/2017-05-10/c255b7a558127b35bd16c2a524ea32f4.jpg',
-	path.join(__dirname, 'img')
-)
-.then((data) => {
-	console.log(data)
-})
+let url = '/public/upload/wechat/album'
+url = url.substring(url.lastIndexOf('/upload'));
+console.log(url)
