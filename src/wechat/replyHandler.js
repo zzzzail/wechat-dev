@@ -9,8 +9,7 @@ const path = require('path');
 const downloadFile = require('../util/downloadFile');
 let cache = {};
 
-module.exports = async
-function (message) {
+module.exports = async function (message) {
   let ctx = this;
   const Reply = ctx.mongoose.model('admin-reply');
   const Material = ctx.mongoose.model('admin-material');
