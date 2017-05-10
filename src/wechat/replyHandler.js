@@ -116,13 +116,13 @@ module.exports = async function (message) {
     
     // 缓存中有用户的key则为电子相册事件
     let key = cache[message.FromUserName];
+    cache[message.FromUserName] = undefined;
     console.log('wechat key', key);
     console.log('wechat message', message.PicUrl);
     let album;
     let uri = await downloadFile(message.PicUrl, path.join(__dirname, '../../public/upload/wechat/album'));
     uri = uri.substring(uri.lastIndexOf('/upload'));
     if (key == 'create') { // 创建电子相册
-      cache[message.FromUserName] = undefined;
       album = new WechatAlbum({
         openId: message.FromUserName,
         title: '这个相册里有我的照片和故事,打开看看吧.',
