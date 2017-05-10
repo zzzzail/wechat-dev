@@ -116,7 +116,8 @@ module.exports = async function (message) {
     
     // 缓存中有用户的key则为电子相册事件
     let key = cache[message.FromUserName];
-    console.log(key);
+    console.log('wechat key', key);
+    console.log('wechat message', message.PicUrl);
     let album;
     let uri = await downloadFile(message.PicUrl, path.join(__dirname, '../../public/upload/wechat/album'));
     uri = uri.substring(uri.lastIndexOf('/upload'));
