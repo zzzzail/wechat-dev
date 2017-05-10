@@ -136,13 +136,13 @@ module.exports = async function (message) {
     } else { // 增加到相册
       
       // 等2s
-      await () => {
+      await (() => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
             resolve()
           }, 2000)
         })
-      }
+      })()
       
       album = await WechatAlbum.findOne({openId: message.FromUserName}).exec();
       if (!album) {
