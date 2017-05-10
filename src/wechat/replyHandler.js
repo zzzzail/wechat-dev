@@ -130,8 +130,6 @@ module.exports = async function (message) {
         });
       } else if (key == 'add') { // 增加到相册
         album = await WechatAlbum.findOne({openId: message.FromUserName}).sort({'meta.createAt': -1}).exec();
-        console.log('add', album);
-        
         album.list.push({
           wechatUrl: message.PicUrl,
           uri: uri

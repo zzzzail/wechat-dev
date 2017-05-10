@@ -32,7 +32,6 @@ module.exports = function (app) {
     let str = [token, timestamp, nonce].sort().join('');
     let sha = sha1(str);
     if (ctx.method == 'GET') {
-      console.log(sha, signature);
       if (sha == signature) {
         return ctx.body = echostr;
       }
