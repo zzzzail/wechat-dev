@@ -21,10 +21,13 @@ exports.getAlbumIndex = async (ctx, next) => {
 	let siteAccessToken = await request(getSiteAccessTokenUrl);
 	siteAccessToken = JSON.parse(siteAccessToken.body);
 
-	const wechat = ctx.wechat;
-	let siteRefreshAccessToken = await wechat.getSiteAccessToken(siteAccessToken.refresh_token);
+	// const wechat = ctx.wechat;
+	// let siteRefreshAccessToken = await wechat.getSiteAccessToken(siteAccessToken.refresh_token);
 
-	console.log(siteRefreshAccessToken);
+	// console.log(siteRefreshAccessToken);
 
-	return ctx.body = '登录成功'
+	const Album = ctx.mongoose.model('wechat-album');
+	let albums = await Album.find({openId: siteAccessToken.openid}).exec();
+
+	return ctx.render('wechat/album/index', {albums});
 }
