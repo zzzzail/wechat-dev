@@ -22,7 +22,7 @@ exports.getAlbumIndex = async (ctx, next) => {
 	siteAccessToken = JSON.parse(siteAccessToken.body);
 
 	const wechat = ctx.wechat;
-	let siteRefreshAccessToken = await wechat.getSiteAccessToken(siteAccessToken.body.refresh_token);
+	let siteRefreshAccessToken = await wechat.getSiteAccessToken(siteAccessToken.refresh_token);
 
 	console.log(siteRefreshAccessToken);
 
