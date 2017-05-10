@@ -20,6 +20,8 @@ class Wechat {
     this.tokenCacheFile = wechatCfg.tokenCacheFile;
     this.ticketCacheFile = wechatCfg.ticketCacheFile;
 
+    this.siteTokenCacheFile = wechatCfg.siteTokenCacheFile;
+
     this.getAccessToken();
   }
 }
@@ -122,6 +124,107 @@ Wechat.prototype.updateAccessToken = function () {
       })
   })
 }
+
+
+// 一下为获取和保存网页的AccessToken
+Wechat.prototype._getSiteAccessToken = function () {
+  let _self = this;
+  return new Promise((resolve, reject) => {
+    fs.readFile(_self.siteTokenCacheFile, 'utf-8', (err, data) => {
+      if (err) {
+        return reject(err);
+      } else return resolve(data);
+    })
+  });
+}
+
+// 获取网页AccessToken的方法
+Wechat.prototype.getSiteAccessToken = function (refresh_token) {
+  let _self = this;
+  if (this.siteAccessTokenStore && this.siteAccessTokenStore.access_token && this.siteAccessTokenStore.expires_in) {
+    if (this.isValidSiteAccessToken(this.siteAccessTokenStore)) {
+      return Promise.resolve(this.siteAccessTokenStore);
+    }
+  }
+
+  return this._getSiteAccessToken()
+    .catch((err) => {
+      let existsFile = fs.existsSync(_self.siteTokenCacheFile);
+      if (!existsFile) {
+        mkp(_self.siteTokenCacheFile, (err) => {
+          if (err) return Promise.reject(err);
+          else return _self.updateSiteAccessToken(refresh_token);
+        })
+      } else {
+        return Promise.reject(err);
+      }
+    })
+    .then((data) => {
+      try {
+        data = JSON.parse(data);
+      } catch (e) {
+        return _self.updateSiteAccessToken(refresh_token);
+      }
+
+      if (_self.isValidSiteAccessToken(data)) {
+        return Promise.resolve(data);
+      } else {
+        return _self.updateSiteAccessToken(refresh_token);
+      }
+    })
+    .then((data) => {
+      _self.siteAccessTokenStore = {
+        access_token: data.access_token,
+        expires_in: data.expires_in
+      }
+
+      return _self.saveSiteAccessToken(data);
+    })
+}
+
+// 保存网页 AccessToken
+Wechat.prototype.saveSiteAccessToken = function (data) {
+  let _self = this;
+  return new Promise((resolve, reject) => {
+    fs.writeFile(_self.siteTokenCacheFile, JSON.stringify(data), (err) => {
+      if (err) reject(err);
+      else resolve(data);
+    })
+  })
+}
+
+// 检查网页 AccessToken 合法性
+Wechat.prototype.isValidSiteAccessToken = function (data) {
+  if (!data || !data.access_token || !data.expires_in) {
+    return false;
+  }
+
+  let expires_in = data.expires_in;
+  let now = (new Date().getTime());
+  if (now < expires_in) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+// 更新网页 AccessToken
+Wechat.prototype.updateSiteAccessToken = function (refresh_token) {
+  let appId = this.appId;
+  let url = `${wechatCfg.api.site_access_token.get}appid=${appId}&grant_type=refresh_token&refresh_token=${refresh_token}`;
+  return new Promise((resolve, reject) => {
+    request({url: url, json: true})
+      .then((response) => {
+        let data = response.body;
+        let now = (new Date().getTime());
+        let expires_in = now + (data.expires_in - 20) * 1000;
+        data.expires_in = expires_in;
+
+        resolve(data);
+      })
+  })
+}
+
 
 Wechat.prototype._getJsapiTicket = function () {
   let _self = this;
