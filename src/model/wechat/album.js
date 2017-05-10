@@ -14,8 +14,9 @@ let albumSchema = new Schema({
   title: String, // 标题
   list: [ // 图片列表
     {
-      wechatUrl: String,
-      uri: String
+      _id: false,
+      wechatUrl: String, // 腾讯系域名链接
+      uri: String // 本域名 uri
     }
   ],
   meta: { // 元数据
