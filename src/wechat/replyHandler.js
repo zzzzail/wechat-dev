@@ -121,7 +121,7 @@ module.exports = async function (message) {
 	    if (key == 'create') { // 创建电子相册
         cache[message.FromUserName] = 'add';
         album = new WechatAlbum({
-          openId: key,
+          openId: message.FromUserName,
           title: '这个相册里有我的照片和故事,打开看看吧.',
           list: [{
             wechatUrl: message.PicUrl,
@@ -129,7 +129,7 @@ module.exports = async function (message) {
           }]
         });
       } else if (key == 'add') { // 增加到相册
-        album = await WechatAlbum.findOne({openId: key}).sort({'meta.createAt': -1}).exec();
+        album = await WechatAlbum.findOne({openId: message.FromUserName}).sort({'meta.createAt': -1}).exec();
         console.log('add', album);
         
         album.list.push({
