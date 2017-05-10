@@ -20,9 +20,9 @@ exports.getAlbumIndex = async (ctx, next) => {
 	let getSiteAccessTokenUrl = `https://api.weixin.qq.com/sns/oauth2/access_token?appid=${wechatCfg.appId}&secret=${wechatCfg.secret}&code=${code}&grant_type=authorization_code`;
 	let siteAccessToken = await request(getSiteAccessTokenUrl);
 	const getSiteAccessToken = ctx.wechat.getSiteAccessToken;
-	let siteAccessToken = await getSiteAccessToken(siteAccessToken.body.refresh_token);
+	let siteRefreshAccessToken = await getSiteAccessToken(siteAccessToken.body.refresh_token);
 
-	console.log(siteAccessToken);
+	console.log(siteRefreshAccessToken);
 
 	return ctx.body = '登录成功'
 }
