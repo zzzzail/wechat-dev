@@ -10,15 +10,15 @@ const path = require('path');
 const downloadFile = require('../util/downloadFile');
 let cache = {};
 
-let wait2s = () => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve()
-    }, 2000)
-  })
-}
-
 module.exports = async function (message) {
+  let wait2s = () => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve()
+      }, 2000)
+    })
+  }
+  
   let ctx = this;
   const Reply = ctx.mongoose.model('admin-reply');
   const Material = ctx.mongoose.model('admin-material');
