@@ -5,6 +5,7 @@
  * @description
  */
 
+const Promise = require('bluebird');
 const path = require('path');
 const downloadFile = require('../util/downloadFile');
 let cache = {};
