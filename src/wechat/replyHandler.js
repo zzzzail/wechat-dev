@@ -124,17 +124,19 @@ module.exports = async function (message) {
       album = new WechatAlbum({
         openId: message.FromUserName,
         title: '这个相册里有我的照片和故事,打开看看吧.',
+        template: 'warm',
         list: [{
           wechatUrl: message.PicUrl,
           uri: uri
         }]
       });
     } else { // 增加到相册
-      album = await WechatAlbum.findOne({openId: message.FromUserName}).sort({'meta.createAt': 1}).exec();
+      album = await WechatAlbum.findOne({openId: message.FromUserName}).exec();
       if (!album) {
         album = new WechatAlbum({
           openId: message.FromUserName,
           title: '这个相册里有我的照片和故事,打开看看吧.',
+          template: 'warm',
           list: []
         })
       }

@@ -12,6 +12,7 @@ const Schema = mongoose.Schema;
 let albumSchema = new Schema({
   openId: String, // 微信 OpenID
   title: String, // 标题
+  template: String, // 模版名称
   list: [ // 图片列表
     {
       _id: false,
