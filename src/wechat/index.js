@@ -212,6 +212,7 @@ Wechat.prototype.isValidSiteAccessToken = function (data) {
 Wechat.prototype.updateSiteAccessToken = function (refresh_token) {
   let appId = this.appId;
   let url = `${wechatCfg.api.site_access_token.get}appid=${appId}&grant_type=refresh_token&refresh_token=${refresh_token}`;
+  console.log(url);
   return new Promise((resolve, reject) => {
     request({url: url, json: true})
       .then((response) => {
