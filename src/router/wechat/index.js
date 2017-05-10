@@ -18,7 +18,7 @@ module.exports = function () {
   router.get('/index', getIndex);
 
   // album
-  router.get('/album', getIndex);
+  router.get('/album', getAlbumIndex);
   
   return router;
 }

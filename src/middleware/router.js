@@ -10,6 +10,7 @@
 module.exports = function (app) {
 	let frontRouter = require('../router/front')();
 	let adminRouter = require('../router/admin')();
+	let wechatRouter = require('../router/wechat')();
 	
   app
     .use(frontRouter.routes())
@@ -17,4 +18,7 @@ module.exports = function (app) {
   app
     .use(adminRouter.routes())
     .use(adminRouter.allowedMethods());
+  app
+  	.use(wechatRouter.routes())
+  	.use(wechatRouter.allowedMethods());
 }
