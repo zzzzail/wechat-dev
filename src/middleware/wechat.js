@@ -48,7 +48,6 @@ module.exports = function (app) {
         let replyMessage = await replyHandler.call(ctx, message);
         // 把回复的信息解析为xml
         let xml = util.xmlTemplate(message, replyMessage);
-        console.log(xml);
         ctx.status = 200;
         ctx.type = 'application/xml';
         return ctx.body = xml;
