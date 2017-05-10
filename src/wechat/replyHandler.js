@@ -11,14 +11,6 @@ const downloadFile = require('../util/downloadFile');
 let cache = {};
 
 module.exports = async function (message) {
-  var wait2s = () => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve()
-      }, 2000)
-    })
-  }
-  
   let ctx = this;
   const Reply = ctx.mongoose.model('admin-reply');
   const Material = ctx.mongoose.model('admin-material');
@@ -144,7 +136,13 @@ module.exports = async function (message) {
     } else { // 增加到相册
       
       // 等2s
-      let wait2s = await wait2s();
+      await () => {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve()
+          }, 2000)
+        })
+      }
       
       album = await WechatAlbum.findOne({openId: message.FromUserName}).exec();
       if (!album) {
