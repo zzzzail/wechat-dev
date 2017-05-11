@@ -10,7 +10,6 @@ const router = new require('koa-router')({
 	prefix: '/wechat'
 });
 const {getIndex} = require('../../controller/wechat/indexController');
-const {getAlbumList} = require('../../controller/wechat/albumController');
 
 module.exports = function () {  
   // 首页
@@ -18,7 +17,7 @@ module.exports = function () {
   router.get('/index', getIndex);
 
   // album
-  router.get('/album/list', getAlbumList);
+  require('./album')(router);
   
   return router;
 }

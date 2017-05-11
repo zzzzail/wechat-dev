@@ -38,3 +38,16 @@ exports.getAlbumList = async (ctx, next) => {
 	let albums = await Album.find({openId: siteAccessToken.openid}).exec();
 	return ctx.render('wechat/album/index', {albums});
 }
+
+// 相册详情页
+exports.getAlbumArticle = async (ctx, next) => {
+	const Album = ctx.mongoose.model('wechat-album');
+	let _id = ctx.params._id;
+	let album = await Album.findOne({_id}).exec();
+	if (album) {
+		return ctx.render(`wechat/album/template_${album.template}`, {
+			list: album.list,
+			album
+		});
+	}
+}
