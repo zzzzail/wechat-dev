@@ -21,6 +21,7 @@ let config = {
   telephone: '', // 公司电话
   icp: '', // 网站备案号
   env: 'production',
+  debug: false,
   appName: 'dianying-open',
   port: 4700,
   keys: ['dianying-open'],

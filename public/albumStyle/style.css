@@ -1,0 +1,276 @@
+@charset "utf-8";
+html {
+  width: 100%;
+  font-size: 16px;
+}
+
+body,
+p,
+input,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+li,
+dl,
+dt,
+dd,
+form {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  vertical-align: middle;
+  font-weight: normal;
+}
+
+img {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+  line-height: 0;
+  vertical-align: middle;
+}
+
+body {
+  font-family: Helvetica, "STHeiti STXihei", "Microsoft JhengHei", "Microsoft YaHei", Tohoma, Arial;
+  color: #000;
+  -webkit-user-select: none;
+  -webkit-text-size-adjust: none;
+}
+
+header,
+section,
+footer {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  border: 0;
+}
+
+::-webkit-input-placeholder {
+  color: #8b8b8b;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+input[type="button"],
+input[type="submit"] {
+  -webkit-appearance: none;
+  outline: none;
+  text-align: center;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+  outline: none;
+}
+
+*,
+:after,
+:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.clearfix:before,
+.clearfix:after {
+  content: "";
+  display: table;
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+.pr {
+  position: relative;
+}
+
+.pa {
+  position: absolute;
+}
+
+.mobile-container {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 640px;
+  min-width: 320px;
+  overflow: hidden;
+}
+
+.album-ul {
+  width: 100%;
+}
+
+.album-li {
+  padding: 0.75rem;
+}
+
+.album-li-content {
+  height: 18.5725rem;
+  background-color: white;
+  border: 0.928rem solid #fff;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.6);
+  position: relative;
+}
+
+.album-li-pic {
+  position: relative;
+  width: 12.85rem;
+  height: 12.85rem;
+  overflow: hidden;
+  background-position: center;
+  background-size: cover;
+}
+
+.album-li-pv {
+  height: 3.5rem;
+  position: absolute;
+  text-align: left;
+  line-height: 1.75rem;
+  font-size: 1.25rem;
+  left: 13.65rem;
+  top: 8.75rem;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.album-li-word {
+  position: absolute;
+  left: 13.65rem;
+  top: 0.25rem;
+  font-size: 1.5rem;
+  line-height: 2.4rem;
+  height: 7.14rem;
+  color: #6dc2f9;
+  overflow: hidden;
+}
+
+.album-li-edit, .album-li-del {
+  width: 46%;
+  height: 3rem;
+  font-size: 1.45rem;
+  line-height: 3rem;
+  text-align: center;
+  color: #ff6f6f;
+  border: 1px solid #ff6f6f;
+  border-radius: 6px;
+  float: left;
+  margin: 1rem 0;
+}
+
+.album-li-edit {
+}
+
+.album-li-del {
+  float: right;
+  background-color: #ff6f6f;
+  color: #fff;
+}
+
+.album-li-view {
+  position: absolute;
+  left: 11px;
+  width: 120px;
+  height: 38px;
+  line-height: 40px;
+  top: 206px;
+  border: 1px solid #ff6f6f;
+  text-align: center;
+  color: #ff6f6f;
+  border-radius: 6px 0px 0px 6px;
+  font-size: 18px;
+}
+
+.album-li-date {
+  position: relative;
+  height: 2rem;
+}
+
+.album-li-date-div {
+  width: 0.5rem;
+  height: 1.75rem;
+  background-color: #ff6f6f;
+  position: relative;
+  left: -0.75rem;
+  float: left;
+}
+
+.album-li-date-text {
+  position: relative;
+  float: left;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.album-li-print {
+  width: 31px;
+  position: absolute;
+  left: 382px;
+  top: 156px;
+  opacity: 0.3;
+}
+
+.sharebtn {
+  position: absolute;
+  right: 0;
+  width: 5rem;
+  height: 2rem;
+  color: rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+.shareicon {
+  width: 1.25rem;
+  position: absolute;
+  top: 0.35rem;
+  left: 0.42rem;
+  opacity: 0.2;
+  margin: 0;
+  padding: 0;
+}
+
+.shareword {
+  position: absolute;
+  top: 0.28rem;
+  left: 2.14rem;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 359px) {
+  html {
+    font-size: 12px !important;
+  }
+}
+
+@media only screen and (min-width: 360px) and (max-width: 479px) {
+  html {
+    font-size: 13px !important;
+  }
+}
+
+@media only screen and (min-width: 480px) and (max-width: 539px) {
+  html {
+    font-size: 14px !important;
+  }
+}
+
+@media only screen and (min-width: 540px) and (max-width: 640px) {
+  html {
+    font-size: 16px !important;
+  }
+}

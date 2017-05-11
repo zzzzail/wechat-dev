@@ -8,11 +8,22 @@
 
 const Promise = require('bluebird');
 const request = Promise.promisify(require('request'));
-const wechatCfg = require('../../config/wechatConfig');
+const cfg = require('../../config/config');
+const wechatCfg =  cfg.wechat;
+const debug = cfg.debug;
 
-exports.getAlbumIndex = async (ctx, next) => {
+exports.getAlbumList = async (ctx, next) => {
+	const Album = ctx.mongoose.model('wechat-album');
 	let code = ctx.query.code;
 	let state = ctx.query.state;
+	
+	// 测试
+	if (debug) {
+		let openId = "or_13wCCOtetkP-GJPJ564SByL1U";
+		let albums = await Album.find({openId: "or_13wCCOtetkP-GJPJ564SByL1U"}).exec();
+		return ctx.render('wechat/album/list', {albums});
+	}
+	
 	if(!code || !state) {
 		return ctx.redirect(`https://open.weixin.qq.com/connect/oauth2/authorize?appid=${wechatCfg.appId}&redirect_uri=${ctx.href}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`)
 	}
@@ -20,13 +31,10 @@ exports.getAlbumIndex = async (ctx, next) => {
 	let getSiteAccessTokenUrl = `https://api.weixin.qq.com/sns/oauth2/access_token?appid=${wechatCfg.appId}&secret=${wechatCfg.secret}&code=${code}&grant_type=authorization_code`;
 	let siteAccessToken = await request(getSiteAccessTokenUrl);
 	siteAccessToken = JSON.parse(siteAccessToken.body);
-	console.log(siteAccessToken);
 
 	// const wechat = ctx.wechat;
 	// let siteRefreshAccessToken = await wechat.getSiteAccessToken(siteAccessToken.refresh_token);
 
-	const Album = ctx.mongoose.model('wechat-album');
 	let albums = await Album.find({openId: siteAccessToken.openid}).exec();
-
 	return ctx.render('wechat/album/index', {albums});
 }

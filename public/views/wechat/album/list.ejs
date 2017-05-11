@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<meta name="copyright" content="">
+	<meta name="Keywords" content="">
+	<meta name="description" content="">
+	<title><%= title %></title>
+
+	<link rel="stylesheet" href="/albumStyle/style.css">
+</head>
+<body>
+<div class="mobile-container">
+	
+	<div class="album-ul">
+	<% albums.forEach(function (album) { %>
+		<div class="album-li">
+			<div class="album-li-date">
+				<div class="album-li-date-div"></div>
+				<div class="album-li-date-text">
+					<%= moment(album.meta.createAt).format('YYYY-MM-DD') %>
+				</div>
+				<div class="sharebtn" onclick="alert('进入相册后，点击右上角即可分享');location.href='/wechat/album/<%= album._id %>'">
+					<img class="shareicon" src="/albumStyle/img/share.png">
+					<div class="shareword">分享</div>
+				</div>
+			</div>
+
+			<div class="album-li-content">
+				<a href="">
+					<div class="album-li-pic" style="background-image:url(<%= album.list[0].uri %>)">
+					</div>
+					<div class="album-li-word"><%= album.title %></div>
+					<div class="album-li-pv">
+						浏览次数：
+						<%= album.meta.views %>
+						<br>
+						转发分享：
+						<%= album.meta.shares %>
+					</div>
+				</a>
+				<a class="album-li-edit" href="/wechat/album/<%= album._id %>">编辑</a>
+				<a class="album-li-del" href="javascript:;">删除</a>
+			</div>
+			
+		</div>
+
+	<% }) %>
+	</div>
+
+</div>
+</body>
+</html>
