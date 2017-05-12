@@ -8,12 +8,14 @@
 
 const {
 	getAlbumList,
-	getAlbumArticle
+	getAlbumArticle,
+	getAlbumTemplate
 } = require('../../controller/wechat/albumController');
 
 module.exports = function (router) {  
   router.get('/album/list', getAlbumList);
   router.get('/album/:_id', getAlbumArticle);
+  router.get('/album/template', getAlbumTemplate);
   
   return router;
 }

@@ -52,3 +52,8 @@ exports.getAlbumArticle = async (ctx, next) => {
 		});
 	}
 }
+
+// 相册模版
+exports.getAlbumTemplate = async (ctx, next) => {
+	
+}

@@ -11,4 +11,60 @@
 			2. 点赞,送花
 			3. 音乐开始和暂停
 -->
+<link rel="stylesheet" href="/albumStyle/controller.css">
+<!-- 点赞 -->
+<div id="album-likes">
+	<div class="likes-heart"></div>
+	<div id="album-likes-num"></div>
+</div>
+<!-- 编辑 -->
+<div id="edit-menu">
+  <div class="edit-menu-item" id="choose-tepmlate" onclick="albumController.openEditPanle('template')">选模板</div>
+  <div class="edit-menu-item" id="choose-music" onclick="albumController.openEditPanle('music')">选音乐</div>
+  <div class="edit-menu-item" id="choose-image" onclick="albumController.openEditPanle('list')">增删图</div>
+  <div class="edit-menu-item" id="write-title" onclick="albumController.openEditPanle('title')">写文字</div>
+  <div class="edit-menu-item" id="make-finish" onclick="albumController.make()">制作</div>
+</div>
+<div id="edit-panle">
+  <div class="edit-panle-ifr">
+    <iframe id="edit-panle-iframe" src=""></iframe>
+  </div>
+  <div id="edit-panle-operation">
+    <button class="operation-btn" onclick="albumController.closeEditPanle()">关闭</button>
+  </div>
+</div>
+<script>
+(function() {
+	albumObject = albumObject || {};
+  var albumController = {
+    panleDom: document.getElementById('edit-panle'),
+    templateDom: document.getElementById('choose-tepmlate'),
+    musicDom: document.getElementById('choose-music'),
+    imageDom: document.getElementById('choose-image'),
+    titleDom: document.getElementById('write-title'),
+    finishDom: document.getElementById('make-finish'),
+    iframeDom: document.getElementById('edit-panle-iframe'),
+    likesDom: document.getElementById('album-likes-num'),
+    iframeUrlPrefix: '/wechat/album/',
+    openEditPanle: function(suffix) { // 打开编辑面板
+    	suffix = suffix || '';
+      this.iframeDom.src = this.iframeUrlPrefix + suffix;
+      this.panleDom.style.display = 'block';
+    },
+    closeEditPanle: function() { // 关闭编辑面板
+      this.iframeDom.src = '';
+      this.panleDom.style.display = 'none';
+    },
+    make: function() { // 制作
 
+    },
+    init: function () { // 初始化
+  		this.likesDom.innerHTML = this.likes;
+  	}
+  }
+  albumController = Object.assign({}, albumObject, albumController);
+  albumController.init();
+  albumController.init = undefined;
+  window.albumController = albumController;
+})(window, albumObject)
+</script>
