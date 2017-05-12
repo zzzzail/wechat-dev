@@ -22,6 +22,10 @@ let albumSchema = new Schema({
   ],
   meta: { // 元数据
     _id: false,
+    likes: {
+      type: Number,
+      default: 0
+    },
     views: { // 浏览次数
       type: Number,
       default: 0

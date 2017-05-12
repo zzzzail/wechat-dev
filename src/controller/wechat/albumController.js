@@ -20,7 +20,7 @@ exports.getAlbumList = async (ctx, next) => {
 	// 测试
 	if (debug) {
 		let openId = "or_13wCCOtetkP-GJPJ564SByL1U";
-		let albums = await Album.find({openId: "or_13wCCOtetkP-GJPJ564SByL1U"}).exec();
+		let albums = await Album.find({openId}).exec();
 		return ctx.render('wechat/album/list', {albums});
 	}
 	
@@ -36,7 +36,7 @@ exports.getAlbumList = async (ctx, next) => {
 	// let siteRefreshAccessToken = await wechat.getSiteAccessToken(siteAccessToken.refresh_token);
 
 	let albums = await Album.find({openId: siteAccessToken.openid}).exec();
-	return ctx.render('wechat/album/index', {albums});
+	return ctx.render('wechat/album/list', {albums});
 }
 
 // 相册详情页
@@ -46,6 +46,7 @@ exports.getAlbumArticle = async (ctx, next) => {
 	let album = await Album.findOne({_id}).exec();
 	if (album) {
 		return ctx.render(`wechat/album/template_${album.template}`, {
+		  title: album.title,
 			list: album.list,
 			album
 		});

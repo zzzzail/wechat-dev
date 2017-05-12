@@ -1,0 +1,38 @@
+<script>(function () {if (/Android (\d+\.\d+)/.test(navigator.userAgent)) {var version = parseFloat(RegExp.$1);if (version > 2.3) {var width = window.outerWidth == 0 ? window.screen.width : window.outerWidth;var phoneScale = parseInt(width) / 500;document.write('<meta name="viewport" content="width=500, minimum-scale = ' + phoneScale + ', maximum-scale = ' + phoneScale + ', target-densitydpi=device-dpi">');} else {document.write('<meta name="viewport" content="width=500, target-densitydpi=device-dpi">');}} else if (navigator.userAgent.indexOf('iPhone') != -1) {var phoneScale = parseInt(window.screen.width) / 500;document.write('<meta name="viewport" content="width=500, height=750, initial-scale=' + phoneScale + ', user-scalable=no" /> ');} else {document.write('<meta name="viewport" content="width=500, height=750, initial-scale=0.64" /> ');}})();</script>
+<script>document.ontouchmove = function (e) {e.preventDefault()}</script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<script src="/open/js/wechat.js?debug=true"></script>
+<script>
+	var module_inits = [];
+	var upload_permission = true;
+	var atkname = 'yilu';
+	function load_init_modules() { 
+		for(var i=0; i<module_inits.length; i++) { 
+			module_inits[i](); 
+		}
+	}
+	function call_me(fun) {
+		module_inits.push(fun);
+	}
+	var ua = navigator.userAgent.toLowerCase();
+	if(ua.match(/MicroMessenger/i)=='micromessenger' ) {
+		wx.ready(load_init_modules);
+	} else {
+		onload=load_init_modules;
+	}
+</script>
+<script type="text/javascript">var XMLHttp = {_objPool: [], _getInstance: function () {for (var i = 0; i < this._objPool.length; i++) {if (this._objPool[i].readyState == 0 || this._objPool[i].readyState == 4) {return this._objPool[i]}}this._objPool[this._objPool.length] = this._createObj();return this._objPool[this._objPool.length - 1]}, _createObj: function () {if (window.XMLHttpRequest) {var objXMLHttp = new XMLHttpRequest()} else {var MSXML = ['MSXML2.XMLHTTP.5.0', 'MSXML2.XMLHTTP.4.0', 'MSXML2.XMLHTTP.3.0', 'MSXML2.XMLHTTP', 'Microsoft.XMLHTTP'];for (var n = 0; n < MSXML.length; n++) {try {var objXMLHttp = new ActiveXObject(MSXML[n]);break} catch (e) {}}}if (objXMLHttp.readyState == null) {objXMLHttp.readyState = 0;objXMLHttp.addEventListener("load", function () {objXMLHttp.readyState = 4;if (typeof objXMLHttp.onreadystatechange == "function") {objXMLHttp.onreadystatechange()}}, false)}return objXMLHttp}, sendReq: function (method, url, data, callback) {var objXMLHttp = this._getInstance();with (objXMLHttp) {try {if (url.indexOf("?") > 0) {url += "&randnum=" + Math.random()} else {url += "?randnum=" + Math.random()}open(method, url, true);if (method.toLowerCase() == 'post') {setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8')}send(data);onreadystatechange = function () {if (objXMLHttp.readyState == 4 && (objXMLHttp.status == 200 || objXMLHttp.status == 304) && callback) {callback(objXMLHttp)}}} catch (e) {alert(e)}}}};</script>
+<script>
+var albumObject = {
+	id: '<%= album._id %>',
+	title: '<%= album.title %>',
+	template: '<%= album.template %>',
+	urls: [<% list.forEach(function(item) { %>'<%= item.uri %>',<% }) %>],
+	date: <%= moment(album.meta.createAt).format('YYYYMMDD') %>,
+	likes: <%= album.meta.likes %>,
+	wechat: {
+		openId: '<%= album.openId %>'
+	}
+}
+</script>
+<title><%= title %></title>
