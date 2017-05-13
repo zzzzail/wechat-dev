@@ -1,0 +1,10 @@
+1.文字性版权替换
+
+web_foot.php
+web_head.php
+index.php
+
+文字性的版权在这里替换就可以了
+
+
+2。图片性的版权文件在assets\index\images
