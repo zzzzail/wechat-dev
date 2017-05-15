@@ -46,7 +46,7 @@
 <body>
 <div class="head-wrap">
   <div class="head w1200">
-    <div class="head-logo2 fl"><a href="index.php" title="长寿俱乐部音乐相册">长寿俱乐部微信音乐相册</a></div>
+    <div class="head-logo2 fl"><a href="index.php" title="点影音乐相册">点影微信音乐相册</a></div>
     <ul class="nav">
       <li class="fl"><a href="index.php" title="首页" class="current">首页</a></li>
       <li class="fl"><a href="template.php" title="模版" >模版</a></li>

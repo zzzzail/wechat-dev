@@ -1,0 +1,40 @@
+{
+  "button": [{
+    "name": "电子相册",
+    "sub_button": [{
+      "type": "pic_photo_or_album",
+      "name": "创建相册",
+      "key": "iweite_n",
+      "sub_button": []
+    }, {
+      "type": "pic_photo_or_album",
+      "name": "添加图片",
+      "key": "iweite_add",
+      "sub_button": []
+    }, {
+      "type": "click",
+      "name": "我的相册",
+      "key": "iweite_f"
+    }, {
+      "type": "view",
+      "name": "相册咨询",
+      "url": "http://open.shuitagushi.com/help.php"
+    }]
+  }, {
+    "name": "制作相册",
+    "sub_button": [{
+      "type": "view",
+      "name": "APP下载",
+      "url": "http://www.loocall.com"
+    }, {
+      "type": "view",
+      "name": "小程序",
+      "url": "http://www.loocall.com"
+    }]
+  }, {
+    "type": "view",
+    "name": "关于点影",
+    "url": "http://www.loocall.com",
+    "sub_button": []
+  }]
+}

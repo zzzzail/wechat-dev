@@ -22,7 +22,7 @@ include 'web_head.php';
     <p class="xiaoguo">这是一个需要宣泄的时代，我快乐！我悲伤！<br>
       纯粹的文字已经不足以表达我们的情感；<br>
       智能相册一键制作，永久的保存。</p>
-    <p class="desgin">已有<span>48973</span>在使用长寿俱乐部音乐相册</p>
+    <p class="desgin">已有<span>48973</span>在使用点影音乐相册</p>
   </div>
 </div>
 <div class="line"></div>

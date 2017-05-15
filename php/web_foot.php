@@ -502,9 +502,8 @@ jQuery(document).ready(function($) {
   <div class="xiasanjiaots"></div>
 </div>
 <div class="footer w1200" >
-  <p >长寿俱乐部-旗下微信音乐相册，为您提供更优质的音乐相册模板，为您打造，专属定制，这个世界上独一无二的酷炫微卡。。</p>
-  <p class="copyright">CopyRight &copy; 2012-2016 www.redunique.com,All Rights Reserved. <!--<a target="_blank" href="http://shang.qq.com/wpa/qunwpa?idkey=6c8fe1b980df50a356e88c15fa7a3786eae90f3b0d8eb12058c1a6d51d4735e4"><img border="0" src="http://pub.idqqimg.com/wpa/images/group.png"  title="微特微场景多用户系统"></a><span id="exectime"></span></p>
-  <div class="footer-logo fr"><a href="http://www.iweite.com" target="_blank"><img src="assets/index/images/footer-logo.jpg" /></a>--></div>
+  <p>点影-旗下微信音乐相册，为您提供更优质的音乐相册模板，为您打造，专属定制，这个世界上独一无二的酷炫微卡。。</p>
+  <p class="copyright">CopyRight &copy; 2012-2017 www.loocall.com,All Rights Reserved. </div>
 </div>
 <div style="display:none">
   <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_5829903'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s23.cnzz.com/stat.php%3Fid%3D5829903%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
