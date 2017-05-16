@@ -71,7 +71,7 @@ let config = {
       name: 'router'
     }
   ],
-  wechat: require('./wechatConfig')
+  wechat: require('./wechat')
 }
 
 if (process.env.NODE_ENV == 'local' || process.env.NODE_ENV == 'development') {

@@ -17,10 +17,10 @@ class Wechat {
   constructor() {
     this.appId = wechatCfg.appId;
     this.secret = wechatCfg.secret;
-    this.tokenCacheFile = wechatCfg.tokenCacheFile;
-    this.ticketCacheFile = wechatCfg.ticketCacheFile;
+    this.tokenCacheFile = wechatCfg.cache.accessToken;
+    this.ticketCacheFile = wechatCfg.cache.ticket;
 
-    this.siteTokenCacheFile = wechatCfg.siteTokenCacheFile;
+    this.siteTokenCacheFile = wechatCfg.cache.siteAccessToken;
 
     this.getAccessToken();
   }
