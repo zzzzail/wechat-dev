@@ -1,0 +1,24 @@
+{
+ "button": [{
+   "name": "开始制作",
+   "sub_button": [{
+     "type": "pic_photo_or_album",
+     "name": "创建相册",
+     "key": "iweite_n",
+     "sub_button": []
+   }, {
+     "type": "pic_photo_or_album",
+     "name": "添加图片",
+     "key": "iweite_add",
+     "sub_button": []
+   }]
+ }, {
+   "type": "click",
+   "name": "我的相册",
+   "key": "iweite_f"
+ }, {
+   "type": "view",
+   "name": "相册咨询",
+   "url": "http://dyhapi.shuitagushi.com/help.php"
+ }]
+}

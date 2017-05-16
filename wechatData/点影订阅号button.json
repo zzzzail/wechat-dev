@@ -1,0 +1,62 @@
+{
+  "button": [
+    {
+      "name": "音乐相册",
+      "sub_button": [{
+        "type": "pic_photo_or_album",
+        "name": "创建相册",
+        "key": "iweite_n"
+      }, {
+        "type": "pic_photo_or_album",
+        "name": "添加图片",
+        "key": "iweite_add"
+      }, {
+        "type": "click",
+        "name": "我的相册",
+        "key": "iweite_f"
+      }, {
+        "type": "view",
+        "name": "相册咨询",
+        "url": "http://dyhapi.shuitagushi.com/help.php"
+      }]
+    }, 
+    {
+      "name": "制作相册",
+      "sub_button": [{
+        "type": "view",
+        "name": "下载点影",
+        "url": "http://shuitagushi.com/download/index.html"
+      }, {
+        "type": "view",
+        "name": "优惠券",
+        "url": "http://shuitagushi.com/market/family.html?type=salesman&id=5770b1f268970978e62630f0"
+      }, {
+        "type": "view",
+        "name": "操作方法",
+        "url": "https://mmbiz.qlogo.cn/mmbiz_jpg/hBLo1Bn8rhExicXcNNS0KNNTFI4iatxia5k0e4z3WkoKD2qPXEiahSYL22pxFibHkiccK9RjJQ4ChFeMBibn4Jf591VCw/0?wx_fmt=jpeg"
+      }, {
+        "type": "miniprogram",
+        "name": "点影小程序",
+        "url": "http://www.loocall.com/",
+        "appid": "wx51ae002408d98542",
+        "pagepath": "pages/index/index"
+      }]
+    }, 
+    {
+      "name": "联系我们",
+      "sub_button": [{
+        "type": "view",
+        "name": "客服微信",
+        "url": "https://mmbiz.qlogo.cn/mmbiz_png/hBLo1Bn8rhHRZAeBRxKZN1KdH3yibJKB9P06MeIPr4jRbg7yIOdz52JcicUf2ltPQLKpLwUfezeZyVxeUZPaFfMw/0?wx_fmt=png"
+      }, {
+        "type": "view",
+        "name": "客服电话",
+        "url": "http://loocall.com/aboutus.html#contact"
+      }, {
+        "type": "view",
+        "name": "官方微博",
+        "url": "http://weibo.com/5619777063/profile?rightmod=1&wvr=6&mod=personnumber&is_all=1"
+      }]
+    }
+  ]
+}
