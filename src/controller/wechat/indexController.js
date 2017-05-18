@@ -9,3 +9,8 @@
 exports.getIndex = async (ctx, next) => {
 	
 }
+
+// 微信登录
+exports.getLogin = async (ctx, next) => {
+  
+}

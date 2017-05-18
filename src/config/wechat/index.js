@@ -9,7 +9,7 @@
 module.exports = {
   appId: "wx41cbb84cb6b1c9ee",
   secret: "c1b8b203c9f67a3907f0c9a6c9067a63",
-  token: 'ZhangErGouWechatDeveloper',
+  token: 'wx41cbb84cb6b1c9ee',
   cache: require('./cache')('dyfwh'),
   api: require('./api')
 }
