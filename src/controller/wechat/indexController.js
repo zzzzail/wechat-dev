@@ -10,6 +10,7 @@ const Promise = require('bluebird');
 const request = Promise.promisify(require('request'));
 const cfg = require('../../config/config');
 const wechatCfg =  cfg.wechat;
+const debug = cfg.debug;
 
 exports.getIndex = async (ctx, next) => {
   
@@ -18,6 +19,21 @@ exports.getIndex = async (ctx, next) => {
 
 // 微信登录
 exports.getLogin = async (ctx, next) => {
+  console.log(debug);
+  if (debug) {
+    return ctx.render('wechat/login', {
+      openid: '',
+      nickname: '',
+      sex: '',
+      country: '',
+      province: '',
+      city: '',
+      headimgurl: '',
+      privilege: '',
+      unionid: ''
+    });
+  }
+  
   let code = ctx.query.code;
   let state = ctx.query.state;
   if(!code || !state) {

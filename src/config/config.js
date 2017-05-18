@@ -25,6 +25,7 @@ let config = {
   appName: 'dianying-open',
   port: 4700,
   keys: ['dianying-open'],
+  apiPrefix: 'http://api.shuitagushi.com/',
   middleware: [
     {
       name: 'initial'

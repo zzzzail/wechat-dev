@@ -1,0 +1,42 @@
+body {
+	background-color: #f1f1f1;
+}
+.wechat-form-login {
+	margin-top: 20px;
+}
+.wechat-form-login .form-group {
+	margin-bottom: 0;
+	padding: 0 10px;
+}
+.login-group {
+	height: 75px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-right: 90px;
+	position: relative;
+}
+.login-group .login-l {
+	
+}
+.login-group .login-r {
+	width: 90px;
+	position: absolute;
+	top: 25px;
+	right: 0;
+	bottom: 0;
+}
+.login-group .login-r .text {
+	height: 35px;
+	font-size: 16px;
+	line-height: 35px;
+	text-align: center;
+}
+.form-control {
+	border-radius: 0;
+}
+.wechat-form-login .btn {
+	width: 100%;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+}

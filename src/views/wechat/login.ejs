@@ -1,28 +1,26 @@
-<!doctype html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport"
-	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Document</title>
+<%- include('partials/head') %>
 
-	<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js?debug=true"></script>
-	<script src="/wechat/open/js/wechat.js?debug=1"></script>
-</head>
-<body>
-	Login
-
-
-	<form action="/wechat/login" method="post">
-		<div class="form-group">
-			<input class="" type="phone" id="cell" name="cell">
+	<form class="wechat-form-login" action="/wechat/login" method="post">
+		<div class="login-group">
+			<div class="login-l">
+				<label for="cell">手机号码</label>
+				<input class="form-control" type="tel" id="cell" name="cell">
+			</div>
+			<div class="login-r">
+				<div class="text">+86</div>
+			</div>
+		</div>
+		<div class="login-group">
+			<div class="login-l">
+				<label for="code">验证码</label>
+				<input class="form-control" type="number" id="code" name="code">
+			</div>
+			<div class="login-r">
+				<div class="text">获取验证码</div>
+			</div>
 		</div>
 		<div class="form-group">
-			<input class="" type="number" id="code" name="code">
-		</div>
-		<div class="form-group">
-			<button type="submit">登录</button>
+			<button class="btn btn-danger" type="submit">登录</button>
 		</div>
 		<input type="hidden" name="openid" value="<%= openid %>">
 		<input type="hidden" name="nickname" value="<%= nickname %>">
@@ -34,5 +32,20 @@
 		<input type="hidden" name="privilege" value="<%= privilege %>">
 		<input type="hidden" name="unionid" value="<%= unionid %>">
 	</form>
-</body>
-</html>
+
+<script>
+	$(function () {
+
+
+
+		function getCellCode() {
+			var cell = $('#cell').val();
+			Util.getCellCode(cell)
+				.then(function (data) {
+					console.log(data);
+				})
+		}
+
+	})
+</script>
+<%- include('partials/foot') %>

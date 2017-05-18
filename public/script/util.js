@@ -36,4 +36,22 @@ Util.__proto__.confirm = function (text) {
   })
 }
 
+Util.__proto__.getCellCode = function (cell) {
+	return new Promise(function (resolve, reject) {
+		$.ajax({
+			type: 'post',
+			url: '/common/sendCelCode',
+			data: {
+				cell: cell
+			},
+			success: function (data) {
+				resolve(data);
+			},
+			error: function (err) {
+				reject(err);
+			}
+		})
+	});
+}
+
 window.Util = Util;
