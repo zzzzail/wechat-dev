@@ -29,10 +29,6 @@ exports.getAlbumList = async (ctx, next) => {
 	}
   
   let siteAccessToken = await ctx.wechat.getSiteAccessToken(code);
-  console.log(siteAccessToken);
-
-	// const wechat = ctx.wechat;
-	// let siteRefreshAccessToken = await wechat.getSiteAccessToken(siteAccessToken.refresh_token);
 
 	let albums = await Album.find({openId: siteAccessToken.openid}).exec();
 	return ctx.render('wechat/album/list', {albums});
