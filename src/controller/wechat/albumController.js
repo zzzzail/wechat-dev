@@ -27,10 +27,9 @@ exports.getAlbumList = async (ctx, next) => {
 	if(!code || !state) {
 		return ctx.redirect(`https://open.weixin.qq.com/connect/oauth2/authorize?appid=${wechatCfg.appId}&redirect_uri=${ctx.href}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`)
 	}
-
-	let getSiteAccessTokenUrl = `https://api.weixin.qq.com/sns/oauth2/access_token?appid=${wechatCfg.appId}&secret=${wechatCfg.secret}&code=${code}&grant_type=authorization_code`;
-	let siteAccessToken = await request(getSiteAccessTokenUrl);
-	siteAccessToken = JSON.parse(siteAccessToken.body);
+  
+  let siteAccessToken = await ctx.wechat.getSiteAccessToken(code);
+  console.log(siteAccessToken);
 
 	// const wechat = ctx.wechat;
 	// let siteRefreshAccessToken = await wechat.getSiteAccessToken(siteAccessToken.refresh_token);

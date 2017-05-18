@@ -13,7 +13,7 @@ module.exports = {
     get: wechatApiPrefix + 'token?grant_type=client_credential&'
   },
   site_access_token: {
-    get: 'https://api.weixin.qq.com/sns/oauth2/?'
+    get: 'https://api.weixin.qq.com/sns/oauth2/access_token?'
   },
   jsapi_ticket: {
     get: wechatApiPrefix + 'ticket/getticket?'

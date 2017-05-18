@@ -139,7 +139,7 @@ Wechat.prototype._getSiteAccessToken = function () {
 }
 
 // 获取网页AccessToken的方法
-Wechat.prototype.getSiteAccessToken = function (refresh_token) {
+Wechat.prototype.getSiteAccessToken = function (code) {
   let _self = this;
   if (this.siteAccessTokenStore && this.siteAccessTokenStore.access_token && this.siteAccessTokenStore.expires_in) {
     if (this.isValidSiteAccessToken(this.siteAccessTokenStore)) {
@@ -153,7 +153,7 @@ Wechat.prototype.getSiteAccessToken = function (refresh_token) {
       if (!existsFile) {
         mkp(_self.siteTokenCacheFile, (err) => {
           if (err) return Promise.reject(err);
-          else return _self.updateSiteAccessToken(refresh_token);
+          else return _self.updateSiteAccessToken(code);
         })
       } else {
         return Promise.reject(err);
@@ -163,13 +163,13 @@ Wechat.prototype.getSiteAccessToken = function (refresh_token) {
       try {
         data = JSON.parse(data);
       } catch (e) {
-        return _self.updateSiteAccessToken(refresh_token);
+        return _self.updateSiteAccessToken(code);
       }
 
       if (_self.isValidSiteAccessToken(data)) {
         return Promise.resolve(data);
       } else {
-        return _self.updateSiteAccessToken(refresh_token);
+        return _self.updateSiteAccessToken(code);
       }
     })
     .then((data) => {
@@ -209,10 +209,10 @@ Wechat.prototype.isValidSiteAccessToken = function (data) {
 }
 
 // 更新网页 AccessToken
-Wechat.prototype.updateSiteAccessToken = function (refresh_token) {
+Wechat.prototype.updateSiteAccessToken = function (code) {
   let appId = this.appId;
-  let url = `${wechatCfg.api.site_access_token.get}appid=${appId}&grant_type=refresh_token&refresh_token=${refresh_token}`;
-  console.log(url);
+  let secret = this.secret;
+  let url = `${wechatCfg.api.site_access_token.get}appid=${appId}&secret=${secret}&code=${code}&grant_type=authorization_code`;
   return new Promise((resolve, reject) => {
     request({url: url, json: true})
       .then((response) => {
@@ -417,5 +417,8 @@ Wechat.prototype.deleteMaterialForever = function (media_id) {
       })
   })
 }
+
+// 获取微信网页 access_token
+
 
 module.exports = Wechat;
