@@ -21,5 +21,8 @@ module.exports = {
   materialForever: {
     post: wechatApiPrefix + 'material/add_material?',
     del: wechatApiPrefix + 'material/del_material?'
+  },
+  user_info: {
+    get: "https://api.weixin.qq.com/sns/userinfo?"
   }
 }

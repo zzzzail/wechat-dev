@@ -26,6 +26,8 @@ exports.getLogin = async (ctx, next) => {
   
   let siteAccessToken = await ctx.wechat.getSiteAccessToken(code);
   console.log(siteAccessToken);
+  let userInfo = await ctx.wechat.getUserInfo(siteAccessToken.access_token, siteAccessToken.openid);
+  console.log(userInfo);
   
   return ctx.render('wechat/login');
 }

@@ -129,15 +129,27 @@ Wechat.prototype.updateAccessToken = function () {
 Wechat.prototype.getSiteAccessToken = function (code) {
   let appId = this.appId;
   let secret = this.secret;
-  let getSiteAccessTokenUrl = `https://api.weixin.qq.com/sns/oauth2/access_token?appid=${appId}&secret=${secret}&code=${code}&grant_type=authorization_code`;
+  let url = `${wechatCfg.api.site_access_token.get}appid=${appId}&secret=${secret}&code=${code}&grant_type=authorization_code`;
   
   return new Promise((resolve, reject) => {
-    request(getSiteAccessTokenUrl)
+    request({url, json: true})
       .then((response) => {
         let data = response.body;
         resolve(data);
       })
   });
+}
+
+// 获取用户信息
+Wechat.prototype.getUserInfo = function (access_token, openid) {
+  let url = `${wechatCfg.api.user_info.get}access_token=${access_token}&openid=${openid}&lang=zh_CN `;
+  return new Promise((resolve, reject) => {
+    request({url, json: true})
+      .then((response) => {
+        let data = response.body;
+        resolve(data);
+      })
+  })
 }
 
 Wechat.prototype._getJsapiTicket = function () {
