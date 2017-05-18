@@ -7,10 +7,11 @@
  */
 
 exports.getIndex = async (ctx, next) => {
-	
+  
+	return ctx.body = '恭喜您登陆成功!';
 }
 
 // 微信登录
 exports.getLogin = async (ctx, next) => {
-  
+  return ctx.render('wechat/login');
 }

@@ -14,12 +14,16 @@ const {
   getLogin
 } = require('../../controller/wechat/indexController');
 
-module.exports = function () {  
+module.exports = function () {
+  
   // 首页
   router.get('/', getIndex);
   router.get('/index', getIndex);
   router.get('/login', getLogin);
-
+  
+  // open
+  require('./open')(router);
+  
   // album
   require('./album')(router);
   

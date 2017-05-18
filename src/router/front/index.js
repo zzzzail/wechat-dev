@@ -7,12 +7,9 @@
  */
 
 const router = new require('koa-router')();
-const {getOpenWechatJs, getIndex} = require('../../controller/front/indexController');
+const {getIndex} = require('../../controller/front/indexController');
 
 module.exports = function () {
-  // wechat jssdk
-  router.get('/open/js/wechat.js', getOpenWechatJs);
-  
   // 首页
   router.get('/', getIndex);
   router.get('/index', getIndex);

@@ -9,7 +9,7 @@
 const path = require('path');
 const _ = require('lodash');
 const staticDir = path.join(__dirname, '../../public');
-const viewPath = path.join(__dirname, '../../public/views');
+const viewPath = path.join(__dirname, '../views');
 const local = require('./local');
 
 let config = {
