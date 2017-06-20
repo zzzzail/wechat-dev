@@ -8,14 +8,15 @@
 
 const router = new require('koa-router')({
   prefix: '/common'
-});
+})
 const {
   postSendCellCode
-} = require('../../controller/common/indexController');
+} = require('../controller/common/indexController')
 
 module.exports = function () {
   
-  router.post('/sendCelCode', postSendCellCode);
+  // 发送短信
+  router.post('/sendCelCode', postSendCellCode)
   
-  return router;
+  return router
 }

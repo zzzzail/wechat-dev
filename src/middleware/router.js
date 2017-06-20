@@ -6,19 +6,28 @@
  *
  */
 
+const path = require('path')
+const fs = require('fs')
 
 module.exports = function (app) {
-	let frontRouter = require('../router/front')();
-	let adminRouter = require('../router/admin')();
-	let wechatRouter = require('../router/wechat')();
-	
-  app
-    .use(frontRouter.routes())
-    .use(frontRouter.allowedMethods());
-  app
-    .use(adminRouter.routes())
-    .use(adminRouter.allowedMethods());
-  app
-  	.use(wechatRouter.routes())
-  	.use(wechatRouter.allowedMethods());
+
+  let routerPath = path.join(__dirname, '../router')
+  let walk = rp => {
+    fs.readdirSync(rp)
+      .forEach(file => {
+        let filePath = path.join(rp, `${file}`)
+        let stat = fs.statSync(filePath)
+        if (stat.isFile()) {
+          if (/(.*)\.(js|jsx|coffee)/.test(file)) {
+            app
+              .use(require(filePath)().routes())
+              .use(require(filePath)().allowedMethods())
+          } else if (stat.isDirectory()) {
+            walk(filePath)
+          }
+        }
+      })
+  }
+
+  walk(routerPath)
 }

@@ -12,14 +12,14 @@ const fs = require('fs');
 module.exports = function (app, param) {
   mongoose.Promise = require('bluebird');
   mongoose.connect(param.uri, param.options);
-  const db = mongoose.connection;
+  let db = mongoose.connection;
   db.on('error', console.error.bind(console, 'connection error:'));
   db.once('open', cb => {
     // yay!
   })
 
-  let modelPath = path.join(__dirname, '../model');
-  const walk = mp => {
+  let modelPath = path.join(__dirname, '../model')
+  let walk = mp => {
     fs
       .readdirSync(mp)
       .forEach(file => {

@@ -68,6 +68,9 @@ let config = {
       }
     }, {
       name: 'wechat'
+    }, 
+    {
+      name: "koa-logger"
     }, {
       name: 'router'
     }

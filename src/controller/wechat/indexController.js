@@ -14,7 +14,7 @@ const debug = cfg.debug;
 
 exports.getIndex = async (ctx, next) => {
   
-	return ctx.body = '恭喜您登陆成功!';
+	return ctx.render('wechat/index')
 }
 
 // 微信登录
