@@ -36,6 +36,7 @@ Util.__proto__.confirm = function (text) {
   })
 }
 
+// 获取手机验证码
 Util.__proto__.getCellCode = function (cell) {
 	return new Promise(function (resolve, reject) {
 		$.ajax({
