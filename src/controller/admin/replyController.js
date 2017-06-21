@@ -25,19 +25,19 @@ exports.getReplyAuto = async (ctx, next) => {
   let replys = await Reply.find({type}).exec()
 	const Material = ctx.mongoose.model('admin-material')
   if (type == 'image') {
-	  for (let i=0 i<replys.length i++) {
+	  for (let i=0; i<replys.length; i++) {
 		  let material = await Material.findOne({_id: replys[i].content}).exec()
 		  replys[i].content = `<img src="${material.uri}">`
 	  }
   }
   if (type == 'voice') {
-	  for (let i=0 i<replys.length i++) {
+	  for (let i=0; i<replys.length; i++) {
 		  let material = await Material.findOne({_id: replys[i].content}).exec()
 		  replys[i].content = `<audio controls src="${material.uri}"></audio>`
 	  }
   }
 	if (type == 'video') {
-		for (let i=0 i<replys.length i++) {
+		for (let i=0; i<replys.length; i++) {
 			let material = await Material.findOne({_id: replys[i].content}).exec()
 			replys[i].content = `<video controls src="${material.uri}"></video>`
 		}

@@ -15,8 +15,7 @@ const middleware = config.middleware
 module.exports = function () {
   // 根据配置批量加载中间件
   middleware.forEach(md => {
-    let name = md.name
-    let params = md.params
+    let { name, params } = md
     let filePath = `./middleware/${name}.js`
     let isFile = fs.existsSync(path.join(__dirname, filePath))
 
@@ -49,5 +48,5 @@ module.exports = function () {
   })
 
   app.listen(config.port)
-  console.log(`app Listening at http://127.0.0.1:${config.port}`)
+  console.log(`APP Listening at http://127.0.0.1:${config.port}`)
 }

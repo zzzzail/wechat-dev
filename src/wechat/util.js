@@ -22,7 +22,7 @@ let formatMessage = function (message) {
   if (typeof message == 'object') {
     let keys = Object.keys(message)
 
-    for (let i=0 i<keys.length i++) {
+    for (let i=0; i<keys.length; i++) {
       let key = keys[i]
       let item = message[key]
       if (!Array.isArray(item) || item.length == 0) continue
@@ -37,7 +37,7 @@ let formatMessage = function (message) {
         }
       } else {
         message[key] = []
-        for (let j=0 j<item.length j++) {
+        for (let j=0; j<item.length; j++) {
           message[key].push(formatMessage(item[j]))
         }
       }
