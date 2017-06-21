@@ -6,7 +6,7 @@
  * 
  */
 
-const wechatApiPrefix = 'https://api.weixin.qq.com/cgi-bin/';
+const wechatApiPrefix = 'https://api.weixin.qq.com/cgi-bin/'
 
 module.exports = {
   access_token: {

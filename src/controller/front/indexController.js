@@ -8,5 +8,5 @@
 
 // 首页
 exports.getIndex = async (ctx, next) => {
-  return ctx.render('front/index');
+  return ctx.render('front/index')
 }

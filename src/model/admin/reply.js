@@ -5,8 +5,8 @@
  * @description 回复model, 欢迎语和自动回复
  */
 
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
 let replyModel = new Schema({
   // 回复类型
@@ -17,8 +17,8 @@ let replyModel = new Schema({
   content: String,
   // 是否启用
   enable: Boolean
-});
+})
 
-replyModel.index({keyword: 1});
+replyModel.index({keyword: 1})
 
-module.exports = mongoose.model('admin-reply', replyModel);
+module.exports = mongoose.model('admin-reply', replyModel)

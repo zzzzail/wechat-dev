@@ -5,58 +5,58 @@
  * @description
  */
 
-const Promise = require('bluebird');
-const xml2js = require('xml2js');
-const xmlCompiled = require('./xmlCompiled');
+const Promise = require('bluebird')
+const xml2js = require('xml2js')
+const xmlCompiled = require('./xmlCompiled')
 
 exports.parseXMLAsync = function (xml) {
   return new Promise((resolve, reject) => {
     xml2js.parseString(xml, {trim: true}, (err, content) => {
-      if (err) reject(err);
-      else resolve(content);
+      if (err) reject(err)
+      else resolve(content)
     })
   })
 }
 
 let formatMessage = function (message) {
   if (typeof message == 'object') {
-    let keys = Object.keys(message);
+    let keys = Object.keys(message)
 
-    for (let i=0; i<keys.length; i++) {
+    for (let i=0 i<keys.length i++) {
       let key = keys[i]
-      let item = message[key];
-      if (!Array.isArray(item) || item.length == 0) continue;
+      let item = message[key]
+      if (!Array.isArray(item) || item.length == 0) continue
 
       if (item.length == 1) {
-        let val = item[0];
+        let val = item[0]
 
         if (typeof val == 'object') {
-          message[key] = formatMessage(val);
+          message[key] = formatMessage(val)
         } else {
-          message[key] = (val || '').trim();
+          message[key] = (val || '').trim()
         }
       } else {
-        message[key] = [];
-        for (let j=0; j<item.length; j++) {
-          message[key].push(formatMessage(item[j]));
+        message[key] = []
+        for (let j=0 j<item.length j++) {
+          message[key].push(formatMessage(item[j]))
         }
       }
     }
   }
 
-  return message;
+  return message
 }
-exports.formatMessage = formatMessage;
+exports.formatMessage = formatMessage
 
 exports.xmlTemplate = function (message, content) {
-  let type = 'text';
-  let toUserName = message.FromUserName;
-  let fromUserName = message.ToUserName;
+  let type = 'text'
+  let toUserName = message.FromUserName
+  let fromUserName = message.ToUserName
   if (Array.isArray(content)) {
-    type = 'news';
+    type = 'news'
   }
 
-  type = content.type || type;
+  type = content.type || type
   let info = {
     msgType: type,
     content,
@@ -65,5 +65,5 @@ exports.xmlTemplate = function (message, content) {
     fromUserName
   }
 
-  return xmlCompiled(info);
+  return xmlCompiled(info)
 }

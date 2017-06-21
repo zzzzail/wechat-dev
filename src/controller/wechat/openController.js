@@ -8,16 +8,16 @@
 
 // 微信jssdk
 exports.getOpenWechatJs = async (ctx, next) => {
-  let debug = parseInt(ctx.query.debug);
-  debug = debug ? true : false;
-  let tokenData = await ctx.wechat.getAccessToken();
-  let ticketData = await ctx.wechat.getJsapiTicket(tokenData);
-  let ticket = ticketData.ticket;
-  let url = ctx.headers.referer || ctx.href;
+  let debug = parseInt(ctx.query.debug)
+  debug = debug ? true : false
+  let tokenData = await ctx.wechat.getAccessToken()
+  let ticketData = await ctx.wechat.getJsapiTicket(tokenData)
+  let ticket = ticketData.ticket
+  let url = ctx.headers.referer || ctx.href
   if (url) {
-    let params = ctx.wechat.createSign(ticket, url);
-    params.appId = ctx.wechat.appId;
-    ctx.type = "application/javascript";
+    let params = ctx.wechat.createSign(ticket, url)
+    params.appId = ctx.wechat.appId
+    ctx.type = "application/javascript"
     return ctx.body = `
 			wx.config({
 			  debug: ${debug},
@@ -62,7 +62,7 @@ exports.getOpenWechatJs = async (ctx, next) => {
 					'chooseCard',
 					'openCard'
 			  ]
-			});
+			})
 		`
   }
 }

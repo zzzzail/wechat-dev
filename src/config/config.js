@@ -6,11 +6,11 @@
  *
  */
 
-const path = require('path');
-const _ = require('lodash');
-const staticDir = path.join(__dirname, '../../public');
-const viewPath = path.join(__dirname, '../views');
-const local = require('./local');
+const path = require('path')
+const _ = require('lodash')
+const staticDir = path.join(__dirname, '../../public')
+const viewPath = path.join(__dirname, '../views')
+const local = require('./local')
 
 let config = {
   version: '1.0.0',
@@ -26,60 +26,57 @@ let config = {
   port: 4700,
   keys: ['dianying-open'],
   apiPrefix: 'http://api.shuitagushi.com/',
-  middleware: [
-    {
-      name: 'initial'
-    }, {
-      name: 'bodyparser',
-      params: {
-        multipart: true,
-        strict: false,
-        formidable: {
-          keepExtensions: true, // 保留上传文件格式
-          maxFieldsSize: (10 * 1024 * 1024),
-          uploadDir: path.join(__dirname, '../../public/upload')
-        }
+  middleware: [{
+    name: 'initial'
+  }, {
+    name: 'bodyparser',
+    params: {
+      multipart: true,
+      strict: false,
+      formidable: {
+        keepExtensions: true, // 保留上传文件格式
+        maxFieldsSize: (10 * 1024 * 1024),
+        uploadDir: path.join(__dirname, '../../public/upload')
       }
-    }, {
-      name: 'koa-static',
-      params: staticDir
-    }, {
-      name: 'ejs',
-      params: {
-	      root: viewPath,
-	      layout: false,
-	      viewExt: 'ejs',
-	      cache: true,
-	      debug: true
-      }
-    }, {
-      name: 'session',
-      params: {
-        key: 'koa:sess',
-        overwrite: true,
-        httpOnly: true,
-        signed: true
-      }
-    }, {
-      name: 'mongoose',
-      params: {
-        uri: `mongodb://localhost/dianying-open`,
-        options: {}
-      }
-    }, {
-      name: 'wechat'
-    }, 
-    {
-      name: "koa-logger"
-    }, {
-      name: 'router'
     }
-  ],
+  }, {
+    name: 'koa-static',
+    params: staticDir
+  }, {
+    name: 'ejs',
+    params: {
+      root: viewPath,
+      layout: false,
+      viewExt: 'ejs',
+      cache: true,
+      debug: true
+    }
+  }, {
+    name: 'session',
+    params: {
+      key: 'koa:sess',
+      overwrite: true,
+      httpOnly: true,
+      signed: true
+    }
+  }, {
+    name: 'mongoose',
+    params: {
+      uri: `mongodb://localhost/dianying-open`,
+      options: {}
+    }
+  }, {
+    name: 'wechat'
+  }, {
+    name: "koa-logger"
+  }, {
+    name: 'router'
+  }],
   wechat: require('./wechat')
 }
 
 if (process.env.NODE_ENV == 'local' || process.env.NODE_ENV == 'development') {
-  config = _.assign(config, local);
+  config = _.assign(config, local)
 }
 
 module.exports = config

@@ -6,10 +6,10 @@
  *
  */
 
-const render = require('koa-ejs');
+const render = require('koa-ejs')
 
 module.exports = function (app, params) {
 	
-	render(app, params);
+	render(app, params)
 	
 }

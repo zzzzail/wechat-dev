@@ -10,42 +10,42 @@
  *
  */
 
-const Promise = require('bluebird');
-const fs = require('fs');
-const mkp = require('mkp');
-const request = require('request');
-const uuidV1 = require('uuid/v1');
+const Promise = require('bluebird')
+const fs = require('fs')
+const mkp = require('mkp')
+const request = require('request')
+const uuidV1 = require('uuid/v1')
 
-module.exports = (url, filepath, filename) => {
-	if (!url || !filepath) return;
+module.exports = (url, filepath, filename = uuidV1()) => {
+	if (!url || !filepath) return
 	
-	let havePath = fs.existsSync(filepath);
+	let havePath = fs.existsSync(filepath)
 	if (!havePath) {
 		try {
-			mkp.sync(filepath);
+			mkp.sync(filepath)
 		} catch (err) {
-			throw err;
+			throw err
 		}
 	}
-	let fullfile;
-	let interimfile = filepath + '/' + uuidV1();
-	let interimStream = fs.createWriteStream(interimfile);
+	let fullfile
+	let interimfile = filepath + '/' + uuidV1()
+	let interimStream = fs.createWriteStream(interimfile)
 	return new Promise((resolve, reject) => {
 		request
 			.get(url)
 			.on('response', (res) => {
-				let type = res.headers['content-type'];
-				type = '.' + type.substring(type.lastIndexOf('/') + 1);
-				filename = filename || (uuidV1() + type);
-				fullfile = filepath + '/' + filename;
+				let type = res.headers['content-type']
+				type = '.' + type.substring(type.lastIndexOf('/') + 1)
+				filename = filename + type
+				fullfile = filepath + '/' + filename
 			})
 			.pipe(interimStream)
 			.on('error', (err) => {
 				reject(err)
 			})
 			.on('close', () => {
-				fs.renameSync(interimfile, fullfile);
-				resolve(fullfile);
+				fs.renameSync(interimfile, fullfile)
+				resolve(fullfile)
 			})
 	})
 }

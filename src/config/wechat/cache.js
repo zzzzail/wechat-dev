@@ -6,10 +6,10 @@
  *
  */
 
-const path = require('path');
+const path = require('path')
 
 module.exports = function(prefix) {
-	prefix = prefix ? (prefix + '-') : 'zail-';
+	prefix = prefix ? (prefix + '-') : 'zail-'
   return {
     accessToken: path.join(__dirname, '../../../', `cache/wechat/${prefix}access-token.txt`),
     siteAccessToken: path.join(__dirname, '../../../', `cache/wechat/${prefix}site-access-token.txt`),

@@ -5,8 +5,8 @@
  * @description
  */
 
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
 let adminUserSchema = new Schema({
   // 昵称
@@ -19,8 +19,8 @@ let adminUserSchema = new Schema({
   email: String,
   // 手机号码
   phone: String
-});
+})
 
-adminUserSchema.index({username: 1});
+adminUserSchema.index({username: 1})
 
-module.exports = mongoose.model('admin-user', adminUserSchema);
+module.exports = mongoose.model('admin-user', adminUserSchema)

@@ -5,8 +5,8 @@
  * @description 素材
  */
 
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
 let materialSchema = new Schema({
   // 素材名称
@@ -23,6 +23,6 @@ let materialSchema = new Schema({
     // 微信url, 只可在腾讯系域名下访问
     url: String
   }
-});
+})
 
 module.exports = mongoose.model('admin-material', materialSchema)

@@ -6,8 +6,8 @@
  *
  */
 
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
 let albumSchema = new Schema({
   openId: String, // 微信 OpenID
@@ -43,17 +43,17 @@ let albumSchema = new Schema({
       default: Date.now()
     }
   }
-});
+})
 
 // 索引
-albumSchema.index({openId: 1});
+albumSchema.index({openId: 1})
 
 // 更新 updateAt
 albumSchema.pre('save', function (next) {
   if (!this.isNew) {
-    this.meta.updateAt = Date.now();
+    this.meta.updateAt = Date.now()
   }
   next();
 });
 
-module.exports = mongoose.model('wechat-album', albumSchema);
+module.exports = mongoose.model('wechat-album', albumSchema)

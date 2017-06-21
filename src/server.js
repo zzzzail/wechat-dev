@@ -5,49 +5,49 @@
  * @description 启动服务文件
  */
 
-const Koa = require('koa');
-const app = new Koa();
-const fs = require('fs');
-const path = require('path');
-const config = require('./config/config');
-const middleware = config.middleware;
+const Koa = require('koa')
+const app = new Koa()
+const fs = require('fs')
+const path = require('path')
+const config = require('./config/config')
+const middleware = config.middleware
 
 module.exports = function () {
   // 根据配置批量加载中间件
   middleware.forEach(md => {
-    let name = md.name;
-    let params = md.params;
-    let filePath = `./middleware/${name}.js`;
-    let isFile = fs.existsSync(path.join(__dirname, filePath));
+    let name = md.name
+    let params = md.params
+    let filePath = `./middleware/${name}.js`
+    let isFile = fs.existsSync(path.join(__dirname, filePath))
 
-    let requireMiddleware;
+    let requireMiddleware
     if (isFile) {
-      requireMiddleware = require(filePath);
+      requireMiddleware = require(filePath)
       if (params) {
         if(Array.isArray(params)) {
-          params.unshift(app);
+          params.unshift(app)
         } else {
-          params = [app, params];
+          params = [app, params]
         }
       } else {
-        params = [app];
+        params = [app]
       }
-      requireMiddleware.apply(requireMiddleware, params);
+      requireMiddleware.apply(requireMiddleware, params)
     } else {
-      requireMiddleware = require(name);
+      requireMiddleware = require(name)
       if (params) {
         if (Array.isArray(params)) {
-          requireMiddleware = requireMiddleware.apply(requireMiddleware, params);
+          requireMiddleware = requireMiddleware.apply(requireMiddleware, params)
         } else {
-          requireMiddleware = requireMiddleware.apply(requireMiddleware, [params]);
+          requireMiddleware = requireMiddleware.apply(requireMiddleware, [params])
         }
       } else {
-        requireMiddleware = requireMiddleware();
+        requireMiddleware = requireMiddleware()
       }
-      app.use(requireMiddleware);
+      app.use(requireMiddleware)
     }
   })
 
-  app.listen(config.port);
-  console.log(`app Listening at http://127.0.0.1:${config.port}`);
+  app.listen(config.port)
+  console.log(`app Listening at http://127.0.0.1:${config.port}`)
 }

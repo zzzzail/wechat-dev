@@ -5,31 +5,30 @@
  * @description
  */
 
-module.exports = function (info) {
-  let contentXml = '';
-
+module.exports = function (info = {}) {
+  let contentXml = ''
   switch (info.msgType) {
     case 'text': {
       contentXml = `
         <MsgType><![CDATA[${info.msgType}]]></MsgType>
-        <Content><![CDATA[${info.content}]]></Content>`;
-      break;
+        <Content><![CDATA[${info.content}]]></Content>`
+      break
     }
     case 'image': {
       contentXml = `
         <MsgType><![CDATA[${info.msgType}]]></MsgType>
         <Image>
           <MediaId><![CDATA[${info.content.mediaId}]]></MediaId>
-        </Image>`;
-      break;
+        </Image>`
+      break
     }
     case 'voice': {
       contentXml = `
       <MsgType><![CDATA[${info.msgType}]]></MsgType>
       <Voice>
         <MediaId><![CDATA[${info.content.mediaId}]]></MediaId>
-      </Voice>`;
-      break;
+      </Voice>`
+      break
     }
     case 'video': {
       contentXml = `
@@ -38,8 +37,8 @@ module.exports = function (info) {
         <MediaId><![CDATA[${info.content.mediaId}]]></MediaId>
         <Title><![CDATA[${info.content.title}]]></Title>
         <Description><![CDATA[${info.content.description}]]></Description>
-      </Video> `;
-      break;
+      </Video> `
+      break
     }
     case 'music': {
       contentXml = `
@@ -50,11 +49,11 @@ module.exports = function (info) {
         <MusicUrl><![CDATA[${info.content.musicUrl}]]></MusicUrl>
         <HQMusicUrl><![CDATA[${info.content.hqMusicUrl}]]></HQMusicUrl>
         <ThumbMediaId><![CDATA[${info.content.thumbMediaId}]]></ThumbMediaId>
-      </Music>`;
-      break;
+      </Music>`
+      break
     }
     case 'news': {
-      let articles = '';
+      let articles = ''
       info.content.forEach(item => {
         articles += `
         <item>
@@ -62,20 +61,20 @@ module.exports = function (info) {
           <Description><![CDATA[${item.description}]]></Description>
           <PicUrl><![CDATA[${item.picUrl}]]></PicUrl>
           <Url><![CDATA[${item.url}]]></Url>
-        </item>`;
+        </item>`
       })
       contentXml = `
       <MsgType><![CDATA[${info.msgType}]]></MsgType>
       <ArticleCount>${info.content.length}</ArticleCount>
       <Articles>
         ${articles}
-      </Articles>`;
-      break;
+      </Articles>`
+      break
     }
     default:
       contentXml = `
         <MsgType><![CDATA[text]]></MsgType>
-        <Content><![CDATA[ ]]></Content>`;
+        <Content><![CDATA[ ]]></Content>`
   }
 
   let xml = `
@@ -84,7 +83,7 @@ module.exports = function (info) {
       <FromUserName><![CDATA[${info.fromUserName}]]></FromUserName>
       <CreateTime>${info.createTime}</CreateTime>
       ${contentXml}
-    </xml>`;
+    </xml>`
 
-  return xml;
+  return xml
 }

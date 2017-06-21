@@ -5,47 +5,47 @@
  * @description
  */
 
-const Promise = require('bluebird');
-const path = require('path');
-const downloadFile = require('../util/downloadFile');
-let cache = {};
+const Promise = require('bluebird')
+const path = require('path')
+const downloadFile = require('../util/downloadFile')
+let cache = {}
 
 module.exports = async function (message) {
-  let ctx = this;
-  const Reply = ctx.mongoose.model('admin-reply');
-  const Material = ctx.mongoose.model('admin-material');
-  let content = message.Content;
-  let reply = '';
+  let ctx = this
+  const Reply = ctx.mongoose.model('admin-reply')
+  const Material = ctx.mongoose.model('admin-material')
+  let content = message.Content
+  let reply = ''
   if (message.MsgType == 'event') {
-    let reply;
+    let reply
     if (message.Event == 'subscribe') {
-      reply = await Reply.findOne({keyword: {$in: ['subscribe']}}).exec();
+      reply = await Reply.findOne({keyword: {$in: ['subscribe']}}).exec()
     }
     if (message.Event == 'unsubscribe') {
-      reply = await Reply.findOne({keyword: {$in: ['unsubscribe']}}).exec();
+      reply = await Reply.findOne({keyword: {$in: ['unsubscribe']}}).exec()
     }
     if (message.Event == 'LOCATION') {
-      reply = await Reply.findOne({keyword: {$in: ['LOCATION']}}).exec();
+      reply = await Reply.findOne({keyword: {$in: ['LOCATION']}}).exec()
     }
     if (message.Event == 'CLICK') {
-      reply = await Reply.findOne({keyword: {$in: ['CLICK']}}).exec();
+      reply = await Reply.findOne({keyword: {$in: ['CLICK']}}).exec()
     }
     if (message.Event == 'VIEW') {
-      reply = await Reply.findOne({keyword: {$in: ['VIEW']}}).exec();
+      reply = await Reply.findOne({keyword: {$in: ['VIEW']}}).exec()
     }
     // 电子相册事件
     if (message.Event == 'pic_photo_or_album') {
-      let key = message.EventKey;
-      cache[message.FromUserName] = key;
+      let key = message.EventKey
+      cache[message.FromUserName] = key
     }
-    let material;
+    let material
     
     if (reply) {
       if (reply.type == 'text') {
-        reply = reply.content;
+        reply = reply.content
       } else {
         material = await
-        Material.findOne({_id: reply.content}).exec();
+        Material.findOne({_id: reply.content}).exec()
       }
       if (content.type == 'image') {
         reply = {
@@ -76,14 +76,14 @@ module.exports = async function (message) {
     }
   } else if (message.MsgType == 'text') {
     let reply = await
-    Reply.findOne({keyword: {$in: [content]}}).exec();
-    let material;
+    Reply.findOne({keyword: {$in: [content]}}).exec()
+    let material
     if (reply) {
       if (reply.type == 'text') {
-        reply = reply.content;
+        reply = reply.content
       } else {
         material = await
-        Material.findOne({_id: reply.content}).exec();
+        Material.findOne({_id: reply.content}).exec()
       }
       if (reply.type == 'image') {
         reply = {
@@ -113,16 +113,16 @@ module.exports = async function (message) {
       }
     }
   } else if (message.MsgType == 'image') {
-    const WechatAlbum = ctx.mongoose.model('wechat-album');
+    const WechatAlbum = ctx.mongoose.model('wechat-album')
     
     // 缓存中有用户的key则为电子相册事件
-    let key = cache[message.FromUserName];
-    cache[message.FromUserName] = undefined;
-    console.log('wechat key', key);
-    console.log('wechat message', message.PicUrl);
-    let album;
-    let uri = await downloadFile(message.PicUrl, path.join(__dirname, '../../public/upload/wechat/album'));
-    uri = uri.substring(uri.lastIndexOf('/upload'));
+    let key = cache[message.FromUserName]
+    cache[message.FromUserName] = undefined
+    console.log('wechat key', key)
+    console.log('wechat message', message.PicUrl)
+    let album
+    let uri = await downloadFile(message.PicUrl, path.join(__dirname, '../../public/upload/wechat/album'))
+    uri = uri.substring(uri.lastIndexOf('/upload'))
     if (key == 'create') { // 创建电子相册
       album = new WechatAlbum({
         openId: message.FromUserName,
@@ -132,7 +132,7 @@ module.exports = async function (message) {
           wechatUrl: message.PicUrl,
           uri: uri
         }]
-      });
+      })
     } else { // 增加到相册
       
       // 等2s
@@ -144,7 +144,7 @@ module.exports = async function (message) {
         })
       })()
       
-      album = await WechatAlbum.findOne({openId: message.FromUserName}).exec();
+      album = await WechatAlbum.findOne({openId: message.FromUserName}).exec()
       if (!album) {
         album = new WechatAlbum({
           openId: message.FromUserName,
@@ -159,13 +159,13 @@ module.exports = async function (message) {
       })
     }
     
-    await album.save();
+    await album.save()
     
     reply = `<a href='http://open.shuitagushi.com/wechat/album/${album._id}'>
           已收到您的图片,点击这里开始制作
         </a>
-        点击"添加图片"上传更多图片`;
+        点击"添加图片"上传更多图片`
   }
   
-  return reply;
+  return reply
 }

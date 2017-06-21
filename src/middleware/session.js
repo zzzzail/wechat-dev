@@ -5,16 +5,16 @@
  * @description
  */
 
-const session = require('koa-session');
-const convert = require('koa-convert');
+const session = require('koa-session')
+const convert = require('koa-convert')
 
 module.exports = function (app, params) {
-  app.use(convert(session(params, app)));
+  app.use(convert(session(params, app)))
   app.use(async (ctx, next) => {
-    if (ctx.path == '/favicon.ico') return;
+    if (ctx.path == '/favicon.ico') return
 
-    let n = ctx.session.views || 0;
-    ctx.session.views = ++n;
-    await next();
+    let n = ctx.session.views || 0
+    ctx.session.views = ++n
+    await next()
   })
 }

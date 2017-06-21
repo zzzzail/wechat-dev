@@ -5,33 +5,33 @@
  * @description 素材管理
  */
 
-const fs = require('fs');
-const path = require('path');
+const fs = require('fs')
+const path = require('path')
 
 exports.getMaterialForever = async (ctx, next) => {
-  let type = ctx.query.type || 'image';
-  const Material = ctx.mongoose.model('admin-material');
-  let materials = await Material.find({type}).exec();
-  return ctx.render('admin/material/forever/index', {materials});
+  let type = ctx.query.type || 'image'
+  const Material = ctx.mongoose.model('admin-material')
+  let materials = await Material.find({type}).exec()
+  return ctx.render('admin/material/forever/index', {materials})
 }
 
 exports.deleteMaterialForever = async (ctx, next) => {
-  const Material = ctx.mongoose.model('admin-material');
-  let _id = ctx.body._id;
-  let material = await Material.findOne({_id: _id}).exec();
+  const Material = ctx.mongoose.model('admin-material')
+  let _id = ctx.body._id
+  let material = await Material.findOne({_id: _id}).exec()
 
   // 微信删除素材
-  let wechat = ctx.wechat;
-  let media_id = material.wechat.media_id;
-  let wresult = await wechat.deleteMaterialForever(media_id);
+  let wechat = ctx.wechat
+  let media_id = material.wechat.media_id
+  let wresult = await wechat.deleteMaterialForever(media_id)
 
   if (wresult.errcode == 0) {
     // 服务器上删除该资源
-    let filepath = path.join(__dirname, `../../public${material.uri}`);
-    fs.unlinkSync(filepath);
+    let filepath = path.join(__dirname, `../../public${material.uri}`)
+    fs.unlinkSync(filepath)
 
     // 从 mongodb 中删除
-    let mresult = await material.remove();
+    let mresult = await material.remove()
     if (mresult) {
       return ctx.body = {
         success: true
@@ -46,27 +46,27 @@ exports.deleteMaterialForever = async (ctx, next) => {
 }
 
 exports.getMaterialList = async (ctx, next) => {
-	const Material = ctx.mongoose.model('admin-material');
-	let type = ctx.query.type;
-	let materials = await Material.find({type}).exec();
+	const Material = ctx.mongoose.model('admin-material')
+	let type = ctx.query.type
+	let materials = await Material.find({type}).exec()
 	
-	return ctx.render(`admin/material/list_${type}`, {materials});
+	return ctx.render(`admin/material/list_${type}`, {materials})
 }
 
 exports.getMaterialForeverUpload = async (ctx, next) => {
-  let type = ctx.query.type || 'image';
-  return ctx.render('admin/material/forever/upload_' + type);
+  let type = ctx.query.type || 'image'
+  return ctx.render('admin/material/forever/upload_' + type)
 }
 
 // 上传永久素材
 exports.postMaterialForeverUpload = async (ctx, next) => {
-  let wechat = ctx.wechat;
-  let uploadFilePath = ctx.body.files.media.path;
-  let uri = uploadFilePath.slice(uploadFilePath.indexOf('upload/') - 1);
-  let type = ctx.query.type;
+  let wechat = ctx.wechat
+  let uploadFilePath = ctx.body.files.media.path
+  let uri = uploadFilePath.slice(uploadFilePath.indexOf('upload/') - 1)
+  let type = ctx.query.type
 
-  let name = ctx.body.fields.name;
-  let description = null;
+  let name = ctx.body.fields.name
+  let description = null
   if (type == 'video') {
     description = {
       title: ctx.body.fields.title,
@@ -74,12 +74,12 @@ exports.postMaterialForeverUpload = async (ctx, next) => {
     }
   }
 
-  let wechatMaterial = await wechat.uploadMaterialForever(type, uploadFilePath, description);
+  let wechatMaterial = await wechat.uploadMaterialForever(type, uploadFilePath, description)
   if (wechatMaterial.errcode) {
-    throw new Error(`Wechat material upload fails: ${wechatMaterial.errmsg}`);
+    throw new Error(`Wechat material upload fails: ${wechatMaterial.errmsg}`)
   }
 
-  const Material = ctx.mongoose.model('admin-material');
+  const Material = ctx.mongoose.model('admin-material')
   let material = new Material({
     name,
     type,
@@ -89,8 +89,8 @@ exports.postMaterialForeverUpload = async (ctx, next) => {
       media_id: wechatMaterial.media_id,
       url: wechatMaterial.url
     }
-  });
-  material = await material.save();
+  })
+  material = await material.save()
 
-  return ctx.body = material;
+  return ctx.body = material
 }
